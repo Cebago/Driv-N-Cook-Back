@@ -57,7 +57,6 @@ CREATE TABLE OPENDAYS(
     startHour TIME,
     endHour TIME
 );
-
 CREATE TABLE TRUCK(
     idTruck INTEGER PRIMARY KEY AUTO_INCREMENT,
     truckManufacturers VARCHAR(100),
