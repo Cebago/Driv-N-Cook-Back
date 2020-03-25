@@ -24,7 +24,6 @@ if( count($_POST) == 11
 	$pwd = $_POST["inputPassword"];
 	$pwdConfirm = $_POST["confirmPassword"];
 	$captcha = strtolower($_POST["captcha"]);
-	$city = htmlspecialchars(strtoupper($_POST["inputCity"]));
 	$pseudo = htmlspecialchars($_POST["pseudo"]);
 	$inputBirthday = $_POST["inputBirthday"];
 	$postalCode = $_POST["postalCode"];
@@ -150,9 +149,7 @@ if( count($_POST) == 11
 									":email"=>$email,
 									":pwd"=>$pwd,
 									":pseudo"=>$pseudo,
-									":city"=>$city,
 									":postalCode"=>$postalCode,
-									":gender"=>$gender,
 									":created"=>$current,
 									":birthday"=>$birthday,
 									":friendCode"=>$friendCode
@@ -183,7 +180,7 @@ if( count($_POST) == 11
 		$destination = $email;
 		$subject = "Activation de votre compte Where2Go";
 		$header = "FROM: no-reply-inscription@where2go.fr";
-		$link = "https://where2go.fr/isActivated?pseudo=".urlencode($pseudo)."&cle=".urlencode($cle);
+		$link = "https://where2go.fr/isActivated?cle=".urlencode($cle);
 		$message = '
 		Bonjour '.$pseudo.'
 		Bienvenue sur Where 2 Go,
@@ -193,12 +190,9 @@ if( count($_POST) == 11
  		---------------
  		Ceci est un mail automatique, Merci de ne pas y répondre.';
 
- 		/*$message = "".file_get_contents("mail.php");*/
-
 		mail($destination, $subject, $message, $header);
-
-		$registered = true;
-		header("Location: register?registered=".$registered);
+		
+		header("login");
 	}
 }else{
 	die("Tentative de Hack .... !!!!");
