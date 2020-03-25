@@ -53,7 +53,7 @@ include "functions.php";
                             }
                             unset($_SESSION["errors"]);
                             ?>
-                            <form method="POST" action="addUser" enctype="multipart/form-data">
+                            <form method="POST" action="addUser.php" enctype="multipart/form-data">
                                 <div class="form-label-group">
                                     <div class="form-row">
                                         <div class="col-6">
