@@ -18,7 +18,6 @@ if( count($_POST) == 11
 
 
 	//Nettoyage des chaînes
-	$gender = strtolower($_POST["gender"]);
 	$firstName = htmlspecialchars(ucwords(strtolower(trim($_POST["firstName"]))));
 	$lastName = htmlspecialchars(strtoupper(trim($_POST["lastName"])));
 	$email = strtolower(trim($_POST["inputEmail"]));
@@ -33,13 +32,7 @@ if( count($_POST) == 11
 	$error = false;
 	$listOfErrors = [];
 
-	//gender
-	if(    !preg_match('/homme/', $gender)
-		&& !preg_match('/femme/', $gender)
-		&& !preg_match('/autre/', $gender)){
-		$error = true;
-		$listOfErrors[] = "Selectionner un genre parmis la liste";
-	}
+	
 
 
 	//firstName : entre 2 caractères et 50
