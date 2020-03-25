@@ -12,14 +12,20 @@ include "functions.php";
                 <div class="col-sm-11 col-md-9 col-lg-7 mx-auto">
                     <div class="card card-login mx-auto mt-5 p-5">
                         <?php
-                        if ( ($_SERVER["SERVER_NAME"] == "www.back.drivncook.com")
-                            || ($_SERVER["SERVER_NAME"] == "back.drivncook.fr")
-                            || ($_SERVER["SERVER_NAME"] == "www.franchises.drivncook.fr")
+                        if ( ($_SERVER["SERVER_NAME"] == "back.drivncook.fr")
                             || ($_SERVER["SERVER_NAME"] == "franchises.drivncook.fr")
                         ){
                         ?>
                             <div class="card-body alert alert-warning">
-                                Pour vous connecter en tant que client, allez sur le lien suivant <a href="drivncook.fr/login.php">Connexion</a>
+                                Pour vous connecter en tant que client, allez sur le lien suivant <a href="https://drivncook.fr/login.php">Connexion</a>
+                            </div>
+                        <?php
+                        } else if ( ($_SERVER["SERVER_NAME"] == "www.back.drivncook.com")
+                                    || ($_SERVER["SERVER_NAME"] == "www.franchises.drivncook.com")
+                        ) {
+                        ?>
+                            <div class="card-body alert alert-warning">
+                                Pour vous connecter en tant que client, allez sur le lien suivant <a href="https://drivncook.fr/login.php">Connexion</a>
                             </div>
                         <?php
                         }
