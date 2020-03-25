@@ -25,7 +25,7 @@ include "functions.php";
                         ) {
                         ?>
                             <div class="card-body alert alert-warning">
-                                Pour vous connecter en tant que client, allez sur le lien suivant <a href="https://drivncook.com/login.php">Connexion</a>
+                                Pour vous connecter en tant que client, allez sur le lien suivant <a href="https://www.drivncook.com/login.php">Connexion</a>
                             </div>
                         <?php
                         }
