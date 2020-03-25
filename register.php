@@ -36,14 +36,6 @@ include "functions.php";
                             ?>
                             <form method="POST" action="addUser" enctype="multipart/form-data">
                                 <div class="form-label-group">
-                                    <div class="form-group ">
-                                        <select id="gender" name="gender" class="form-control" required="required">
-                                            <option selected>Sexe</option>
-                                            <option>Homme</option>
-                                            <option>Femme</option>
-                                            <option>Autre</option>
-                                        </select>
-                                    </div>
                                     <div class="form-row">
                                         <div class="col-6">
                                             <div class="form-group">
@@ -74,60 +66,12 @@ include "functions.php";
                                                :"";?>">
                                 </div>
                                 <div class="form-group">
-                                    <!-- Pseudo -->
-                                    <input type="text" id="pseudo" class="form-control focus" placeholder="Pseudonyme" required="required" name="pseudo"
-                                           value="<?php echo (isset($_SESSION["inputErrors"]))
-                                               ?$_SESSION["inputErrors"]["pseudo"]
-                                               :"";?>">
-                                </div>
-                                <div class="form-group">
                                     <!-- Mot de passe -->
                                     <input type="password" id="inputPassword" class="form-control focus" placeholder="Mot de passe" required="required" name="inputPassword" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <!-- Confirmation mot de passe -->
                                     <input type="password" id="confirmPassword" class="form-control focus" placeholder="Confirmation mot de passe" required="required" name="confirmPassword" autocomplete="off">
-                                </div>
-                                <div class="form-label-group">
-                                    <div class="form-row">
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <!-- Ville -->
-                                                <input type="text" id="inputCity" class="form-control focus" placeholder="Ville" required="required" name="inputCity"
-                                                       value="<?php echo (isset($_SESSION["inputErrors"]))
-                                                           ?$_SESSION["inputErrors"]["inputCity"]
-                                                           :"";?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <!-- Code postal -->
-                                                <input type="text" id="pos" class="form-control focus" placeholder="Code postal" required="required"  name="postalCode"
-                                                       value="<?php echo (isset($_SESSION["inputErrors"]))
-                                                           ?$_SESSION["inputErrors"]["postalCode"]
-                                                           :"";?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-label-group">
-                                    <div class="form-row">
-                                        <div class="col-6">
-                                            <div class="form-group text-center vertical-align mt-1">
-                                                <!-- Date de naissance -->
-                                                <p>Date de naissance : </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <!-- Date de naissance -->
-                                                <input id="inputBirthday" type="date" class="form-control focus" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" name="inputBirthday"
-                                                       value="<?php echo (isset($_SESSION["inputErrors"]))
-                                                           ?$_SESSION["inputErrors"]["inputBirthday"]
-                                                           :"";?>">
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-group">
