@@ -10,22 +10,23 @@ $image = imagecreate(300,100);
 $listOfFonts = glob("fonts/*.ttf");
 $startX = rand(10,20);
 $background = imagecolorallocate($image, rand(0,100), rand(0,100), rand(0,100));
-for($i=0; $i<$lenghtCaptcha; $i++){
-	$configCaptcha[$i]["size"] = rand(25,35);
-	$configCaptcha[$i]["font"] = __DIR__."/".$listOfFonts[array_rand($listOfFonts)];
+for ($i=0; $i<$lenghtCaptcha; $i++) {
+    $configCaptcha[$i]["size"] = rand(25,35);
+	//$configCaptcha[$i]["font"] = __DIR__."/".$listOfFonts[array_rand($listOfFonts)];
 	$configCaptcha[$i]["angle"] = rand(-20,20);
 	$configCaptcha[$i]["x"] = (isset($configCaptcha[$i-1]))
 								?$configCaptcha[$i-1]["x"]+rand(30,40)
 								:$startX;
 	$configCaptcha[$i]["y"] = rand(40,80);
 	$configCaptcha[$i]["color"] = imagecolorallocate($image, rand(150,255), rand(150,255), rand(150,255));
-	imagettftext($image, 
+	imagettftext(
+	    $image,
 		$configCaptcha[$i]["size"], 
 		$configCaptcha[$i]["angle"], 
 		$configCaptcha[$i]["x"], 
 		$configCaptcha[$i]["y"], 
 		$configCaptcha[$i]["color"],
-		$configCaptcha[$i]["font"], 
+		$configCaptcha[$i]["font"],
 		$captcha[$i]
 	);
 }
