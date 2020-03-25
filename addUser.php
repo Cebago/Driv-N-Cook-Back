@@ -143,7 +143,7 @@ if( count($_POST) == 6
 
 		mail($destination, $subject, $message, $header);
 		
-		header("login");
+		header("login.php");
 	}
 } else {
 	die ("Tentative de Hack .... !!!!");
