@@ -137,19 +137,7 @@ include "functions.php";
                                     <!-- Captcha réponse -->
                                     <input type="text" name="captcha" id="inputCaptcha" placeholder="Captcha" required="required" class="form-control focus" autocomplete="off">
                                 </div>
-                                
                                 <input class="btn btn-primary degrade btn-block" type="submit" value="Inscription">
-                                
-                                
-                                
-                                <?php
-                                $registered = isset($_REQUEST['registered']);
-                                if($registered){ ?>
-                                    <script>$(document).ready(function(){
-                                            $('#test').modal('show');
-                                        });</script>
-                                <?php } ?>
-                                
                                 <div class="registerConfirm">
                                     <div class="modal fade" id="test" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
