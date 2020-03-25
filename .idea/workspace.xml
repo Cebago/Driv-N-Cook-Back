@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f81c6665-286b-485e-81a6-7334239ec86b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/captcha.php" beforeDir="false" afterPath="$PROJECT_DIR$/captcha.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/register.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,7 +77,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585154811072</updated>
-      <workItem from="1585154815005" duration="585000" />
+      <workItem from="1585154815005" duration="1223000" />
     </task>
     <servers />
   </component>
@@ -85,6 +85,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="178" width="816" height="730" key="#Intentions" timestamp="1585155910891">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="178" width="816" height="730" key="#Intentions/0.0.1920.1040@0.0.1920.1040" timestamp="1585155910891" />
     <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585155034849">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
