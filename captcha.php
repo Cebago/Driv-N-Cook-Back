@@ -12,7 +12,7 @@ $startX = rand(10,20);
 $background = imagecolorallocate($image, rand(0,100), rand(0,100), rand(0,100));
 for ($i=0; $i<$lenghtCaptcha; $i++) {
     $configCaptcha[$i]["size"] = rand(25,35);
-	//$configCaptcha[$i]["font"] = __DIR__."/".$listOfFonts[array_rand($listOfFonts)];
+	$configCaptcha[$i]["font"] = __DIR__."/".$listOfFonts[array_rand($listOfFonts)];
 	$configCaptcha[$i]["angle"] = rand(-20,20);
 	$configCaptcha[$i]["x"] = (isset($configCaptcha[$i-1]))
 								?$configCaptcha[$i-1]["x"]+rand(30,40)
