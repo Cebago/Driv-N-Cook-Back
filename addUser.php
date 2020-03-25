@@ -92,8 +92,8 @@ if( count($_POST) == 6
 
     }else{
     	$pdo = connectDB();
-		$query = "INSERT INTO USER (firstname, lastname, emailAddress, pwd, phoneNumber, token, userRole) VALUES
-		( :firstname ,:lastname ,:email , :pwd, :number, :role)";
+		$query = "INSERT INTO USER (firstname, lastname, emailAddress, pwd, phoneNumber, userRole) VALUES
+		( :firstname, :lastname, :email, :pwd, :number, :role)";
 
 		$pwd =  password_hash($pwd,PASSWORD_DEFAULT);
         $role = 1;
@@ -114,41 +114,38 @@ if( count($_POST) == 6
 		$cle= $lastName.$email;
 		$cle = md5($cle."drivncookPA2A2ESGIcebago");
 
-		$queryPrepared = $pdo->prepare("SELECT idUser FROM USER WHERE email = :email");
+		$queryPrepared = $pdo->prepare("SELECT idUser FROM USER WHERE emailAddress = :email");
 		$queryPrepared->execute([
 								":email"=>$email
 								]);
 		$result = $queryPrepared->fetch();
 		$idUser = $result["idUser"];
 
-		$queryPrepared = $pdo->prepare("UPDATE USER SET token = :token WHERE email = :email");
+		$queryPrepared = $pdo->prepare("UPDATE USER SET token = :token WHERE emailAddress = :email");
 		$queryPrepared->execute([
 			":token"=>$cle,
 			":email"=>$email
 		]);
-
-		$queryPrepared = $pdo->prepare("INSERT INTO XZF_LIST (name, description, user ) VALUES ('LIKE', 'Liste de tous les lieux que vous aimez', :user)");
-		$queryPrepared->execute([
-								":user"=>$idUser
-								]);
-
+		
 		$destination = $email;
 		$subject = "Activation de votre compte Where2Go";
-		$header = "FROM: no-reply-inscription@where2go.fr";
-		$link = "https://where2go.fr/isActivated?cle=".urlencode($cle);
+		$header = "FROM: client@drivncook.fr";
+		$link = "https://drivncook.fr/isActivated?cle=".urlencode($cle);
 		$message = '
-		Bonjour '.$pseudo.'
+		Bonjour ' . $lastName . ' ' . $firstName . '
 		Bienvenue sur Where 2 Go,
  
-		Pour activer votre compte, veuillez cliquer sur le lien ci dessous ou copier/coller dans votre navigateur internet.
+		Pour activer votre compte, veuillez cliquer sur le lien ci-dessous ou le copier/coller dans votre navigateur internet.
  		'.$link.'
  		---------------
- 		Ceci est un mail automatique, Merci de ne pas y répondre.';
+ 		
+ 		Ceci est un mail automatique,
+ 		Merci de ne pas y répondre.';
 
 		mail($destination, $subject, $message, $header);
 		
 		header("login");
 	}
-}else{
-	die("Tentative de Hack .... !!!!");
+} else {
+	die ("Tentative de Hack .... !!!!");
 }
