@@ -40,18 +40,23 @@ include "functions.php";
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <!-- Prénom -->
+                                                <label for="firstName">
+                                                    Prénom :
+                                                </label>
                                                 <input type="text" id="firstName" class="form-control focus" placeholder="Prénom" required="required" name="firstName"
                                                        value="<?php echo (isset($_SESSION["inputErrors"]))
                                                            ?$_SESSION["inputErrors"]["firstName"]
-                                                           :"";?>"
-                                                >
+                                                           :"";?>" >
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <!-- Nom -->
+                                                <label for="lastName">
+                                                    Nom :
+                                                </label>
                                                 <input type="text" id="lastName" class="form-control focus" placeholder="Nom" required="required" name="lastName"
-                                                       value="<?php echo (isset($_SESSION["inputErrors"]))
+                                                                                     value="<?php echo (isset($_SESSION["inputErrors"]))
                                                            ?$_SESSION["inputErrors"]["lastName"]
                                                            :"";?>">
                                             </div>
@@ -60,17 +65,26 @@ include "functions.php";
                                 </div>
                                 <div class="form-group">
                                     <!-- Email -->
+                                    <label for="inputEmail">
+                                        Adresse email :
+                                    </label>
                                     <input type="email" id="inputEmail" class="form-control focus" placeholder="Email" required="required" name="inputEmail"
-                                           value="<?php echo (isset($_SESSION["inputErrors"]))
+                                                                           value="<?php echo (isset($_SESSION["inputErrors"]))
                                                ?$_SESSION["inputErrors"]["inputEmail"]
                                                :"";?>">
                                 </div>
                                 <div class="form-group">
                                     <!-- Mot de passe -->
+                                    <label for="inputPassword">
+                                        Mot de passe :
+                                    </label>
                                     <input type="password" id="inputPassword" class="form-control focus" placeholder="Mot de passe" required="required" name="inputPassword" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <!-- Confirmation mot de passe -->
+                                    <label for="confirmPassword">
+                                        Confirmation de mot de passe :
+                                    </label>
                                     <input type="password" id="confirmPassword" class="form-control focus" placeholder="Confirmation mot de passe" required="required" name="confirmPassword" autocomplete="off">
                                 </div>
                                 <div class="form-group">
@@ -79,6 +93,9 @@ include "functions.php";
                                         <img src="captcha.php" alt="captcha">
                                     </div>
                                     <!-- Captcha réponse -->
+                                    <label for="inputCaptcha">
+                                        Captcha :
+                                    </label>
                                     <input type="text" name="captcha" id="inputCaptcha" placeholder="Captcha" required="required" class="form-control focus" autocomplete="off">
                                 </div>
                                 <input class="btn btn-primary degrade btn-block" type="submit" value="Inscription">
