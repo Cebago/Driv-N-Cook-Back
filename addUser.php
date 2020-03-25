@@ -88,7 +88,7 @@ if( count($_POST) == 6
 		$_SESSION["errors"] = $listOfErrors;
 		$_SESSION["inputErrors"] = $_POST;
 		//Rediriger sur register.php
-		header("Location: register");
+		header("Location: register.php");
 
     }else{
     	$pdo = connectDB();
