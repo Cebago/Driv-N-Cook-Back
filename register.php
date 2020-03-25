@@ -11,6 +11,14 @@ include "functions.php";
             <div class="row">
                 <div class="col-sm-11 col-md-9 col-lg-7 mx-auto">
                     <div class="card card-login mx-auto mt-5 p-5">
+                        <?php
+                        echo "<pre>";
+                        print_r($_SERVER);
+                        echo "</pre>";
+                        ?>
+                        <div class="card-body alert alert-success">
+                            coucou
+                        </div>
                         <div class="text-center">
                             <div class="row">
                                 <div class="col-1"></div>
