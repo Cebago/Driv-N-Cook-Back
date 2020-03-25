@@ -3,18 +3,14 @@ session_start();
 require "conf.inc.php";
 require "functions.php";
 
-if( count($_POST) == 11
-	&& !empty($_POST["gender"])
+if( count($_POST) == 116
 	&& !empty($_POST["firstName"])
 	&& !empty($_POST["lastName"]) 
 	&& !empty($_POST["inputEmail"]) 
 	&& !empty($_POST["inputPassword"])
 	&& !empty($_POST["confirmPassword"])
-	&& !empty($_POST["inputCity"])
-	&& !empty($_POST["postalCode"])
-	&& !empty($_POST["inputBirthday"])
 	&& !empty($_POST["captcha"])
-	&& !empty($_POST["pseudo"])){
+) {
 
 
 	//Nettoyage des chaînes
@@ -24,9 +20,7 @@ if( count($_POST) == 11
 	$pwd = $_POST["inputPassword"];
 	$pwdConfirm = $_POST["confirmPassword"];
 	$captcha = strtolower($_POST["captcha"]);
-	$pseudo = htmlspecialchars($_POST["pseudo"]);
-	$inputBirthday = $_POST["inputBirthday"];
-	$postalCode = $_POST["postalCode"];
+	
 
 	$error = false;
 	$listOfErrors = [];
@@ -46,22 +40,6 @@ if( count($_POST) == 11
 		$error = true;
 		$listOfErrors[] = "Le nom doit faire entre 2 et 100 caractères";
 	}
-
-	//pseudo
-	if( strlen($pseudo)<3 || strlen($pseudo)>15){
-		$error = true;
-		$listOfErrors[] = "Le pseudo n'est pas valide";
-	}else if(!$error){
-		$pdo = connectDB();
-		$queryPrepared = $pdo->prepare("SELECT idUser FROM XZF_USER WHERE pseudo=:pseudo");
-		$queryPrepared->execute([":pseudo"=>$pseudo]);
-		$result = $queryPrepared->fetch();
-		if(!empty($result)){
-			$error = true;
-			$listOfErrors[] = "Le pseudo existe déjà";
-		}
-	}
-	
 
 	//captcha
 	if($captcha != $_SESSION["captcha"]){
@@ -102,23 +80,6 @@ if( count($_POST) == 11
 			$listOfErrors[] = "L'email existe déjà";
 		}
 	}
-
-	//Code Postal
-	if (strlen($postalCode) != 5 
-		&& !preg_match("#^[0-9]{5}$#", $postalCode)){
-		/* ||!preg_match('^[0-9]{5}$', $postalCode)*/
-		$error = true;
-		$listOfErrors[] = "Le code postal n'est pas dans un format valide";
-	}
-	
-	//Date de naissance
-	if (strlen($inputBirthday) != 10
-		&& !preg_match("(([1-2][0-9])|([1-9])|(3[0-1]))/((1[0-2])|([1-9]))/[0-9]{4}",$inputBirthday)){
-		$error = true;
-		$listOfErrors[] = "La date de naissance n'est pas dans un format valide";
-	}
-	/*$inputBirthday = date("Y-m-d", $inputBirthday);*/
-
 
 	if($error){
 		unset($_POST["inputPassword"]);
