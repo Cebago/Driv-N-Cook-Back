@@ -3,7 +3,7 @@ session_start();
 require "conf.inc.php";
 require "functions.php";
 
-if( count($_POST) == 116
+if( count($_POST) == 6
 	&& !empty($_POST["firstName"])
 	&& !empty($_POST["lastName"]) 
 	&& !empty($_POST["inputEmail"]) 
@@ -29,20 +29,20 @@ if( count($_POST) == 116
 
 
 	//firstName : entre 2 caractères et 50
-	if( strlen($firstName)<2 || strlen($firstName)>50 ){
+	if( strlen($firstName) < 2 || strlen($firstName) > 50 ) {
 		$error = true;
 		$listOfErrors[] = "Le prénom doit faire entre 2 et 50 caractères";
 	}
 
 
 	//lastName : entre 2 caractères et 100
-	if( strlen($lastName)<2 || strlen($lastName)>100 ){
+	if( strlen($lastName) < 2 || strlen($lastName) > 100 ) {
 		$error = true;
 		$listOfErrors[] = "Le nom doit faire entre 2 et 100 caractères";
 	}
 
 	//captcha
-	if($captcha != $_SESSION["captcha"]){
+	if($captcha != $_SESSION["captcha"]) {
 		$error = true;
 		$listOfErrors[] = "Le captcha n'est pas correct";
 	}
@@ -50,10 +50,11 @@ if( count($_POST) == 116
 
 	//pwd : entre 8 caractères et 30
 	//Majuscule, minuscules, chiffres
-	if( strlen($pwd)<8 || strlen($pwd)>30 
+	if( strlen($pwd) < 8 || strlen($pwd) > 30
 		|| !preg_match("#[a-z]#", $pwd)
 		|| !preg_match("#[A-Z]#", $pwd)
-		|| !preg_match("#\d#", $pwd) ){
+		|| !preg_match("#\d#", $pwd)
+    ){
 
 		$error = true;
 		$listOfErrors[] = "Le mot de passe doit faire entre 8 et 30 caractères avec des minuscules, majuscules et chiffres";
@@ -91,43 +92,36 @@ if( count($_POST) == 116
 
     }else{
     	$pdo = connectDB();
-		$query = "INSERT INTO XZF_USER (firstname, lastname, email ,password, pseudo, city, postalCode, gender, created, birthday, friendCode) VALUES
-		( :firstname ,:lastname ,:email , :pwd, :pseudo, :city, :postalCode,:gender,:created, :birthday, :friendCode )";
+		$query = "INSERT INTO USER (firstname, lastname, emailAddress, pwd, phoneNumber, token, userRole) VALUES
+		( :firstname ,:lastname ,:email , :pwd, :number, :role)";
 
 		$pwd =  password_hash($pwd,PASSWORD_DEFAULT);
-
+        $role = 1;
 		$str = "abcdefghijklmnopqrstuvwxyz1234567890";
-		$friendCode = substr(str_shuffle($str), rand(0,26), 10);
-
-		$date = getdate();
-		$current = $date["year"]."-".$date["mon"]."-".$date["mday"];
-		$birthday = date("Y-m-d", strtotime($inputBirthday));
+		
 
 		$queryPrepared = $pdo->prepare($query);
 		$queryPrepared->execute( [
-									":firstname"=>$firstName,
-									":lastname"=>$lastName,
-									":email"=>$email,
-									":pwd"=>$pwd,
-									":pseudo"=>$pseudo,
-									":postalCode"=>$postalCode,
-									":created"=>$current,
-									":birthday"=>$birthday,
-									":friendCode"=>$friendCode
+									":firstname" => $firstName,
+									":lastname" => $lastName,
+									":email" => $email,
+									":pwd" => $pwd,
+                                    ":number" => $numberPhone,
+                                    ":role" => $role
 								] );
 
 		//Génétation d'un token
-		$cle= $pseudo.$email;
-		$cle = md5($cle."TB8ISLOD");
+		$cle= $lastName.$email;
+		$cle = md5($cle."drivncookPA2A2ESGIcebago");
 
-		$queryPrepared = $pdo->prepare("SELECT idUser FROM XZF_USER WHERE email = :email");
+		$queryPrepared = $pdo->prepare("SELECT idUser FROM USER WHERE email = :email");
 		$queryPrepared->execute([
 								":email"=>$email
 								]);
 		$result = $queryPrepared->fetch();
 		$idUser = $result["idUser"];
 
-		$queryPrepared = $pdo->prepare("UPDATE XZF_USER SET token = :token WHERE email = :email");
+		$queryPrepared = $pdo->prepare("UPDATE USER SET token = :token WHERE email = :email");
 		$queryPrepared->execute([
 			":token"=>$cle,
 			":email"=>$email
