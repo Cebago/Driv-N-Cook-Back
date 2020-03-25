@@ -73,7 +73,7 @@ if( count($_POST) == 6
 		$listOfErrors[] = "L'email n'est pas valide";
 	}else if(!$error){
 		$pdo = connectDB();
-		$queryPrepared = $pdo->prepare("SELECT idUser FROM XZF_USER WHERE email=:email");
+		$queryPrepared = $pdo->prepare("SELECT idUser FROM USER WHERE emailAddress=:email");
 		$queryPrepared->execute([":email"=>$email]);
 		$result = $queryPrepared->fetch();
 		if(!empty($result)){
@@ -92,8 +92,8 @@ if( count($_POST) == 6
 
     }else{
     	$pdo = connectDB();
-		$query = "INSERT INTO USER (firstname, lastname, emailAddress, pwd, phoneNumber, userRole) VALUES
-		( :firstname, :lastname, :email, :pwd, :number, :role)";
+		$query = "INSERT INTO USER (firstname, lastname, emailAddress, pwd, userRole) VALUES
+		( :firstname, :lastname, :email, :pwd, :role)";
 
 		$pwd =  password_hash($pwd,PASSWORD_DEFAULT);
         $role = 1;
@@ -106,7 +106,6 @@ if( count($_POST) == 6
 									":lastname" => $lastName,
 									":email" => $email,
 									":pwd" => $pwd,
-                                    ":number" => $numberPhone,
                                     ":role" => $role
 								] );
 
