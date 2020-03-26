@@ -90,7 +90,10 @@ if( count($_POST) == 6
 		//Rediriger sur register.php
 		header("Location: register.php");
 
-    }else{
+    } else {
+	    echo "<pre>";
+	    print_r($_POST);
+	    echo "</pre>";
     	$pdo = connectDB();
 		$query = "INSERT INTO USER (firstname, lastname, emailAddress, pwd, userRole) VALUES
 		( :firstname, :lastname, :email, :pwd, :role)";
