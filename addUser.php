@@ -91,16 +91,12 @@ if( count($_POST) == 6
 		header("Location: register.php");
 
     } else {
-	    echo "<pre>";
-	    print_r($_POST);
-	    echo "</pre>";
     	$pdo = connectDB();
 		$query = "INSERT INTO USER (firstname, lastname, emailAddress, pwd, userRole) VALUES
 		( :firstname, :lastname, :email, :pwd, :role)";
 
 		$pwd =  password_hash($pwd,PASSWORD_DEFAULT);
         $role = 1;
-		$str = "abcdefghijklmnopqrstuvwxyz1234567890";
 		
 
 		$queryPrepared = $pdo->prepare($query);
@@ -128,9 +124,9 @@ if( count($_POST) == 6
 			":token"=>$cle,
 			":email"=>$email
 		]);
-		
+		/*
 		$destination = $email;
-		$subject = "Activation de votre compte Where2Go";
+		$subject = "Activation de votre compte Drincook";
 		$header = "FROM: client@drivncook.fr";
 		$link = "https://drivncook.fr/isActivated?cle=".urlencode($cle);
 		$message = '
@@ -144,8 +140,9 @@ if( count($_POST) == 6
  		Ceci est un mail automatique,
  		Merci de ne pas y répondre.';
 
+		$message = wordwrap($message, 70, "\r\n");
 		mail($destination, $subject, $message, $header);
-		
+		*/
 		header("login.php");
 	}
 } else {
