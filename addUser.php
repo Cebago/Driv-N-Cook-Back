@@ -124,7 +124,6 @@ if( count($_POST) == 6
 			":token"=>$cle,
 			":email"=>$email
 		]);
-		/*
 		$destination = $email;
 		$subject = "Activation de votre compte Drincook";
 		$header = "FROM: client@drivncook.fr";
@@ -142,8 +141,7 @@ if( count($_POST) == 6
 
 		$message = wordwrap($message, 70, "\r\n");
 		mail($destination, $subject, $message, $header);
-		*/
-		header("login.php");
+		header("Location: login.php");
 	}
 } else {
 	die ("Tentative de Hack .... !!!!");
