@@ -1,0 +1,13 @@
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?drivncook.(fr|com)/.*$ [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ - [NC,F,L]
+
+#remove php file extension
+RewriteEngine on 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]
+
+ErrorDocument 404 /pageNotFound
+
+Options -Indexes
