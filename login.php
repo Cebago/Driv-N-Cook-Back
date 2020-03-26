@@ -29,6 +29,7 @@ if (isset($_POST["inputEmail"]) && isset($_POST["inputPassword"]) && !empty($_PO
 <section class="login">
     <div class="pt-5 container">
         <div class="col-xs-10 col-sm-10  col-lg-6 mx-auto">
+            
             <div class="card card-login mx-auto mt-5 p-5">
                 <div class="card-body">
                     <?php
