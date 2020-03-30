@@ -1,10 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <pre>
-                <?php print_r($_SERVER); ?>
-            </pre>
-            <?php if ($_SERVER["REQUEST_URI"] == 'home.php') { ?>
+            <?php if ($_SERVER["REQUEST_URI"] != '/home.php') { ?>
             <li class="nav-item">
                 <a class="nav-link" href="home.php">Accueil</a>
             </li>
