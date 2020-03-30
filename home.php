@@ -50,7 +50,7 @@ require 'functions.php'; ?>
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h2 class="mb-0">
-                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#clientGest" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#truckGest" aria-expanded="true" aria-controls="collapseOne">
                                     Gestion des camions
                                 </button>
                                 <a class="btn btn-link" href="trucks.php">
@@ -58,7 +58,7 @@ require 'functions.php'; ?>
                                 </a>
                             </h2>
                         </div>
-                        <div id="clientGest" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div id="truckGest" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
                                 Accédez à la liste de tous vos camions, gérez leur affectation et consultez leurs incidents
                             </div>
