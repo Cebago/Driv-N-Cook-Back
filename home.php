@@ -12,71 +12,93 @@ require 'functions.php'; ?>
             <img src="https://www.humanprogresscenter.com/wp-content/uploads/2016/05/fond-gris.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Gestion de l'entreprise</h5>
-                <div class="accordion" id="accordionExample">
-                    <div class="card">
-                        <div class="card-header" id="headingOne">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#franchiseesGest" aria-expanded="true" aria-controls="collapseOne">
-                                    Gestion des franchisés
-                                </button>
-                                <a class="btn btn-link" href="franchisees.php">
-                                    Accéder <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </h2>
-                        </div>
-                        <div id="franchiseesGest" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                                Accédez à la liste de tous vos franchisés et attribuez leur un camion
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="headingOne">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#clientGest" aria-expanded="true" aria-controls="collapseOne">
-                                    Gestion des clients
-                                </button>
-                                <a class="btn btn-link" href="clients.php">
-                                    Accéder <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </h2>
-                        </div>
-                        <div id="clientGest" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                                Accédez à la liste de tous vos clients
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="headingOne">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#truckGest" aria-expanded="true" aria-controls="collapseOne">
-                                    Gestion des camions
-                                </button>
-                                <a class="btn btn-link" href="trucks.php">
-                                    Accéder <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </h2>
-                        </div>
-                        <div id="truckGest" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                                Accédez à la liste de tous vos camions, gérez leur affectation et consultez leurs incidents
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ul class="list-group">
+                    <a href="franchisees.php">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Gestion des franchisés
+                            <span class="badge badge-primary badge-pill">
+                                <?php
+                                    $pdo = connectDB();
+                                    $query = "SELECT COUNT(idUser) AS COUNT FROM USER, SITEROLE WHERE userRole = idRole AND roleName = 'Franchisé' ";
+                                    $queryPrepared = $pdo->prepare($query);
+                                    $result = $queryPrepared->execute();
+                                    $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+                                    echo $result[0]['COUNT'];
+                                ?>
+                            </span>
+                        </li>
+                    </a>
+                    <a href="clients.php">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Gestion des utilisateurs
+                            <span class="badge badge-primary badge-pill">
+                                <?php
+                                    $pdo = connectDB();
+                                    $query = "SELECT COUNT(idUser) AS COUNT FROM USER ;";
+                                    $queryPrepared = $pdo->prepare($query);
+                                    $result = $queryPrepared->execute();
+                                    $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+                                    echo $result[0]['COUNT'];
+                                ?>
+                            </span>
+                        </li>
+                    </a>
+                    <a href="trucks.php">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Gestion du parc de camions
+                            <span class="badge badge-primary badge-pill">
+                                <?php
+                                    $pdo = connectDB();
+                                    $query = "SELECT COUNT(*) AS COUNT FROM TRUCK;";
+                                    $queryPrepared = $pdo->prepare($query);
+                                    $result = $queryPrepared->execute();
+                                    $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+                                    echo $result[0]['COUNT'];
+                                ?>
+                            </span>
+                        </li>
+                    </a>
+                </ul>
             </div>
         </div>
         <div class="card menu">
             <img src="https://www.humanprogresscenter.com/wp-content/uploads/2016/05/fond-gris.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Approvisionnement</h5>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Cras justo odio
+                        <span class="badge badge-primary badge-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Dapibus ac facilisis in
+                        <span class="badge badge-primary badge-pill">2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Morbi leo risus
+                        <span class="badge badge-primary badge-pill">1</span>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="card menu">
             <img src="https://www.humanprogresscenter.com/wp-content/uploads/2016/05/fond-gris.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Revenus</h5>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Cras justo odio
+                        <span class="badge badge-primary badge-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Dapibus ac facilisis in
+                        <span class="badge badge-primary badge-pill">2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Morbi leo risus
+                        <span class="badge badge-primary badge-pill">1</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
