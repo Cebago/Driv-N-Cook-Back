@@ -7,7 +7,7 @@
             </li>
             <?php } ?>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="global" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="global" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Entreprise
                 </a>
                 <div class="dropdown-menu" aria-labelledby="global">
@@ -26,7 +26,7 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="benefits" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Chiffre d'affaires
+                    Revenus
                 </a>
                 <div class="dropdown-menu" aria-labelledby="benefits">
                     <a class="dropdown-item" href="#">Vue en temps réel</a>
