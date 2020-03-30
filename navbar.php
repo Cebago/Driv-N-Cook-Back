@@ -7,11 +7,11 @@
             </li>
             <?php } ?>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="global" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" id="global" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Entreprise
                 </a>
                 <div class="dropdown-menu" aria-labelledby="global">
-                    <a class="dropdown-item" href="#">Gestion des franchisés</a>
+                    <a class="dropdown-item" href="franchisees.php">Gestion des franchisés</a>
                     <a class="dropdown-item" href="#">Gestion du parc de camions</a>
                 </div>
             </li>
