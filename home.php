@@ -28,7 +28,7 @@ require 'functions.php'; ?>
                             </span>
                         </li>
                     </a>
-                    <a href="clients.php">
+                    <a href="users.php">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             Gestion des utilisateurs
                             <span class="badge badge-primary badge-pill">

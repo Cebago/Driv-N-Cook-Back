@@ -12,7 +12,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="global">
                     <a class="dropdown-item" href="franchisees.php">Gestion des franchisés</a>
-                    <a class="dropdown-item" href="clients.php">Gestion des utilisateurs</a>
+                    <a class="dropdown-item" href="users.php">Gestion des utilisateurs</a>
                     <a class="dropdown-item" href="#">Gestion du parc de camions</a>
                 </div>
             </li>
