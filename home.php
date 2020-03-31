@@ -93,10 +93,6 @@ require 'functions.php'; ?>
                             Historique des revenus
                         </a>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Morbi leo risus
-                        <span class="badge badge-primary badge-pill">1</span>
-                    </li>
                 </ul>
             </div>
         </div>
