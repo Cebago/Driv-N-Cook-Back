@@ -13,51 +13,51 @@ require 'functions.php'; ?>
             <div class="card-body">
                 <h5 class="card-title">Gestion de l'entreprise</h5>
                 <ul class="list-group">
-                    <a href="franchisees.php">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="franchisees.php" class="card-link">
                             Gestion des franchisés
-                            <span class="badge badge-primary badge-pill">
-                                <?php
-                                    $pdo = connectDB();
-                                    $query = "SELECT COUNT(idUser) AS COUNT FROM USER, SITEROLE WHERE userRole = idRole AND roleName = 'Franchisé' ";
-                                    $queryPrepared = $pdo->prepare($query);
-                                    $result = $queryPrepared->execute();
-                                    $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
-                                    echo $result[0]['COUNT'];
-                                ?>
-                            </span>
-                        </li>
-                    </a>
-                    <a href="users.php">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        </a>
+                        <a class="badge badge-light badge-pill" href="franchisees.php">
+                            <?php
+                                $pdo = connectDB();
+                                $query = "SELECT COUNT(idUser) AS COUNT FROM USER, SITEROLE WHERE userRole = idRole AND roleName = 'Franchisé' ";
+                                $queryPrepared = $pdo->prepare($query);
+                                $result = $queryPrepared->execute();
+                                $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+                                echo $result[0]['COUNT'];
+                            ?>
+                        </a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="users.php" class="card-link">
                             Gestion des utilisateurs
-                            <span class="badge badge-primary badge-pill">
-                                <?php
-                                    $pdo = connectDB();
-                                    $query = "SELECT COUNT(idUser) AS COUNT FROM USER ;";
-                                    $queryPrepared = $pdo->prepare($query);
-                                    $result = $queryPrepared->execute();
-                                    $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
-                                    echo $result[0]['COUNT'];
-                                ?>
-                            </span>
-                        </li>
-                    </a>
-                    <a href="trucks.php">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        </a>
+                        <a class="badge badge-light badge-pill" href="users.php">
+                            <?php
+                                $pdo = connectDB();
+                                $query = "SELECT COUNT(idUser) AS COUNT FROM USER ;";
+                                $queryPrepared = $pdo->prepare($query);
+                                $result = $queryPrepared->execute();
+                                $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+                                echo $result[0]['COUNT'];
+                            ?>
+                        </a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="trucks.php" class="card-link">
                             Gestion du parc de camions
-                            <span class="badge badge-primary badge-pill">
-                                <?php
-                                    $pdo = connectDB();
-                                    $query = "SELECT COUNT(*) AS COUNT FROM TRUCK;";
-                                    $queryPrepared = $pdo->prepare($query);
-                                    $result = $queryPrepared->execute();
-                                    $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
-                                    echo $result[0]['COUNT'];
-                                ?>
-                            </span>
-                        </li>
-                    </a>
+                        </a>
+                        <a class="badge badge-light badge-pill" href="trucks.php">
+                            <?php
+                                $pdo = connectDB();
+                                $query = "SELECT COUNT(*) AS COUNT FROM TRUCK;";
+                                $queryPrepared = $pdo->prepare($query);
+                                $result = $queryPrepared->execute();
+                                $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+                                echo $result[0]['COUNT'];
+                            ?>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -67,16 +67,13 @@ require 'functions.php'; ?>
                 <h5 class="card-title">Approvisionnement</h5>
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Cras justo odio
-                        <span class="badge badge-primary badge-pill">14</span>
+                        Stock actuel de chaque entrepôt
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Dapibus ac facilisis in
-                        <span class="badge badge-primary badge-pill">2</span>
+                        Approvisonnement du franchisé
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Morbi leo risus
-                        <span class="badge badge-primary badge-pill">1</span>
+                        Historique d'approvisionnement
                     </li>
                 </ul>
             </div>
