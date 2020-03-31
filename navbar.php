@@ -21,8 +21,9 @@
                     Approvisionnement
                 </a>
                 <div class="dropdown-menu" aria-labelledby="warehouses">
-                    <a class="dropdown-item" href="#">Franchisé</a>
-                    <a class="dropdown-item" href="#">Historique</a>
+                    <a class="dropdown-item" href="#">Stock actuel de chaque entrepôt</a>
+                    <a class="dropdown-item" href="#">Approvisionnement du franchisé</a>
+                    <a class="dropdown-item" href="#">Historique d'approvisionnement</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
