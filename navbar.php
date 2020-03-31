@@ -13,7 +13,7 @@
                 <div class="dropdown-menu" aria-labelledby="global">
                     <a class="dropdown-item" href="franchisees.php">Gestion des franchisés</a>
                     <a class="dropdown-item" href="users.php">Gestion des utilisateurs</a>
-                    <a class="dropdown-item" href="#">Gestion du parc de camions</a>
+                    <a class="dropdown-item" href="trucks.php">Gestion du parc de camions</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -21,9 +21,9 @@
                     Approvisionnement
                 </a>
                 <div class="dropdown-menu" aria-labelledby="warehouses">
-                    <a class="dropdown-item" href="#">Stock actuel de chaque entrepôt</a>
-                    <a class="dropdown-item" href="#">Approvisionnement du franchisé</a>
-                    <a class="dropdown-item" href="#">Historique d'approvisionnement</a>
+                    <a class="dropdown-item" href="warehouseStore.php">Stock actuel de chaque entrepôt</a>
+                    <a class="dropdown-item" href="ordersFranchisees.php">Approvisionnement du franchisé</a>
+                    <a class="dropdown-item" href="ordersHistory.php">Historique d'approvisionnement</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -31,8 +31,8 @@
                     Revenus
                 </a>
                 <div class="dropdown-menu" aria-labelledby="benefits">
-                    <a class="dropdown-item" href="#">Vue en temps réel</a>
-                    <a class="dropdown-item" href="#">Historique</a>
+                    <a class="dropdown-item" href="sales.php">Vue en temps réel</a>
+                    <a class="dropdown-item" href="salesHistory.php">Historique</a>
                 </div>
             </li>
         </ul>
