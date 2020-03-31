@@ -84,12 +84,14 @@ require 'functions.php'; ?>
                 <h5 class="card-title">Revenus</h5>
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Cras justo odio
-                        <span class="badge badge-primary badge-pill">14</span>
+                        <a href="sales.php" class="card-link">
+                            Vue en temps réel
+                        </a>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Dapibus ac facilisis in
-                        <span class="badge badge-primary badge-pill">2</span>
+                        <a href="salesHistory.php" class="card-link">
+                            Historique des revenus
+                        </a>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         Morbi leo risus
