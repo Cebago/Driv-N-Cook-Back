@@ -67,13 +67,19 @@ require 'functions.php'; ?>
                 <h5 class="card-title">Approvisionnement</h5>
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Stock actuel de chaque entrepôt
+                        <a href="warehouseStore.php" class="card-link">
+                            Stock actuel de chaque entrepôt
+                        </a>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Approvisonnement du franchisé
+                        <a href="ordersFranchisees.php" class="card-link">
+                            Approvisonnement du franchisé
+                        </a>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Historique d'approvisionnement
+                        <a href="ordersHistory.php" class="card-link">
+                            Historique d'approvisionnement
+                        </a>
                     </li>
                 </ul>
             </div>
