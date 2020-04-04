@@ -8,7 +8,7 @@ require 'functions.php'; ?>
     <?php include 'navbar.php'; ?>
     <script>
         function jsSales() {
-            let chart = new CanvasJS.Chart("chartContainer", {
+            let chart = new CanvasJS.Chart("salesDiv", {
                 animationEnabled: true,
                 exportEnabled: true,
                 title:{
@@ -32,6 +32,6 @@ require 'functions.php'; ?>
         window.onload = jsSales;
         setInterval(jsSales, 300000);
     </script>
-    <div id="chartContainer" class="w-75 mx-auto"></div>
+    <div id="salesDiv" class="w-75 mx-auto"></div>
     <?php include 'footer.php'; ?>
 </body>
