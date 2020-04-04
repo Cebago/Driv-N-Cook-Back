@@ -32,6 +32,6 @@ require 'functions.php'; ?>
         window.onload = jsSales;
         setInterval(jsSales, 300000);
     </script>
-    <div id="chartContainer" class="card w-75 mx-auto"></div>
+    <div id="chartContainer" class="w-75 mx-auto"></div>
     <?php include 'footer.php'; ?>
 </body>
