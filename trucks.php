@@ -46,7 +46,7 @@ require 'functions.php'; ?>
             } else {
                 echo "<td class='table-warning'>Aucun</td>";
             }
-            echo "<td></td>";
+            echo "<td><a class='btn btn-primary btn-success' href='functions.php?user=" . $value['user'] . "&truck=" . $value['idTruck'] . "'>Assigner</a></td>";
             echo "</tr>";
         }
         ?>
