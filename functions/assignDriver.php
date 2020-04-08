@@ -6,8 +6,15 @@
     if (isset($_POST["user"]) && isset($_POST["truck"])) {
         $user = $_POST["user"];
         $truck = $_POST["truck"];
+        $error = false;
+        $listOfErrors = [];
         
         //userX -> camionX
+        
+        if (!preg_match("#\d#", $user)) {
+            $error = true;
+            $listOfErrors[] = "Vous n'avez pas choisi de conducteur";
+        }
         
         $pdo = connectDB();
         $queryPrepared = $pdo->prepare("SELECT idTruck FROM TRUCK, USER WHERE user = idUser AND idUser = :user");
@@ -15,8 +22,6 @@
             ":user" => $user
         ]);
         $result = $queryPrepared->fetch();
-        $error = false;
-        $listOfErrors = [];
         if(!empty($result)){
             $error = true;
             $listOfErrors[] = "L'utilisateur est déjà assigné à un camion";
@@ -26,10 +31,8 @@
         $queryPrepared->execute([
             ":truck" => $truck
         ]);
-        $result = $queryPrepared->fetch();
-        $error = false;
-        $listOfErrors = [];
-        if(!empty($result)){
+        $result = $queryPrepared->fetch(PDO::FETCH_ASSOC);
+        if(!empty($result["user"])){
             $error = true;
             $listOfErrors[] = "Le camion possède déjà un conducteur";
         }
@@ -39,9 +42,7 @@
             $_SESSION["errors"] = $listOfErrors;
             $_SESSION["inputErrors"] = $_POST;
             //Rediriger sur register.php
-            //header("Location: trucks.php");
-            echo "KO";
-            echo "<pre>" . print_r($listOfErrors) . "</pre>";
+            header("Location: trucks.php");
         } else {
             $pdo = connectDB();
             $queryPrepared = $pdo->prepare("UPDATE TRUCK SET user = :user WHERE idTruck = :truck");
@@ -49,7 +50,7 @@
                 ":user" => $user,
                 ":truck" => $truck
             ]);
-            echo "OK"
+            echo "OK";
         }
     }
 ?>
