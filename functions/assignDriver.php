@@ -15,6 +15,10 @@
             $error = true;
             $listOfErrors[] = "Vous n'avez pas choisi de conducteur";
         }
+        if (!preg_match("#\d#", $truck)) {
+            $error = true;
+            $listOfErrors[] = "Le camion n'existe pas";
+        }
         
         $pdo = connectDB();
         $queryPrepared = $pdo->prepare("SELECT idTruck FROM TRUCK, USER WHERE user = idUser AND idUser = :user");
