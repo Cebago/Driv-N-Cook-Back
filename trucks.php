@@ -2,12 +2,13 @@
 session_start();
 include 'header.php';
 require 'conf.inc.php';
-require 'functions.php'; ?>
+require 'functions.php';
+?>
 </head>
 
 <body>
 <?php include "navbar.php"; ?>
-<div class="menu mt-5 card col-md-11 mx-auto">
+<div class="menu mt-5 card col-md-11 mx-auto" onload="setTimeout('location.reload(true)',1000);">
     <table class="table table-striped mt-2">
         <thead class="thead-dark">
         <tr>
@@ -97,6 +98,35 @@ require 'functions.php'; ?>
         const content = document.getElementById("assign");
         content.value = idTruck;
     }
+    function unassignDriver(idtruck) {
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if(request.readyState === 4) {
+                if(request.status === 200) {
+                    console.log(request.responseText);
+                }
+            }
+        };
+        request.open('POST', 'functions/unassignDriver.php');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.send(
+            'truck=' + idtruck
+        );
+    }
+    function refreshTable() {
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if(request.readyState === 4) {
+                if(request.status === 200) {
+                    console.log(request.responseText);
+                }
+            }
+        };
+        request.open('GET', './trucks.php');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.send();
+    }
+    setInterval(refreshTable, 180000);
 </script>
 <?php include "footer.php"; ?>
 </body>
