@@ -123,7 +123,7 @@ require 'functions.php';
             }
         };
         request.open('GET', './trucks.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        //request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.send();
     }
     setInterval(refreshTable, 180000);
