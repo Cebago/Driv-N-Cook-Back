@@ -54,7 +54,7 @@
                 ":user" => $user,
                 ":truck" => $truck
             ]);
-            echo "OK";
+            header("Location: ../trucks.php");
         }
     }
 ?>
