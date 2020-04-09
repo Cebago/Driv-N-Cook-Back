@@ -102,7 +102,7 @@ require 'functions.php';
         //request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.send();
     }
-    setInterval(refreshTable, 5000);
+    setInterval(refreshTable, 60000);
     window.onload = refreshTable;
 </script>
 <?php include "footer.php"; ?>
