@@ -45,8 +45,9 @@
         if($error) {
             $_SESSION["errors"] = $listOfErrors;
             $_SESSION["inputErrors"] = $_POST;
+            print_r($listOfErrors);
             //Rediriger sur register.php
-            header("Location: ../trucks.php");
+            //header("Location: ../trucks.php");
         } else {
             $pdo = connectDB();
             $queryPrepared = $pdo->prepare("UPDATE TRUCK SET user = :user WHERE idTruck = :truck");
@@ -54,7 +55,7 @@
                 ":user" => $user,
                 ":truck" => $truck
             ]);
-            header("Location: ../trucks.php");
+            //header("Location: ../trucks.php");
         }
     }
 ?>

@@ -30,38 +30,36 @@ require 'functions.php';
 <div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="functions/assignDriver.php" method="POST">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Assigner un conducteur</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group flex-nowrap">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="idTruck">Camion n°</span>
-                        </div>
-                        <input type="text" id="assign" class="form-control" name="truck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Assigner un conducteur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="idTruck">Camion n°</span>
                     </div>
-                    <select class="custom-select mt-2" name="user">
-                        <option selected>Choisir un franchisé</option>
-                        <?php
-                            $pdo = connectDB();
-                            $queryPrepared = $pdo->prepare("SELECT idUser, firstname FROM USER, SITEROLE WHERE userRole = idRole AND roleName = 'Franchisé';");
-                            $queryPrepared->execute();
-                            $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
-                            foreach ($result as $value) {
-                                echo "<option value='" . $value["idUser"] . "'>" . $value["firstname"] . "</option>";
-                            }
-                        ?>
-                    </select>
+                    <input type="text" id="assign" class="form-control" name="truck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Assigner</button>
-                </div>
-            </form>
+                <select class="custom-select mt-2" name="user" id="select">
+                    <option selected>Choisir un franchisé</option>
+                    <?php
+                        $pdo = connectDB();
+                        $queryPrepared = $pdo->prepare("SELECT idUser, firstname FROM USER, SITEROLE WHERE userRole = idRole AND roleName = 'Franchisé';");
+                        $queryPrepared->execute();
+                        $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($result as $value) {
+                            echo "<option value='" . $value["idUser"] . "'>" . $value["firstname"] . "</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button class="btn btn-primary" data-dismiss="modal" type="button" onclick="assignTruck()">Assigner</button>
+            </div>
         </div>
     </div>
 </div>
@@ -75,7 +73,7 @@ require 'functions.php';
         request.onreadystatechange = function() {
             if(request.readyState === 4) {
                 if(request.status === 200) {
-                    console.log(request.responseText);
+                    //console.log(request.responseText);
                 }
             }
         };
@@ -83,6 +81,26 @@ require 'functions.php';
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.send(
             'truck=' + idtruck
+        );
+        refreshTable();
+    }
+    function assignTruck() {
+        const truck = document.getElementById("assign").value;
+        const user = document.getElementById("select").value;
+        
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if(request.readyState === 4) {
+                if(request.status === 200) {
+                    console.log(request.responseText);
+                }
+            }
+        };
+        request.open('POST', 'functions/assignDriver.php');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.send(
+            'user=' + user +
+            "&truck=" + truck
         );
         refreshTable();
     }

@@ -42,8 +42,7 @@
             //echo "<button class='btn btn-secondary mr-2' type='button' onclick='unassignDriver(". $value["idTruck"] . ")'><i class='fas fa-user-slash'></i></button>";
             $string .= "<button class='btn btn-secondary mr-2' type='button' onclick='unassignDriver(". $value["idTruck"] . ")'><i class='fas fa-user-slash'></i></button>";
         } else {
-            //echo "<button class='btn btn-primary mr-2' type='button' data-toggle='modal' data-target='#assignModal' data-whatever='" .
-                $value["idTruck"] . "' onclick='displayTruckId(". $value["idTruck"] . ")'><i class='fas fa-user-tag'></i></button>";
+            //echo "<button class='btn btn-primary mr-2' type='button' data-toggle='modal' data-target='#assignModal' data-whatever='" . $value["idTruck"] . "' onclick='displayTruckId(". $value["idTruck"] . ")'><i class='fas fa-user-tag'></i></button>";
             $string .= "<button class='btn btn-primary mr-2' type='button' data-toggle='modal' data-target='#assignModal' data-whatever='" .
                 $value["idTruck"] . "' onclick='displayTruckId(". $value["idTruck"] . ")'><i class='fas fa-user-tag'></i></button>";
         }
