@@ -47,8 +47,14 @@ require 'functions.php';
             } else {
                 echo "<td class='table-secondary'>Aucun</td>";
             }
-            echo "<td><button class='btn btn-primary' type='button' data-toggle='modal' data-target='#assignModal' data-whatever='" .
-                $value["idTruck"] . "' onclick='displayTruck(". $value["idTruck"] . ")'><i class=\"fas fa-user-tag\"></i></button></td>";
+            echo "<td>";
+            if (isset($value["user"])) {
+                echo "<button class='btn btn-secondary mr-2' type='button' onclick='unassignDriver(". $value["idTruck"] . ")'><i class='fas fa-user-slash'></i></button>";
+            } else {
+                echo "<button class='btn btn-primary mr-2' type='button' data-toggle='modal' data-target='#assignModal' data-whatever='" .
+                    $value["idTruck"] . "' onclick='displayTruck(". $value["idTruck"] . ")'><i class=\"fas fa-user-tag\"></i></button>";
+            }
+            echo "</td>";
             echo "</tr>";
         }
         ?>
@@ -125,6 +131,7 @@ require 'functions.php';
         request.open('GET', './trucks.php');
         //request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.send();
+        const content = document.getElementById("");
     }
     setInterval(refreshTable, 180000);
 </script>
