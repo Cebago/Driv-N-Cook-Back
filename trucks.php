@@ -8,7 +8,7 @@ require 'functions.php';
 
 <body>
 <?php include "navbar.php"; ?>
-<div class="menu mt-5 card col-md-11 mx-auto" onload="setTimeout('location.reload(true)',1000);">
+<div class="menu mt-5 card col-md-11 mx-auto">
     <table class="table table-striped mt-2">
         <thead class="thead-dark">
         <tr>
@@ -22,42 +22,8 @@ require 'functions.php';
             <th scope="col">Action</th>
         </tr>
         </thead>
-        <tbody>
-        <?php
-        $pdo = connectDB();
-        $queryPrepared = $pdo->prepare("SELECT * FROM pa2a2drivncook.TRUCK;");
-        $queryPrepared->execute();
-        $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $value) {
-            echo "<tr>";
-            echo "<th scope='row'>" . $value["idTruck"] . "</th>";
-            echo "<td>" . $value["truckManufacturers"] . "</td>";
-            echo "<td>" . $value["truckModel"] . "</td>";
-            echo "<td>" . $value["licensePlate"] . "</td>";
-            echo "<td>" . $value["km"] . "</td>";
-            echo "<td>" . $value["createDate"] . "</td>";
-            if (isset($value["user"])) {
-                $pdo = connectDB();
-                $queryPrepared = $pdo->prepare("SELECT firstname FROM USER WHERE idUser = :user");
-                $queryPrepared->execute([
-                    ":user" => $value["user"]
-                ]);
-                $user = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
-                echo "<td class='table-success'>" . $user[0]["firstname"] . "</td>";
-            } else {
-                echo "<td class='table-secondary'>Aucun</td>";
-            }
-            echo "<td>";
-            if (isset($value["user"])) {
-                echo "<button class='btn btn-secondary mr-2' type='button' onclick='unassignDriver(". $value["idTruck"] . ")'><i class='fas fa-user-slash'></i></button>";
-            } else {
-                echo "<button class='btn btn-primary mr-2' type='button' data-toggle='modal' data-target='#assignModal' data-whatever='" .
-                    $value["idTruck"] . "' onclick='displayTruck(". $value["idTruck"] . ")'><i class=\"fas fa-user-tag\"></i></button>";
-            }
-            echo "</td>";
-            echo "</tr>";
-        }
-        ?>
+        <tbody id="tablebody">
+        
         </tbody>
     </table>
 </div>
@@ -100,7 +66,7 @@ require 'functions.php';
     </div>
 </div>
 <script>
-    function displayTruck(idTruck) {
+    function displayTruckId(idTruck) {
         const content = document.getElementById("assign");
         content.value = idTruck;
     }
@@ -118,22 +84,26 @@ require 'functions.php';
         request.send(
             'truck=' + idtruck
         );
+        refreshTable();
     }
     function refreshTable() {
+        const content = document.getElementById("tablebody");
+        
         const request = new XMLHttpRequest();
         request.onreadystatechange = function() {
             if(request.readyState === 4) {
                 if(request.status === 200) {
-                    console.log(request.responseText);
+                    //console.log(request.responseText);
+                    content.innerHTML = request.responseText;
                 }
             }
         };
-        request.open('GET', './trucks.php');
+        request.open('GET', './functions/getTruckList.php', true);
         //request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.send();
-        const content = document.getElementById("");
     }
-    setInterval(refreshTable, 180000);
+    setInterval(refreshTable, 5000);
+    window.onload = refreshTable;
 </script>
 <?php include "footer.php"; ?>
 </body>
