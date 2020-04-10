@@ -12,9 +12,7 @@ require 'functions.php'; ?>
             request.onreadystatechange = function() {
                 if(request.readyState === 4) {
                     if(request.status === 200) {
-                        console.log(request.responseText);
-                        const phpData = request.responseText;
-                        console.dir('data = ' + phpData);
+                        
                         let chart = new CanvasJS.Chart("salesDiv", {
                             animationEnabled: true,
                             exportEnabled: true,
@@ -31,7 +29,7 @@ require 'functions.php'; ?>
                                 indexLabelFontSize: 16,
                                 indexLabel: "{label} - #percent%",
                                 yValueFormatString: "#.##€",
-                                dataPoints: phpData
+                                dataPoints: request.responseText
                             }]
                         });
                         chart.render();
