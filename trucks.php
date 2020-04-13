@@ -63,10 +63,59 @@ require 'functions.php';
         </div>
     </div>
 </div>
+<div class="modal fade" id="updateTruck" tabindex="-1" role="dialog" aria-labelledby="updateTruckInfo" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateTruckInfo">Modifier le camion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="idTruck">Camion n°</span>
+                    </div>
+                    <input type="text" id="update" class="form-control truckID" name="truck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button class="btn btn-primary" data-dismiss="modal" type="button" onclick="">Assigner</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="locateTruck" tabindex="-1" role="dialog" aria-labelledby="locateTruck" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateTruckInfo">Localiser le camion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="idTruck">Camion n°</span>
+                    </div>
+                    <input type="text" id="map" class="form-control truckID" name="truck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     function displayTruckId(idTruck) {
-        const content = document.getElementById("assign");
-        content.value = idTruck;
+        const truckID = document.getElementsByClassName("truckID");
+        for (let i = 0; i < truckID.length; i++) {
+            truckID[i].value = idTruck;
+        }
     }
     function unassignDriver(idtruck) {
         const request = new XMLHttpRequest();
