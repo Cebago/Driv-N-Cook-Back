@@ -41,7 +41,7 @@ require 'functions.php';
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="idTruck">Camion n°</span>
                     </div>
-                    <input type="text" id="assign" class="form-control" name="truck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly>
+                    <input type="text" id="assign" class="form-control truckID" name="truck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly>
                 </div>
                 <select class="custom-select mt-2" name="user" id="select">
                     <option selected>Choisir un franchisé</option>
