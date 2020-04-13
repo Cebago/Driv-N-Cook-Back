@@ -40,12 +40,18 @@
         $string .= "<td>";
         if (isset($value["user"])) {
             //echo "<button class='btn btn-secondary mr-2' type='button' onclick='unassignDriver(". $value["idTruck"] . ")'><i class='fas fa-user-slash'></i></button>";
-            $string .= "<button class='btn btn-secondary mr-2' type='button' onclick='unassignDriver(". $value["idTruck"] . ")'><i class='fas fa-user-slash'></i></button>";
+            $string .= "<button class='btn btn-secondary mr-2 mt-1' type='button' title='Ne plus assigner le camion' onclick='unassignDriver(". $value["idTruck"] . ")'>
+                        <i class='fas fa-user-slash'></i></button>";
+            $string .= "<button class='btn btn-success mr-2 mt-1' type='button' data-toggle='modal' title='Localiser le camion'
+            data-target='#locateTruck' data-whatever='" . $value["idTruck"] . "' onclick='displayTruckId(". $value["idTruck"] . ")'><i class='fas fa-map-marked-alt'></i></button>";
         } else {
-            //echo "<button class='btn btn-primary mr-2' type='button' data-toggle='modal' data-target='#assignModal' data-whatever='" . $value["idTruck"] . "' onclick='displayTruckId(". $value["idTruck"] . ")'><i class='fas fa-user-tag'></i></button>";
-            $string .= "<button class='btn btn-primary mr-2' type='button' data-toggle='modal' data-target='#assignModal' data-whatever='" .
-                $value["idTruck"] . "' onclick='displayTruckId(". $value["idTruck"] . ")'><i class='fas fa-user-tag'></i></button>";
+            $string .= "<button class='btn btn-primary mr-2 mt-1' type='button' data-toggle='modal' title='Assigner le camion à un franchisé'
+            data-target='#assignModal' data-whatever='" . $value["idTruck"] . "' onclick='displayTruckId(". $value["idTruck"] . ")'>
+            <i class='fas fa-user-tag'></i></button>";
         }
+        $string .= "<button class='btn btn-info mr-2 mt-1' type='button' data-toggle='modal' title='Modifier les informations du camion' data-target='#updateTruck'
+        data-whatever='" . $value["idTruck"] . "' onclick='displayTruckId(". $value["idTruck"] . ")'><i class='fas fa-truck-moving'></i></button>";
+        
         //echo "</td>";
         $string .= "</td>";
         //echo "</tr>";
