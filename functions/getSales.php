@@ -18,4 +18,5 @@
     foreach ($result as $truck) {
         $dataPoints[] = array("label" => $truck["truckmanufacturers"], "y" => $truck["sum"]);
     }
-    echo "".json_encode($dataPoints, JSON_NUMERIC_CHECK);
+    $dataPoints = json_encode($dataPoints, JSON_NUMERIC_CHECK);
+    echo $dataPoints;
