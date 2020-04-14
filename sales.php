@@ -29,7 +29,7 @@ require 'functions.php'; ?>
                                 indexLabelFontSize: 16,
                                 indexLabel: "{label} - #percent%",
                                 yValueFormatString: "#.##€",
-                                dataPoints: request.responseText
+                                dataPoints: JSON.parse(request.responseText)
                             }]
                         });
                         chart.render();
