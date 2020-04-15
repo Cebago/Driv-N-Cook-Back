@@ -29,3 +29,25 @@ function login($email){
     $_SESSION["token"] = $token;
     $_SESSION["email"] = $email;
 }
+
+function isConnected(){
+    if(!empty($_SESSION["email"])
+        && !empty($_SESSION["token"]) ){
+        $email = $_SESSION["email"];
+        $token = $_SESSION["token"];
+        //Vérification d'un correspondant en base de données
+        $pdo = connectDB();
+        $queryPrepared = $pdo->prepare("SELECT idUser FROM USER WHERE emailAddress = :email AND token = :token");
+        $queryPrepared->execute([
+            ":email"=>$email,
+            ":token"=>$token
+        ]);
+        if (!empty($queryPrepared->fetch()) ){
+            login($email);
+            return true;
+        }
+    }
+    session_destroy();
+    return false;
+}
+
