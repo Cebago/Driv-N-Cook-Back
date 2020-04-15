@@ -17,7 +17,7 @@ require 'functions.php'; ?>
                 <th scope="col">Email</th>
                 <th scope="col">Numéro</th>
                 <th scope="col">Date de création</th>
-                <th scope="col">Activé ?</th>
+                <th scope="col">Activation</th>
                 <th scope="col">Adresse</th>
                 <th scope="col">Code postal</th>
                 <th scope="col">Permis n°</th>
@@ -29,7 +29,7 @@ require 'functions.php'; ?>
             <tbody>
             <?php
             $pdo = connectDB();
-            $queryPrepared = $pdo->prepare("SELECT idUser, lastname, firstname, emailAddress, phoneNumber, createDate,
+            $queryPrepared = $pdo->prepare("SELECT idUser, lastname, firstname, emailAddress, phoneNumber, DATE_FORMAT(createDate,'%d/%m/%Y') as createDate,
                                                     isActivated, address, postalCode, licenseNumber, roleName, fidelityCard FROM USER, SITEROLE WHERE idRole = userRole ORDER BY idUser");
             $queryPrepared->execute();
             $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
