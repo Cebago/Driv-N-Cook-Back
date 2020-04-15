@@ -41,7 +41,7 @@ if (count($_POST) == 5) {
     }
     if ( ( !preg_match("#\d*#", $km) ) || $km < 0 ) {
         $error = true;
-        $listOfErrors .= "Le kilométrage n'est pas bonne \r\n";
+        $listOfErrors .= "Le kilométrage n'est pas bon \r\n";
     }
     
     if ($error) {
