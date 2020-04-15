@@ -12,8 +12,8 @@ $km = $_POST["km"];
 
 if (count($_POST) == 5) {
     
-    $manufacturers = htmlspecialchars(ucfirst(trim($manufacturers)));
-    $model = htmlspecialchars(ucfirst(trim($model)));
+    $manufacturers = htmlspecialchars(ucwords(trim($manufacturers)));
+    $model = htmlspecialchars(ucwords(trim($model)));
     $license = htmlspecialchars(strtoupper(trim($license)));
     
     
