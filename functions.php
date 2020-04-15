@@ -71,3 +71,21 @@ function isActivated(){
     }
 }
 
+function isAdmin(){
+    if(!empty($_SESSION["email"]) && !empty($_SESSION["token"]) ){
+        $email = $_SESSION["email"];
+        $token = $_SESSION["token"];
+        $pdo = connectDB();
+        $queryPrepared = $pdo->prepare("SELECT roleName FROM USER, SITEROLE WHERE emailAddress = :email AND token = :token AND userRole = idRole");
+        $queryPrepared->execute([
+            ":email"=>$email,
+            ":token"=>$token
+        ]);
+        $isAdmin = $queryPrepared->fetch();
+        $isAdmin = $isAdmin["roleName"];
+        if ($isAdmin == "Administrateur"){
+            return true;
+        }
+        return false;
+    }
+}
