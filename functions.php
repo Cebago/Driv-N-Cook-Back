@@ -51,3 +51,23 @@ function isConnected(){
     return false;
 }
 
+function isActivated(){
+    if(!empty($_SESSION["email"]) && !empty($_SESSION["token"]) ){
+        $email = $_SESSION["email"];
+        $token = $_SESSION["token"];
+        $pdo = connectDB();
+        $queryPrepared = $pdo->prepare("SELECT isActivated FROM USER WHERE emailAddress = :email AND token = :token");
+        $queryPrepared->execute([
+            ":email"=>$email,
+            ":token"=>$token
+        ]);
+        $isActivated = $queryPrepared->fetch();
+        $isActivated = $isActivated["isActivated"];
+        if ($isActivated == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+
