@@ -29,8 +29,12 @@ require 'functions.php'; ?>
             <tbody>
             <?php
             $pdo = connectDB();
-            $queryPrepared = $pdo->prepare("SELECT idUser, lastname, firstname, emailAddress, phoneNumber, DATE_FORMAT(createDate,'%d/%m/%Y') as createDate,
-                                                    isActivated, address, postalCode, licenseNumber, roleName, fidelityCard FROM USER, SITEROLE WHERE idRole = userRole ORDER BY idUser");
+            $queryPrepared = $pdo->prepare("SELECT idUser, lastname, firstname, emailAddress, phoneNumber, 
+                                                    DATE_FORMAT(createDate,'%d/%m/%Y') as createDate,
+                                                    isActivated, address, postalCode, licenseNumber, roleName, fidelityCard 
+                                                    FROM USER, SITEROLE 
+                                                    WHERE idRole = userRole 
+                                                    ORDER BY idUser");
             $queryPrepared->execute();
             $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $value) {
