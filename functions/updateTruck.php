@@ -39,7 +39,7 @@ if (count($_POST) == 5) {
         $error = true;
         $listOfErrors .= "La plaque d'immatriculation n'est pas bonne \r\n";
     }
-    if ( ( !preg_match("#\d*#", $km) ) ) {
+    if ( ( !preg_match("#\d*#", $km) ) || $km < 0 ) {
         $error = true;
         $listOfErrors .= "Le kilométrage n'est pas bonne \r\n";
     }
