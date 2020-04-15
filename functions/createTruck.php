@@ -3,8 +3,7 @@ session_start();
 require "../conf.inc.php";
 require "../functions.php";
 
-
-$truck = $_POST["id"];
+$warehouse = $_POST["warehouse"];
 $manufacturers = $_POST["manufacturers"];
 $model = $_POST["model"];
 $license = $_POST["license"];
@@ -20,9 +19,9 @@ if (count($_POST) == 5) {
     $listOfErrors = "";
     $error = false;
     
-    if (!preg_match("#\d#", $truck)) {
+    if ( !preg_match("#\d*#", $warehouse) ) {
         $error = true;
-        $listOfErrors .= "Merci de ne pas modifier l'id du camion \r\n";
+        $listOfErrors .= "Merci de choisir un entrepôt de rattachement \r\n";
     }
     
     if ( (strlen($manufacturers) < 4) && (strlen($manufacturers) > 101) ) {
@@ -38,8 +37,19 @@ if (count($_POST) == 5) {
     if ( ( !preg_match("#[A-Z]{2}-[0-9]{3}-[A-Z]{2}#", $license) ) && ( !preg_match("#[0-9]{3} [A-Z]{3} [0-9]{2}#", $license) ) ) {
         $error = true;
         $listOfErrors .= "La plaque d'immatriculation n'est pas bonne \r\n";
+    } elseif (!$error) {
+        $pdo = connectDB();
+        $queryPrepared = $pdo->prepare("SELECT idTruck FROM TRUCK WHERE licensePlate = :license");
+        $queryPrepared->execute([
+            ":license" => $license
+        ]);
+        $result = $queryPrepared->fetch();
+        if (!empty($result)) {
+            $error = true;
+            $listOfErrors .= "Un camion avec cette plaque existe déjà";
+        }
     }
-    if ( ( !preg_match("#\d*#", $km) ) ) {
+    if ( ( !preg_match("#\d*#", $km) ) || $km < 0 ) {
         $error = true;
         $listOfErrors .= "Le kilométrage n'est pas bonne \r\n";
     }
@@ -49,19 +59,34 @@ if (count($_POST) == 5) {
         echo $listOfErrors;
     } else {
         $pdo = connectDB();
-        $queryPrepared = $pdo->prepare  ("UPDATE TRUCK SET truckManufacturers = :manufacturers,
-                                                                            truckModel = :model,
-                                                                            licensePlate = :license,
-                                                                            km = :km
-                                                    WHERE idTruck = :id"
-                                        );
+        $queryPrepared = $pdo->prepare  ("INSERT INTO TRUCK (truckManufacturers, truckModel, licensePlate, km)
+                                                    VALUES (:manufacturers, :model, :license, :km);");
         $queryPrepared->execute([
             ":manufacturers" => $manufacturers,
             ":model" => $model,
             ":license" => $license,
-            ":km" => $km,
-            ":id" => $truck
+            ":km" => $km
         ]);
+        $idTruck = $pdo->lastInsertId();
+        $queryPrepared = $pdo->prepare  ("INSERT INTO WAREHOUSES (warehouseName, warehouseType)
+                                                    VALUES ('Stock du camion', 'Camion')");
+        $queryPrepared->execute();
+        $idWarehouse = $pdo->lastInsertId();
+        
+        $queryPrepared = $pdo->prepare("INSERT INTO TRUCKWAREHOUSE (truck, warehouse)
+                                                    VALUES (:truck, :warehouse)");
+        $queryPrepared->execute([
+            ":truck" => $idTruck,
+            ":warehouse" => $warehouse
+        ]);
+        $queryPrepared = $pdo->prepare("INSERT INTO TRUCKWAREHOUSE (truck, warehouse)
+                                                    VALUES (:truck, :warehouse)");
+        $queryPrepared->execute([
+            ":truck" => $idTruck,
+            ":warehouse" => $idWarehouse
+        ]);
+        echo "truck " . $idTruck;
+        echo "entre " . $idWarehouse;
     }
 } else {
     echo "Merci de ne pas modifier le formulaire !!";
