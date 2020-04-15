@@ -37,7 +37,7 @@ if (count($_POST) == 5) {
     
     if ( ( !preg_match("#[A-Z]{2}-[0-9]{3}-[A-Z]{2}#", $license) ) && ( !preg_match("#[0-9]{3} [A-Z]{3} [0-9]{2}#", $license) ) ) {
         $error = true;
-        $listOfErrors .= "La plaque d'immatriculation n'est pas bonne \r\n";
+        $listOfErrors .= "La plaque d'immatriculation n'est pas bon \r\n";
     }
     if ( ( !preg_match("#\d*#", $km) ) || $km < 0 ) {
         $error = true;
