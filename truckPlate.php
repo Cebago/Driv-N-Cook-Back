@@ -51,13 +51,13 @@ if ( preg_match("#[A-Z]{2}-[0-9]{3}-[A-Z]{2}#", $string)) {
     $captcha = $string;
     $_SESSION["captcha"] = $captcha;
     $listOfFonts = "./fonts/dealerplate california.ttf";
-    $startX = 45;
+    $startX = 35;
     for ($i = 0; $i < $lenghtString; $i++) {
         $configCaptcha[$i]["size"] = 20;
         $configCaptcha[$i]["font"] = __DIR__ . "/" . $listOfFonts;
         $configCaptcha[$i]["angle"] = 0;
         $configCaptcha[$i]["x"] = (isset($configCaptcha[$i - 1]))
-            ? $configCaptcha[$i - 1]["x"] + 10
+            ? $configCaptcha[$i - 1]["x"] + 13
             : $startX;
         $configCaptcha[$i]["y"] = 35;
         $configCaptcha[$i]["color"] = imagecolorallocate($image, 0, 0, 0);
