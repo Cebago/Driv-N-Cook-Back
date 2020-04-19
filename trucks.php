@@ -200,6 +200,61 @@ require 'functions.php';
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="generalInfo" tabindex="-1" role="dialog" aria-labelledby="locateTruck" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateTruckInfo">Informations générales du camion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="idTruck">Camion n°</span>
+                    </div>
+                    <input type="text" id="generalInfo" class="form-control truckID" name="idTruck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly>
+                </div>
+                <div class="mt-1">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content card mt-1" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <table class="table table-striped" id="openTable">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Jour de la semaine</th>
+                                    <th scope="col">Ouverture</th>
+                                    <th scope="col">Fermeture</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function refreshTable() {
         const content = document.getElementById("tablebody");
@@ -308,6 +363,42 @@ require 'functions.php';
         );
         refreshTable();
     }
+    function getOpenDays(idtruck) {
+        const table = document.getElementById("tableBody");
+        table.innerText = "";
+
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if(request.readyState === 4) {
+                if(request.status === 200) {
+                    //console.log(request.responseText);
+                    let myJson = JSON.parse(request.responseText);
+                    //console.dir(myJson);
+                    for (let i = 0; i < myJson.length; i++) {
+                        //console.log(myJson[i]["openDay"]);
+                        const tr = document.createElement("tr");
+                        const th = document.createElement("th");
+                        th.scope = "row";
+                        th.innerHTML = myJson[i]["openDay"];
+                        const td1 = document.createElement("td");
+                        const td2 = document.createElement("td");
+                        td1.innerHTML = myJson[i]["startHour"];
+                        td2.innerHTML = myJson[i]["endHour"];
+                        tr.appendChild(th);
+                        tr.appendChild(td1);
+                        tr.appendChild(td2);
+                        table.appendChild(tr);
+                    }
+                }
+            }
+        };
+        request.open('POST', 'functions/getOpenDays.php');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.send(
+            'truck=' + idtruck
+        );
+        refreshTable();
+    }
     
     function updateTruck() {
         const id = document.getElementById("update")
@@ -337,7 +428,6 @@ require 'functions.php';
         );
         refreshTable();
     }
-    
     
     setInterval(refreshTable, 60000);
     window.onload = refreshTable;
