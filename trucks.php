@@ -220,19 +220,19 @@ require 'functions.php';
                 <div class="mt-1">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#openDays" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-calendar-week"></i>&nbsp;Horaires</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Incidents</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Localisation</a>
                         </li>
                     </ul>
                     <div class="tab-content card mt-1" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade show active" id="openDays" role="tabpanel" aria-labelledby="home-tab">
                             <table class="table table-striped" id="openTable">
-                                <thead>
+                                <thead  class="thead-dark">
                                 <tr>
                                     <th scope="col">Jour de la semaine</th>
                                     <th scope="col">Ouverture</th>
