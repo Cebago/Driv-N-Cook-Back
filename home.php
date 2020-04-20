@@ -1,8 +1,11 @@
 <?php
 session_start();
-include 'header.php';
 require 'conf.inc.php';
-require 'functions.php'; ?>
+require 'functions.php';
+
+if (isAdmin() && isActivated() && isConnected() ) {
+include 'header.php';
+?>
 </head>
 
 <body>
@@ -105,4 +108,8 @@ require 'functions.php'; ?>
     </div>
     <?php include 'footer.php'; ?>
 </body>
-
+<?php
+} else {
+    header("Location: login.php");
+}
+?>
