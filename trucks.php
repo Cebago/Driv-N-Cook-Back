@@ -202,7 +202,7 @@ require 'functions.php';
 </div>
 
 <div class="modal fade" id="generalInfo" tabindex="-1" role="dialog" aria-labelledby="locateTruck" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="updateTruckInfo">Informations générales du camion</h5>
@@ -223,10 +223,10 @@ require 'functions.php';
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#openDays" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-calendar-week"></i>&nbsp;Horaires</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Incidents</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-car-crash"></i>&nbsp;Incidents</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Localisation</a>
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-map-marked-alt"></i>&nbsp;Localisation</a>
                         </li>
                     </ul>
                     <div class="tab-content card mt-1" id="myTabContent">
