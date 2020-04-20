@@ -4,7 +4,7 @@
     require "../functions.php";
     
     $pdo = connectDB();
-    $queryPrepared = $pdo->prepare("SELECT * FROM pa2a2drivncook.TRUCK;");
+    $queryPrepared = $pdo->prepare("SELECT idTruck, truckManufacturers, truckModel, licensePlate, km, DATE_FORMAT(createDate,'%d/%m/%Y') as createDate, user FROM pa2a2drivncook.TRUCK;");
     $queryPrepared->execute();
     $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
     $string = "";
