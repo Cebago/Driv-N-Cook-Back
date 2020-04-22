@@ -162,7 +162,8 @@ require 'functions.php';
                         </div>
                         <input type="text" id="updateLicense" class="form-control truck" name="licensePlate" placeholder="Plaque d'immatriculation du camion" aria-label="truckId" aria-describedby="addon-wrapping">
                     </div>
-                    <div class="input-group flex-nowrap mt-1">
+                    <small id="plateHelp" class="form-text text-muted">Merci de respecter les deux formats suivants: AA-111-AA ou 111 AAA 11</small>
+                    <div class="input-group flex-nowrap mt-2">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="km">Nombre de kilomètres</span>
                         </div>
