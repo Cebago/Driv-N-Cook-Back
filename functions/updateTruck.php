@@ -20,7 +20,7 @@ if (count($_POST) == 5) {
     $listOfErrors = "";
     $error = false;
     
-    if (!preg_match("#\d#", $truck)) {
+    if (!preg_match("#\d*#", $truck)) {
         $error = true;
         $listOfErrors .= "Merci de ne pas modifier l'id du camion \r\n";
     }

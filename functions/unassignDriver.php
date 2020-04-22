@@ -8,7 +8,7 @@
         $error = false;
         $listOfErrors = [];
     
-        if (!preg_match("#\d#", $truck)) {
+        if (!preg_match("#\d*#", $truck)) {
             $error = true;
             $listOfErrors[] = "Le camion n'existe pas";
         }
