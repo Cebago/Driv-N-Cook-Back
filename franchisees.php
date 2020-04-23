@@ -16,7 +16,7 @@ require 'functions.php';
             <th scope="col">Nom</th>
             <th scope="col">Prénom</th>
             <th scope="col">Date d'entrée dans la société</th>
-            <th scope="col">Sommme versée</th>
+            <th scope="col">Somme versée</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
