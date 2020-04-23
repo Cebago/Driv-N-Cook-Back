@@ -23,9 +23,40 @@ require 'functions.php';
         <tbody id="tablebody"></tbody>
     </table>
 </div>
+
+<div class="modal fade" id="priceModal" tabindex="-1" role="dialog" aria-labelledby="priceModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Assigner un conducteur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="identity">Franchisé</span>
+                    </div>
+                    <input type="text" id="assign" class="form-control Franchise" name="idTruck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly>
+                </div>
+                <div id="calendar">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function getFranchisesList() {
         const content = document.getElementById("tablebody");
+        while (content.firstChild) {
+            content.removeChild(content.firstChild);
+        }
 
         const request = new XMLHttpRequest();
         request.onreadystatechange = function() {
@@ -47,6 +78,16 @@ require 'functions.php';
                         let td4 = document.createElement("td");
                         td4.innerHTML = myJson[i]["price"] + " €";
                         let td5 = document.createElement("td");
+                        let priceButton = document.createElement("button");
+                        priceButton.className = "btn btn-primary";
+                        priceButton.innerHTML = "Consulter le solde";
+                        priceButton.setAttribute("title", "Mettre à jour le solde");
+                        priceButton.setAttribute("type", "button");
+                        priceButton.setAttribute("data-target", "#priceModal");
+                        priceButton.setAttribute("data-toggle", "modal");
+                        priceButton.setAttribute("onclick", "displayFranchisee('" + myJson[i]["lastname"] + "', '"
+                            + myJson[i]["firstname"] +"'); consultDeposit("+ myJson[i]["idUser"] + ")");
+                        td5.appendChild(priceButton);
                         tr.appendChild(th);
                         tr.appendChild(td1);
                         tr.appendChild(td2);
@@ -62,8 +103,55 @@ require 'functions.php';
         request.send();
     }
 
+    function consultDeposit(user) {
+        const calendar = document.getElementById("calendar");
+        while (calendar.firstChild) {
+            calendar.removeChild(calendar.firstChild);
+        }
+
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if(request.readyState === 4) {
+                if(request.status === 200) {
+                    //console.log(request.responseText);
+                    let myJson = JSON.parse(request.responseText);
+                    for (let i = 0; i < myJson.length; i++) {
+                        let pdiv = document.createElement("div");
+                        pdiv.className = "input-group flex-nowrap";
+                        let mdiv = document.createElement("div");
+                        mdiv.className = "input-group-prepend mt-1";
+                        let span = document.createElement("span");
+                        span.className = "input-group-text";
+                        span.innerHTML = myJson[i]["transactionDate"];
+                        mdiv.appendChild(span);
+                        let input = document.createElement("input");
+                        input.type = "text";
+                        input.className = "form-control mt-1";
+                        input.placeholder = "Prix payé";
+                        input.value = myJson[i]["price"] + " €";
+                        input.setAttribute("readonly", "readonly");
+                        pdiv.appendChild(mdiv);
+                        pdiv.appendChild(input);
+                        calendar.appendChild(pdiv);
+                    }
+                }
+            }
+        };
+        request.open('POST', './functions/consultDeposit.php', true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.send("user=" + user);
+    }
+
+    function displayFranchisee(lastname, firstname) {
+        const franchisee = document.getElementsByClassName("Franchise");
+        console.dir(franchisee);
+        for (let i = 0; i < franchisee.length; i++) {
+            franchisee[i].value = lastname.toUpperCase() + " " + firstname;
+        }
+    }
+
     window.onload = getFranchisesList;
-    setInterval(refreshTable, 60000);
+    setInterval(getFranchisesList, 60000);
 
 </script>
 
