@@ -20,57 +20,55 @@ include "header.php";
 
             const request = new XMLHttpRequest();
             request.onreadystatechange = function() {
-                if(request.readyState === 4) {
-                    if(request.status === 200) {
-                        //console.log(request.responseText);
-                        let myJson = JSON.parse(request.responseText);
-                        let myJsonKeys = Object.keys(myJson[0])
-                        for (let i = 0; i < myJsonKeys.length; i++) {
-                            if (myJson[0][myJsonKeys[i]] !== null) {
-                                let pdiv = document.createElement("div");
-                                let cdiv = document.createElement("div");
-                                let span = document.createElement("span");
-                                let input = document.createElement("input");
+                if (request.readyState === 4 && request.status === 200) {
+                    //console.log(request.responseText);
+                    let myJson = JSON.parse(request.responseText);
+                    let myJsonKeys = Object.keys(myJson[0])
+                    for (let i = 0; i < myJsonKeys.length; i++) {
+                        if (myJson[0][myJsonKeys[i]] !== null) {
+                            let pdiv = document.createElement("div");
+                            let cdiv = document.createElement("div");
+                            let span = document.createElement("span");
+                            let input = document.createElement("input");
 
-                                pdiv.className = "input-group flex-nowrap mt-2";
-                                cdiv.className = "input-group-prepend";
-                                span.id = myJsonKeys[i];
-                                span.className = "input-group-text";
+                            pdiv.className = "input-group flex-nowrap mt-2";
+                            cdiv.className = "input-group-prepend";
+                            span.id = myJsonKeys[i];
+                            span.className = "input-group-text";
 
-                                if (myJsonKeys[i] === "idUser") {
-                                    span.innerHTML = "Numéro d'utilisateur";
-                                } else if (myJsonKeys[i] === "emailAddress") {
-                                    span.innerHTML = "Adresse email";
-                                } else if (myJsonKeys[i] === "lastname") {
-                                    span.innerHTML = "Nom de famille";
-                                } else if (myJsonKeys[i] === "firstname") {
-                                    span.innerHTML = "Prénom";
-                                } else if (myJsonKeys[i] === "createDate") {
-                                    span.innerHTML = "Date de création du compte";
-                                } else if (myJsonKeys[i] === "licenseNumber") {
-                                    span.innerHTML = "Numéro de permis";
-                                } else if (myJsonKeys[i] === "postalCode") {
-                                    span.innerHTML = "Code postal";
-                                } else if (myJsonKeys[i] === "phoneNumber") {
-                                    span.innerHTML = "Numéro de téléphone";
-                                } else if (myJsonKeys[i] === "roleName") {
-                                    span.innerHTML = "Votre rôle sur le site";
-                                } else if (myJsonKeys[i] === "address") {
-                                    span.innerHTML = "Adresse";
-                                } else if (myJsonKeys[i] === "fidelityCard") {
-                                    span.innerHTML = "Votre numéro de carte fidélité";
-                                }
-
-                                cdiv.appendChild(span);
-                                pdiv.appendChild(cdiv);
-                                input.id = myJsonKeys[i];
-                                input.className = "form-control";
-                                input.placeholder = myJsonKeys[i];
-                                input.value = myJson[0][myJsonKeys[i]];
-                                input.setAttribute("readonly", "readonly");
-                                pdiv.appendChild(input);
-                                profile.appendChild(pdiv);
+                            if (myJsonKeys[i] === "idUser") {
+                                span.innerHTML = "Numéro d'utilisateur";
+                            } else if (myJsonKeys[i] === "emailAddress") {
+                                span.innerHTML = "Adresse email";
+                            } else if (myJsonKeys[i] === "lastname") {
+                                span.innerHTML = "Nom de famille";
+                            } else if (myJsonKeys[i] === "firstname") {
+                                span.innerHTML = "Prénom";
+                            } else if (myJsonKeys[i] === "createDate") {
+                                span.innerHTML = "Date de création du compte";
+                            } else if (myJsonKeys[i] === "licenseNumber") {
+                                span.innerHTML = "Numéro de permis";
+                            } else if (myJsonKeys[i] === "postalCode") {
+                                span.innerHTML = "Code postal";
+                            } else if (myJsonKeys[i] === "phoneNumber") {
+                                span.innerHTML = "Numéro de téléphone";
+                            } else if (myJsonKeys[i] === "roleName") {
+                                span.innerHTML = "Votre rôle sur le site";
+                            } else if (myJsonKeys[i] === "address") {
+                                span.innerHTML = "Adresse";
+                            } else if (myJsonKeys[i] === "fidelityCard") {
+                                span.innerHTML = "Votre numéro de carte fidélité";
                             }
+
+                            cdiv.appendChild(span);
+                            pdiv.appendChild(cdiv);
+                            input.id = myJsonKeys[i];
+                            input.className = "form-control";
+                            input.placeholder = myJsonKeys[i];
+                            input.value = myJson[0][myJsonKeys[i]];
+                            input.setAttribute("readonly", "readonly");
+                            pdiv.appendChild(input);
+                            profile.appendChild(pdiv);
                         }
                     }
                 }
