@@ -40,7 +40,7 @@
             <a class="btn btn-primary my-2 my-sm-0" href="#" id="warehouses" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="far fa-user-circle"></i>&nbsp;Gérer mon compte
             </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="warehouses">
+            <div class="dropdown-menu dropdown-menu-lg-left" aria-labelledby="warehouses">
                 <a class="dropdown-item" href="myProfile.php">Mon profil</a>
                 <a class="dropdown-item" href="#">Mot de passe</a>
                 <a class="dropdown-item" href="functions/logout.php"><i class="fas fa-sign-out-alt"></i>&nbsp;Déconnexion</a>
