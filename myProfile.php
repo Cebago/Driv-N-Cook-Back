@@ -82,7 +82,6 @@ include "header.php";
         
         function unlockForm() {
             const valid = document.getElementById('valid');
-            console.dir(valid);
             if (valid !== null) {
                 valid.remove();
             }
