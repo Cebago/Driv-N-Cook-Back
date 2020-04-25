@@ -89,3 +89,9 @@ function isAdmin(){
         return false;
     }
 }
+
+function logout($email){
+    $pdo = connectDB();
+    $queryPrepared = $pdo->prepare("UPDATE USER SET token = null WHERE emailAddress = :email");
+    $queryPrepared->execute([":email"=>$email]);
+}
