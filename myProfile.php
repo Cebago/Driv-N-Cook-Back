@@ -79,25 +79,33 @@ include "header.php";
         window.onload = getProfileDetails;
         
         function unlockForm() {
-            const valid = document.getElementById('valid');
-            if (valid !== null) {
-                valid.remove();
-            }
             const input = document.getElementsByClassName('form-control');
             for (let i = 0; i < input.length; i++) {
                 input[i].removeAttribute('readonly');
             }
-            createValidationButton();
+            createFormButton();
         }
         
-        function createValidationButton() {
-            const buttonDiv = document.getElementById('buttons');
-            const buttonValidation = document.createElement('button');
-            buttonValidation.innerHTML = '<i class="fas fa-check"></i>&nbsp;Valider le formulaire';
-            buttonValidation.className = "btn btn-success float-right mr-3 btn-lg";
-            buttonValidation.type = "submit";
-            buttonValidation.id = "valid";
-            buttonDiv.appendChild(buttonValidation);
+        function createFormButton() {
+            const valid = document.getElementById('valid');
+            const cancel = document.getElementById('cancel');
+            if (valid === null && cancel === null) {
+                const buttonDiv = document.getElementById('buttons');
+                const buttonValidation = document.createElement('button');
+                const cancelButton = document.createElement('button');
+                buttonValidation.innerHTML = '<i class="fas fa-check"></i>&nbsp;Valider le formulaire';
+                buttonValidation.className = "btn btn-success float-right mr-3 btn-lg";
+                buttonValidation.type = "submit";
+                buttonValidation.id = "valid";
+
+                cancelButton.innerHTML = '<i class="fas fa-times"></i>&nbsp;Annuler le formulaire';
+                cancelButton.className = "btn btn-success float-right mr-3 btn-lg";
+                cancelButton.type = "submit";
+                cancelButton.id = "cancel";
+
+                buttonDiv.appendChild(buttonValidation);
+                buttonDiv.appendChild(cancelButton);
+            }
         }
         
     </script>
