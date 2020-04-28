@@ -40,7 +40,6 @@ if (isset($_POST["inputEmail"]) && isset($_POST["inputPassword"]) && !empty($_PO
                     <form method="POST" action="login.php">
                         <div class="form-group">
                             <div class="form-label-group">
-                                <!-- adresse mail -->
                                 <label for="inputEmail">
                                     Addresse email :
                                 </label>
@@ -49,7 +48,6 @@ if (isset($_POST["inputEmail"]) && isset($_POST["inputPassword"]) && !empty($_PO
                         </div>
                         <div class="form-group">
                             <div class="form-label-group">
-                                <!-- mot de passe -->
                                 <label for="inputPassword">
                                     Mot de passe :
                                 </label>
