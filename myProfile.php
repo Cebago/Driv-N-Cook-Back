@@ -8,7 +8,7 @@ include "header.php";
 <body>
     <?php include "navbar.php"; ?>
     <div class="col-md-11 mx-auto mt-3">
-        <h5 class="" id="updateTruckInfo">Consulation du le camion</h5>
+        <h5 class="" id="seeProfile">Consulation du profil</h5>
     </div>
     <form class="col-md-11 mx-auto mt-3" action="./functions/updateProfile.php" method="POST">
         <div class="mt-5" id="profile"></div>
