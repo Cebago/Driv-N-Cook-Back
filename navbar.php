@@ -42,7 +42,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-lg-left" aria-labelledby="warehouses">
                 <a class="dropdown-item" href="myProfile.php">Mon profil</a>
-                <a class="dropdown-item" href="#">Mot de passe</a>
+                <a class="dropdown-item" href="myPassword.php">Mot de passe</a>
                 <a class="dropdown-item" href="functions/logout.php"><i class="fas fa-sign-out-alt"></i>&nbsp;Déconnexion</a>
             </div>
         </div>
