@@ -22,7 +22,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="warehouses">
                     <a class="dropdown-item" href="warehouseStore.php">Stock actuel de chaque entrepôt</a>
-                    <a class="dropdown-item" href="ordersFranchisees.php">Approvisionnement du franchisé</a>
+                    <a class="dropdown-item" href="ingredients.php">Liste des ingrédients</a>
                     <a class="dropdown-item" href="ordersHistory.php">Historique d'approvisionnement</a>
                 </div>
             </li>
