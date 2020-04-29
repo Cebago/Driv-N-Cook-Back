@@ -36,6 +36,7 @@ include 'header.php';
                         img.src = "img/" + myJson[i]["ingredientImage"];
                         div2.appendChild(img);
                         div3.className = "card-body";
+                        title.className = "ml-2"
                         title.innerHTML = myJson[i]["ingredientName"]
                         p.className = "card-text";
                         small.className = "text-muted";
@@ -73,7 +74,8 @@ include 'header.php';
                         div3.appendChild(p);
                         div3.appendChild(list);
                         div3.appendChild(div4);
-                        div2.appendChild(img)
+                        div2.appendChild(img);
+                        div2.appendChild(title);
                         div2.appendChild(div3);
                         div1.appendChild(div2);
                         parent.appendChild(div1);
