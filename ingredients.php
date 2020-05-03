@@ -15,13 +15,17 @@ include 'header.php';
 </div>
 <script>
     function getIngredients() {
+        const parent = document.getElementById('ingredients');
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+
         const request = new XMLHttpRequest();
         request.onreadystatechange = function() {
             if(request.readyState === 4) {
                 if(request.status === 200) {
                     const myJson = JSON.parse(request.responseText);
                     for (let i = 0; i < myJson.length; i++) {
-                        const parent = document.getElementById('ingredients');
                         const div1 = document.createElement('div');
                         const div2 = document.createElement('div');
                         const div3 = document.createElement('div');
@@ -89,6 +93,7 @@ include 'header.php';
     }
 
     window.onload = getIngredients;
+    setInterval(getIngredients, 60000);
 </script>
 
 
