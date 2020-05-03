@@ -64,7 +64,7 @@ include "header.php";
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <button class="btn btn-primary" data-dismiss="modal" type="button" onclick="">Modifier</button>
+                <button class="btn btn-primary" data-dismiss="modal" type="button" onclick="createWarehouse()">Ajouter</button>
             </div>
         </div>
     </div>
@@ -78,7 +78,6 @@ include "header.php";
             if(request.readyState === 4) {
                 if(request.status === 200) {
                     let myJson = JSON.parse(request.responseText);
-                    //console.log(myJson);
                     for (let i = 0; i < myJson.length; i++) {
                         const tr = document.createElement('tr');
                         const th = document.createElement('th');
@@ -97,6 +96,22 @@ include "header.php";
             }
         };
         request.open('GET', './functions/getListWarehouses.php', true);
+        request.send();
+    }
+
+    function createWarehouse() {
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if(request.readyState === 4) {
+                if(request.status === 200) {
+                    if (request.responseText !== "") {
+                        alert(request.responseText);
+                    }
+                }
+            }
+        };
+        request.open('POST', './functions/createWarehouse.php', true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.send();
     }
 
