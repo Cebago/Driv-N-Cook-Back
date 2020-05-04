@@ -51,7 +51,7 @@ include "header.php";
                 </div>
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="licensePlate">Adresse de l'entrepôt</span>
+                        <span class="input-group-text" id="Address">Adresse de l'entrepôt</span>
                     </div>
                     <input type="text" id="warehouseAddress" class="form-control warehouse" name="warehouseAddress" placeholder="Adresse de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
                 </div>
@@ -64,7 +64,7 @@ include "header.php";
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <button class="btn btn-primary" data-dismiss="modal" type="button" onclick="createWarehouse()">Ajouter</button>
+                <button class="btn btn-primary" type="submit" data-dismiss="modal" onclick="createWarehouse()">Ajouter</button>
             </div>
         </div>
     </div>
@@ -72,6 +72,10 @@ include "header.php";
 <script>
     function getListWarehouses() {
         const content = document.getElementById("tablebody");
+
+        while (content.firstChild) {
+            content.removeChild(content.firstChild);
+        }
 
         const request = new XMLHttpRequest();
         request.onreadystatechange = function() {
@@ -100,6 +104,17 @@ include "header.php";
     }
 
     function createWarehouse() {
+
+        let name = document.getElementsByName('warehouseName');
+        let city = document.getElementsByName('warehouseCity');
+        let address = document.getElementsByName('warehouseAddress');
+        let postalCode = document.getElementsByName('postalCode');
+
+        name = name[0].value;
+        city = city[0].value;
+        address = address[0].value;
+        postalCode = postalCode[0].value;
+
         const request = new XMLHttpRequest();
         request.onreadystatechange = function() {
             if(request.readyState === 4) {
@@ -112,7 +127,12 @@ include "header.php";
         };
         request.open('POST', './functions/createWarehouse.php', true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send();
+        request.send("name=" + name
+            + "&city=" + city
+            + "&address=" + address
+            + "&postalCode=" + postalCode
+        );
+        getListWarehouses();
     }
 
     window.onload = getListWarehouses;
