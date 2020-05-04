@@ -64,7 +64,7 @@ include "header.php";
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <button class="btn btn-primary" type="submit" data-dismiss="modal" onclick="createWarehouse()">Ajouter</button>
+                <button class="btn btn-primary" data-dismiss="modal" onclick="createWarehouse()" type="submit">Ajouter</button>
             </div>
         </div>
     </div>
@@ -136,6 +136,7 @@ include "header.php";
     }
 
     window.onload = getListWarehouses;
+    setInterval(getListWarehouses, 60000);
 </script>
 
 <?php include "footer.php"; ?>
