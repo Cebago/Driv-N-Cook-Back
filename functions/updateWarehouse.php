@@ -35,7 +35,7 @@ if ((count($_POST) == 5)
         $listOfErrors .= "Veuillez saisir une adresse comprise entre 10 et 100 caractères \r\n";
     }
 
-    if (!preg_match("#^[0-9]{5}$#", $postalCode) && count($postalCode) != 5) {
+    if (!preg_match("#^[0-9]{5}$#", $postalCode) && strlen($postalCode) != 5) {
         $error = true;
         $listOfErrors .= "Le code postal n'est pas valide";
     }
