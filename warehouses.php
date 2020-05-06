@@ -21,6 +21,7 @@ include "header.php";
             <th scope="col">Adresse</th>
             <th scope="col">Code postal</th>
             <th scope="col">Camions</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody id="tablebody">
@@ -39,32 +40,81 @@ include "header.php";
             <div class="modal-body">
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="name">Nom de l'entrepôt</span>
+                        <span class="input-group-text" id="nameSpan">Nom de l'entrepôt</span>
                     </div>
-                    <input type="text" class="form-control warehouse" name="warehouseName" placeholder="Nom de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="text" class="form-control warehouse" id="warehouseName" placeholder="Nom de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
                 </div>
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="city">Ville de l'entrpôt</span>
+                        <span class="input-group-text" id="citySpan">Ville de l'entrpôt</span>
                     </div>
-                    <input type="text" id="warehouseCity" class="form-control warehouse" name="warehouseCity" placeholder="Ville de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="text" class="form-control warehouse" id="warehouseCity" placeholder="Ville de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
                 </div>
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="Address">Adresse de l'entrepôt</span>
+                        <span class="input-group-text" id="addressSpan">Adresse de l'entrepôt</span>
                     </div>
-                    <input type="text" id="warehouseAddress" class="form-control warehouse" name="warehouseAddress" placeholder="Adresse de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="text" class="form-control warehouse" id="warehouseAddress" placeholder="Adresse de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
                 </div>
                 <div class="input-group flex-nowrap mt-2">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="km">Code postal</span>
+                        <span class="input-group-text" id="postalCodeSpan">Code postal</span>
                     </div>
-                    <input type="number" id="postalCode" class="form-control warehouse" name="postalCode" placeholder="Code postal" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="number" id="postalCode" class="form-control warehouse" id="warehousePostalCode" placeholder="Code postal" aria-label="warehouse" aria-describedby="addon-wrapping">
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                 <button class="btn btn-primary" data-dismiss="modal" onclick="createWarehouse()" type="submit">Ajouter</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateWarehouse" tabindex="-1" role="dialog" aria-labelledby="updateWarehouse" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateWarehouseInfo">Modification d'un entrepôt</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="updateName">Nom de l'entrepôt</span>
+                    </div>
+                    <input type="text" class="form-control updateWarehouse" id="idWarehouse" name="idWarehouse" placeholder="Nom de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping" readonly>
+                </div>
+                <div class="input-group flex-nowrap mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="updateName">Nom de l'entrepôt</span>
+                    </div>
+                    <input type="text" class="form-control updateWarehouse" id="nameWarehouse" name="warehouseName" placeholder="Nom de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                </div>
+                <div class="input-group flex-nowrap mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="updateCity">Ville de l'entrpôt</span>
+                    </div>
+                    <input type="text" class="form-control updateWarehouse" id="cityWarehouse" name="warehouseCity" placeholder="Ville de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                </div>
+                <div class="input-group flex-nowrap mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="updateAddress">Adresse de l'entrepôt</span>
+                    </div>
+                    <input type="text" class="form-control updateWarehouse" id="addressWarehouse" name="warehouseAddress" placeholder="Adresse de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                </div>
+                <div class="input-group flex-nowrap mt-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="updatePostalCode">Code postal</span>
+                    </div>
+                    <input type="number" id="warehouseZip" class="form-control updateWarehouse" name="warehousePostalCode" placeholder="Code postal" aria-label="warehouse" aria-describedby="addon-wrapping">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button class="btn btn-primary" data-dismiss="modal" onclick="updateWarehouse()" type="submit">Modifier</button>
             </div>
         </div>
     </div>
@@ -94,7 +144,20 @@ include "header.php";
                             this['td' + j].innerHTML = myJson[i][newJson[j]];
                             tr.appendChild(this['td' + j]);
                         }
+                        const td = document.createElement('td');
+                        const button = document.createElement('button');
+                        button.setAttribute('data-toggle', 'modal');
+                        button.setAttribute('data-target', '#updateWarehouse');
+                        button.setAttribute('data-whatever', myJson[i]["idWarehouse"]);
+                        button.className = "btn btn-info mr- mt-1";
+                        button.innerHTML = "<i class='fas fa-edit'></i>";
+                        button.type = "button";
+                        button.title = "Modifier les informations de l'entrepôt";
+                        button.setAttribute('onclick', "getInfo(" + myJson[i]['idWarehouse'] + ")");
+                        td.appendChild(button);
+                        tr.appendChild(td);
                         content.appendChild(tr);
+
                     }
                 }
             }
@@ -105,15 +168,15 @@ include "header.php";
 
     function createWarehouse() {
 
-        let name = document.getElementsByName('warehouseName');
-        let city = document.getElementsByName('warehouseCity');
-        let address = document.getElementsByName('warehouseAddress');
-        let postalCode = document.getElementsByName('postalCode');
+        let name = document.getElementById('warehouseName');
+        let city = document.getElementById('warehouseCity');
+        let address = document.getElementById('warehouseAddress');
+        let postalCode = document.getElementById('postalCode');
 
-        name = name[0].value;
-        city = city[0].value;
-        address = address[0].value;
-        postalCode = postalCode[0].value;
+        name = name.value;
+        city = city.value;
+        address = address.value;
+        postalCode = postalCode.value;
 
         const request = new XMLHttpRequest();
         request.onreadystatechange = function() {
@@ -134,6 +197,54 @@ include "header.php";
         );
         getListWarehouses();
     }
+
+    function updateWarehouse() {
+        const warehouse = document.getElementById("idWarehouse").value;
+        const name = document.getElementById("nameWarehouse").value;
+        const city = document.getElementById("cityWarehouse").value;
+        const address = document.getElementById("addressWarehouse").value;
+        const postalCode = document.getElementById("warehouseZip").value;
+
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if(request.readyState === 4) {
+                if(request.status === 200) {
+                    if (request.responseText !== "") {
+                        alert(request.responseText);
+                    }
+                }
+            }
+        };
+        request.open('POST', './functions/updateWarehouse.php', true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.send(
+            "id=" + warehouse
+            + "&name=" + name
+            + "&city=" + city
+            + "&address=" + address
+            + "&postalCode=" + postalCode
+        );
+        getListWarehouses();
+    }
+    
+    function getInfo(idWarehouse) {
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if(request.readyState === 4) {
+                if(request.status === 200) {
+                    let myJson = JSON.parse(request.responseText);
+                    const warehouse = document.getElementsByClassName("updateWarehouse");
+                    for (let i = 0; i < warehouse.length; i++) {
+                        const input = document.getElementsByName(warehouse[i].name);
+                        input[0].value = myJson[0][warehouse[i].name];
+                    }
+                }
+            }
+        };
+        request.open('GET', './functions/getWarehouseInfo.php?id='+idWarehouse, true);
+        request.send();
+    }
+    
 
     window.onload = getListWarehouses;
     setInterval(getListWarehouses, 60000);
