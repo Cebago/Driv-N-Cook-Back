@@ -21,6 +21,7 @@ include "header.php";
             <th scope="col">Adresse</th>
             <th scope="col">Code postal</th>
             <th scope="col">Camions</th>
+            <th scope="col">Nombre d'ingrédients différents</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -145,16 +146,25 @@ include "header.php";
                             tr.appendChild(this['td' + j]);
                         }
                         const td = document.createElement('td');
-                        const button = document.createElement('button');
-                        button.setAttribute('data-toggle', 'modal');
-                        button.setAttribute('data-target', '#updateWarehouse');
-                        button.setAttribute('data-whatever', myJson[i]["idWarehouse"]);
-                        button.className = "btn btn-info mr- mt-1";
-                        button.innerHTML = "<i class='fas fa-edit'></i>";
-                        button.type = "button";
-                        button.title = "Modifier les informations de l'entrepôt";
-                        button.setAttribute('onclick', "getInfo(" + myJson[i]['idWarehouse'] + ")");
-                        td.appendChild(button);
+                        const updateButton = document.createElement('button');
+                        updateButton.setAttribute('data-toggle', 'modal');
+                        updateButton.setAttribute('data-target', '#updateWarehouse');
+                        updateButton.setAttribute('data-whatever', myJson[i]["idWarehouse"]);
+                        updateButton.className = "btn btn-info mr- mt-1";
+                        updateButton.innerHTML = "<i class='fas fa-edit'></i>";
+                        updateButton.type = "button";
+                        updateButton.title = "Modifier les informations de l'entrepôt";
+                        updateButton.setAttribute('onclick', "getInfo(" + myJson[i]['idWarehouse'] + ")");
+                        td.appendChild(updateButton);
+                        if (Number(myJson[i]["truck"]) === 0 && Number(myJson[i]["ingredients"]) === 0) {
+                            const deleteButton = document.createElement('button');
+                            deleteButton.className = "btn btn-info ml-1 mr-1 mt-1";
+                            deleteButton.innerHTML = '<i class="fas fa-times"></i>';
+                            deleteButton.type = "button";
+                            deleteButton.title = "Supprimer l'entrepôt";
+                            deleteButton.setAttribute('onclick', "deleteWarehouse(" + myJson[i]['idWarehouse'] + ")");
+                            td.appendChild(deleteButton);
+                        }
                         tr.appendChild(td);
                         content.appendChild(tr);
 
@@ -167,17 +177,14 @@ include "header.php";
     }
 
     function createWarehouse() {
-
         let name = document.getElementById('warehouseName');
         let city = document.getElementById('warehouseCity');
         let address = document.getElementById('warehouseAddress');
         let postalCode = document.getElementById('postalCode');
-
         name = name.value;
         city = city.value;
         address = address.value;
         postalCode = postalCode.value;
-
         const request = new XMLHttpRequest();
         request.onreadystatechange = function() {
             if(request.readyState === 4) {
@@ -195,7 +202,7 @@ include "header.php";
             + "&address=" + address
             + "&postalCode=" + postalCode
         );
-        getListWarehouses();
+        setTimeout(getListWarehouses, 1000);
     }
 
     function updateWarehouse() {
@@ -204,7 +211,6 @@ include "header.php";
         const city = document.getElementById("cityWarehouse").value;
         const address = document.getElementById("addressWarehouse").value;
         const postalCode = document.getElementById("warehouseZip").value;
-
         const request = new XMLHttpRequest();
         request.onreadystatechange = function() {
             if(request.readyState === 4) {
@@ -224,7 +230,26 @@ include "header.php";
             + "&address=" + address
             + "&postalCode=" + postalCode
         );
-        getListWarehouses();
+        setTimeout(getListWarehouses, 1000);
+    }
+
+    function deleteWarehouse(id) {
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if(request.readyState === 4) {
+                if(request.status === 200) {
+                    if (request.responseText !== "") {
+                        console.log(request.responseText);
+                    }
+                }
+            }
+        };
+        request.open('POST', './functions/deleteWarehouse.php', true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.send(
+            "id=" + id
+        );
+        setTimeout(getListWarehouses, 1000);
     }
     
     function getInfo(idWarehouse) {
