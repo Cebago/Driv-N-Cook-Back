@@ -8,8 +8,6 @@ $background = imagecolorallocate($image, 255, 255, 255);
 if ( preg_match("#[A-Z]{2}-[0-9]{3}-[A-Z]{2}#", $string)) {
     $lenghtString = strlen($string);
     $captcha = $string;
-    $_SESSION["captcha"] = $captcha;
-
     $listOfFonts = "./fonts/dealerplate california.ttf";
     $startX = 35;
 
@@ -49,7 +47,6 @@ if ( preg_match("#[A-Z]{2}-[0-9]{3}-[A-Z]{2}#", $string)) {
 } else {
     $lenghtString = strlen($string);
     $captcha = $string;
-    $_SESSION["captcha"] = $captcha;
     $listOfFonts = "./fonts/dealerplate california.ttf";
     $startX = 35;
     for ($i = 0; $i < $lenghtString; $i++) {
