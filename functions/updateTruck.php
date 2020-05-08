@@ -4,18 +4,29 @@ require "../conf.inc.php";
 require "../functions.php";
 
 
-$truck = $_POST["id"];
-$manufacturers = $_POST["manufacturers"];
-$model = $_POST["model"];
-$license = $_POST["license"];
-$km = $_POST["km"];
 
-if (count($_POST) == 5) {
-    
+
+if (count($_POST) == 6
+    && isset($_POST["id"])
+    && isset($_POST["manufacturers"])
+    && isset($_POST["model"])
+    && isset($_POST["license"])
+    && isset($_POST["km"])
+    && isset($_POST["name"])
+) {
+
+    $truck = $_POST["id"];
+    $manufacturers = $_POST["manufacturers"];
+    $model = $_POST["model"];
+    $license = $_POST["license"];
+    $km = $_POST["km"];
+    $name = $_POST["name"];
+
     $manufacturers = htmlspecialchars(ucwords(trim($manufacturers)));
     $model = htmlspecialchars(ucwords(trim($model)));
     $license = htmlspecialchars(strtoupper(trim($license)));
-    
+    $name = htmlspecialchars(ucwords(trim($name)));
+
     
     $listOfErrors = "";
     $error = false;
@@ -33,6 +44,10 @@ if (count($_POST) == 5) {
     if ( (strlen($model) < 4) && (strlen($model) > 101) ) {
         $error = true;
         $listOfErrors .= "Veuillez saisir un modèle de camion compris entre 5 et 100 caractères \r\n";
+    }
+    if ( (strlen($name) < 4) && (strlen($name) > 101) ) {
+        $error = true;
+        $listOfErrors .= "Veuillez saisir un nom de camion compris entre 5 et 100 caractères \r\n";
     }
     
     if ( ( !preg_match("#[A-Z]{2}-[0-9]{3}-[A-Z]{2}#", $license) ) && ( !preg_match("#[0-9]{3} [A-Z]{3} [0-9]{2}#", $license) ) ) {
@@ -52,7 +67,8 @@ if (count($_POST) == 5) {
         $queryPrepared = $pdo->prepare  ("UPDATE TRUCK SET truckManufacturers = :manufacturers,
                                                                             truckModel = :model,
                                                                             licensePlate = :license,
-                                                                            km = :km
+                                                                            km = :km,
+                                                                            truckName = :name
                                                     WHERE idTruck = :id"
                                         );
         $queryPrepared->execute([
@@ -60,6 +76,7 @@ if (count($_POST) == 5) {
             ":model" => $model,
             ":license" => $license,
             ":km" => $km,
+            ":name" => $name,
             ":id" => $truck
         ]);
     }
