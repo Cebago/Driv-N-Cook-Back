@@ -294,7 +294,7 @@ require 'functions.php';
         request.send(
             'truck=' + idtruck
         );
-        refreshTable();
+        setTimeout(refreshTable, 1000);
     }
     
     function assignTruck() {
@@ -317,7 +317,7 @@ require 'functions.php';
             'user=' + user +
             "&truck=" + truck
         );
-        refreshTable();
+        setTimeout(refreshTable, 1000);
     }
 
     function getInfo(idtruck) {
@@ -362,7 +362,7 @@ require 'functions.php';
             '&km=' + km +
             '&warehouse=' + warehouse
         );
-        refreshTable();
+        setTimeout(refreshTable, 1000);
     }
     function getOpenDays(idtruck) {
         const table = document.getElementById("tableBody");
@@ -398,7 +398,7 @@ require 'functions.php';
         request.send(
             'truck=' + idtruck
         );
-        refreshTable();
+        setTimeout(refreshTable, 1000);
     }
     
     function updateTruck() {
@@ -427,7 +427,7 @@ require 'functions.php';
             '&license=' + license.value +
             '&km=' + km.value
         );
-        refreshTable();
+        setTimeout(refreshTable, 1000);
     }
     
     setInterval(refreshTable, 60000);
