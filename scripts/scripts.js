@@ -1,4 +1,6 @@
 var map;
+var lat = null;
+var lng = null;
 function init(myLoc) {
     let marker = new google.maps.Marker({
         position: myLoc
@@ -12,11 +14,31 @@ function init(myLoc) {
     marker.setMap(map);
 }
 
-$("#mapModal").click(function(){
-// get latitude and longitude that pass from open modal button
-    init(new google.maps.LatLng($(this).data('lat'), $(this).data('long')));
-});
 
+
+function initMap() {
+    init(new google.maps.LatLng(lat, lng))
+}
+
+function showMap(idTruck) {
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
+                if (request.responseText !== "") {
+                    let myJson = JSON.parse(request.responseText);
+                    lat = myJson[0]["lat"];
+                    lng = myJson[0]["lng"];
+                    initMap();
+                }
+            }
+        }
+        return 0;
+    };
+    request.open('GET', 'functions/getTruckPos.php?id=' + idTruck);
+    request.send();
+
+};
 
 function refreshTable() {
     const content = document.getElementById("tablebody");
@@ -143,7 +165,7 @@ function getOpenDays(idtruck) {
                         thd.scope = "row";
                         thd.id = myJson[i]["openDay"];
                         thd.innerText = myJson[i]["openDay"];
-                        const td1 = document.createElement("td");
+                            const td1 = document.createElement("td");
                         td1.innerText = myJson[i]["startHour"];
                         td1.className = "text-center";
                         const td2 = document.createElement("td");
