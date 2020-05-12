@@ -1,11 +1,25 @@
 var map;
-var lat = null;
-var lng = null;
-function init(myLoc) {
-    let marker = new google.maps.Marker({
+var marker;
+
+function init(myLoc, name) {
+    marker = new google.maps.Marker({
         position: myLoc,
         icon : 'img/truck.png'
     });
+    console.log(name);
+
+    var contentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h1 id="firstHeading" class="firstHeading">'+name+'</h1>'+
+        '<div id="bodyContent">'+
+        '</div>';
+
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+
+
     let opt = {
         center: myLoc,
         zoom: 13 ,
@@ -13,24 +27,33 @@ function init(myLoc) {
     };
     map = new google.maps.Map(document.getElementById("mapModal"), opt);
     marker.setMap(map);
+    marker.addListener('mouseover', function() {
+        infowindow.open(map, marker);
+    });
+
 }
 
 
 
-function initMap() {
-    init(new google.maps.LatLng(lat, lng))
+
+function toggleBounce() {
+    if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+    } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
 }
 
-function showMap(idTruck) {
+
+
+function showMap(idTruck, name) {
     const request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.readyState === 4) {
             if (request.status === 200) {
                 if (request.responseText !== "") {
                     let myJson = JSON.parse(request.responseText);
-                    lat = myJson[0]["lat"];
-                    lng = myJson[0]["lng"];
-                    initMap();
+                    init(new google.maps.LatLng(myJson[0]["lat"], myJson[0]["lng"]), name)
                 }
             }
         }

@@ -11,6 +11,7 @@ include 'header.php';
     <h5 class="card-header">Gestion de l'ensemble des camions</h5>
     <div class="card-body">
         <button type="button" class="btn btn-primary ml-5 mr-5 mx-auto" data-toggle="modal" data-target="#createTruckModal" ><i class="fas fa-plus"></i>&nbsp;Ajouter un nouveau camion</button>
+        <button class="btn btn-success ml-5 mr-5 mx-auto" type="button" data-toggle="modal" data-target="#locateAllTrucks"><i class="fas fa-map-marked-alt"></i> Voir tous les camions</button>
     </div>
     <table class="table table-striped mt-2">
         <thead class="thead-dark">
@@ -63,6 +64,20 @@ include 'header.php';
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                 <button class="btn btn-primary" data-dismiss="modal" type="button" onclick="assignTruck()">Assigner</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="locateAllTrucks" tabindex="-1" role="dialog" aria-labelledby="locateTruck" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateTruckInfo">Carte des camions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             </div>
         </div>
     </div>
@@ -257,7 +272,7 @@ include 'header.php';
                             </table>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                        <div class="tab-pane fade" id="mapModal" role="tabpanel" aria-labelledby="contact-tab" "></div>
+                        <div class="tab-pane fade" id="mapModal" role="tabpanel" aria-labelledby="contact-tab"></div>
                     </div>
                 </div>
             </div>
