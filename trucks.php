@@ -239,7 +239,7 @@ include 'header.php';
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-car-crash"></i>&nbsp;Incidents</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-map-marked-alt"></i>&nbsp;Localisation</a>
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#mapModal" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-map-marked-alt"></i>&nbsp;Localisation</a>
                         </li>
                     </ul>
                     <div class="tab-content card mt-1" id="myTabContent">
@@ -257,7 +257,7 @@ include 'header.php';
                             </table>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                        <div class="tab-pane fade" id="mapModal" role="tabpanel" aria-labelledby="contact-tab" data-lat="5.134515" data-long="97.151759"></div>
                     </div>
                 </div>
             </div>
@@ -268,201 +268,13 @@ include 'header.php';
     </div>
 </div>
 
-<script>
-    function refreshTable() {
-        const content = document.getElementById("tablebody");
-
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    //console.log(request.responseText);
-                    content.innerHTML = request.responseText;
-                }
-            }
-        };
-        request.open('GET', './functions/getTruckList.php', true);
-        request.send();
-    }
-    
-    function displayTruckId(idTruck) {
-        const truckID = document.getElementsByClassName("truckID");
-        for (let i = 0; i < truckID.length; i++) {
-            truckID[i].value = idTruck;
-        }
-    }
-    
-    function unassignDriver(idtruck) {
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    //console.log(request.responseText);
-                }
-            }
-        };
-        request.open('POST', 'functions/unassignDriver.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(
-            'truck=' + idtruck
-        );
-        setTimeout(refreshTable, 1000);
-    }
-    
-    function assignTruck() {
-        const truck = document.getElementById("assign").value;
-        const user = document.getElementById("select").value;
-        
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    if (request.responseText !== "") {
-                        alert(request.responseText);
-                    }
-                }
-            }
-        };
-        request.open('POST', 'functions/assignDriver.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(
-            'user=' + user +
-            "&truck=" + truck
-        );
-        setTimeout(refreshTable, 1000);
-    }
-
-    function getInfo(idtruck) {
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    let truckJson = JSON.parse(request.responseText);
-                    const truck = document.getElementsByClassName("truck");
-                    for (let i = 0; i < truck.length; i++) {
-                        const input = document.getElementsByName(truck[i].name);;
-                        input[0].value = truckJson[0][truck[i].name];
-                    }
-                }
-            }
-        };
-        request.open('GET', './functions/getTruckInfo.php?id='+idtruck, true);
-        request.send();
-    }
-    
-    function createTruck() {
-        const manufacturers = document.getElementById("truckManufacturers").value;
-        const model = document.getElementById("truckModel").value;
-        const license = document.getElementById("licensePlate").value;
-        const km = document.getElementById("truckKm").value;
-        const warehouse = document.getElementById("truckWarehouse").value;
-
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    console.log(request.responseText);
-                }
-            }
-        };
-        request.open('POST', 'functions/createTruck.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(
-            'manufacturers=' + manufacturers +
-            '&model=' + model +
-            '&license=' + license +
-            '&km=' + km +
-            '&warehouse=' + warehouse
-        );
-        setTimeout(refreshTable, 1000);
-    }
-    function getOpenDays(idtruck) {
-        const table = document.getElementById("tableBody");
-        table.innerText = "";
-
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    let myJson = JSON.parse(request.responseText);
-                    const tbody = document.getElementById("tableBody");
-                    for (let i = 0; i < myJson.length; i++) {
-                        const tr = document.createElement("tr");
-                        const search = document.getElementById(myJson[i]["openDay"]);
-                        if (search === null) {
-                            const thd = document.createElement("th");
-                            thd.scope = "row";
-                            thd.id = myJson[i]["openDay"];
-                            thd.innerText = myJson[i]["openDay"];
-                            const td1 = document.createElement("td");
-                            td1.innerText = myJson[i]["startHour"];
-                            td1.className = "text-center";
-                            const td2 = document.createElement("td");
-                            td2.innerText = myJson[i]["endHour"];
-                            td2.className = "text-center";
-
-                            tr.appendChild(thd);
-                            tr.appendChild(td1);
-                            tr.appendChild(td2);
-                        } else {
-
-                            search.setAttribute("rowspan", "2");
-                            search.className = "align-middle";
-                            const td1 = document.createElement("td");
-                            td1.innerText = myJson[i]["startHour"];
-                            td1.className = "text-center";
-                            const td2 = document.createElement("td");
-                            td2.innerText = myJson[i]["endHour"];
-                            td2.className = "text-center";
-                            tr.appendChild(td1);
-                            tr.appendChild(td2);
-                        }
-                        tbody.appendChild(tr);
-                    }
-                }
-            }
-        };
-        request.open('POST', 'functions/getOpenDays.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(
-            'truck=' + idtruck
-        );
-        setTimeout(refreshTable, 1000);
-    }
-    
-    function updateTruck() {
-        const id = document.getElementById("update")
-        const manufacturers = document.getElementById("updateManufacturers");
-        const model = document.getElementById("updateModel");
-        const license = document.getElementById("updateLicense");
-        const km = document.getElementById("updateKM");
-        const truckName = document.getElementById("updateName");
-        
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    if (request.responseText !== "") {
-                        alert(request.responseText);
-                    }
-                }
-            }
-        };
-        request.open('POST', './functions/updateTruck.php', true);
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(
-            'id=' + id.value +
-            '&manufacturers=' + manufacturers.value +
-            '&model=' + model.value +
-            '&name=' + truckName.value +
-            '&license=' + license.value +
-            '&km=' + km.value
-        );
-        setTimeout(refreshTable, 1000);
-    }
-    
-    setInterval(refreshTable, 60000);
-    window.onload = refreshTable;
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr_vOUs3BJrToO67yuX8dmTYvr8qCbWB8&callback=initMap">
 </script>
+
+<script src ="scripts/scripts.js"></script>
 <?php include "footer.php"; ?>
 </body>
