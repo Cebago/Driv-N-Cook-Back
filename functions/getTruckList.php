@@ -4,7 +4,7 @@
     require "../functions.php";
     
     $pdo = connectDB();
-    $queryPrepared = $pdo->prepare("SELECT idTruck, truckManufacturers, truckModel, licensePlate, km, DATE_FORMAT(createDate,'%d/%m/%Y') as createDate, user FROM pa2a2drivncook.TRUCK;");
+    $queryPrepared = $pdo->prepare("SELECT idTruck, truckManufacturers, truckModel, truckName, licensePlate, km, DATE_FORMAT(createDate,'%d/%m/%Y') as createDate, user FROM pa2a2drivncook.TRUCK;");
     $queryPrepared->execute();
     $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
     $string = "";
@@ -13,6 +13,7 @@
         $string .= "<th scope='row'>" . $value["idTruck"] . "</th>";
         $string .= "<td>" . $value["truckManufacturers"] . "</td>";
         $string .= "<td>" . $value["truckModel"] . "</td>";
+        $string .= "<td>" . $value["truckName"] . "</td>";
         $string .= "<td><img class='rounded border border-dark' src='./truckPlate.php?string=". $value['licensePlate'] ."' width='200' height='50'></td>";
         $string .= "<td>" . $value["km"] . "</td>";
         $string .= "<td>" . $value["createDate"] . "</td>";

@@ -1,11 +1,10 @@
 <?php
 session_start();
-include 'header.php';
 require 'conf.inc.php';
 require 'functions.php';
+include 'header.php';
 ?>
 </head>
-
 <body>
 <?php include "navbar.php"; ?>
 <div class="menu mt-5 card col-md-11 mx-auto">
@@ -19,6 +18,7 @@ require 'functions.php';
             <th scope="col">ID</th>
             <th scope="col">Marque</th>
             <th scope="col">Modèle</th>
+            <th scope="col">Nom</th>
             <th scope="col">Plaque d'immatriculation</th>
             <th scope="col">Distance parcourue</th>
             <th scope="col">Date de création</th>
@@ -92,6 +92,12 @@ require 'functions.php';
                 </div>
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
+                        <span class="input-group-text" id="name">Nom</span>
+                    </div>
+                    <input type="text" id="truckName" class="form-control" name="createTruckName" placeholder="Nom du camion" aria-label="truckId" aria-describedby="addon-wrapping">
+                </div>
+                <div class="input-group flex-nowrap mt-1">
+                    <div class="input-group-prepend">
                         <span class="input-group-text" id="plate">Plaque d'immatriculation</span>
                     </div>
                     <input type="text" id="licensePlate" class="form-control" name="createLicensePlate" placeholder="Plaque d'immatriculation du camion" aria-label="truckId" aria-describedby="addon-wrapping">
@@ -155,6 +161,12 @@ require 'functions.php';
                             <span class="input-group-text" id="truckModel">Modèle</span>
                         </div>
                         <input type="text" id="updateModel" class="form-control truck" name="truckModel" placeholder="Modèle du camion" aria-label="truckId" aria-describedby="addon-wrapping">
+                    </div>
+                    <div class="input-group flex-nowrap mt-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="truckName">Nom</span>
+                        </div>
+                        <input type="text" id="updateName" class="form-control truck" name="truckName" placeholder="Nom du camion" aria-label="truckId" aria-describedby="addon-wrapping">
                     </div>
                     <div class="input-group flex-nowrap mt-1">
                         <div class="input-group-prepend">
@@ -294,7 +306,7 @@ require 'functions.php';
         request.send(
             'truck=' + idtruck
         );
-        refreshTable();
+        setTimeout(refreshTable, 1000);
     }
     
     function assignTruck() {
@@ -317,7 +329,7 @@ require 'functions.php';
             'user=' + user +
             "&truck=" + truck
         );
-        refreshTable();
+        setTimeout(refreshTable, 1000);
     }
 
     function getInfo(idtruck) {
@@ -328,7 +340,7 @@ require 'functions.php';
                     let truckJson = JSON.parse(request.responseText);
                     const truck = document.getElementsByClassName("truck");
                     for (let i = 0; i < truck.length; i++) {
-                        const input = document.getElementsByName(truck[i].name);
+                        const input = document.getElementsByName(truck[i].name);;
                         input[0].value = truckJson[0][truck[i].name];
                     }
                 }
@@ -362,7 +374,7 @@ require 'functions.php';
             '&km=' + km +
             '&warehouse=' + warehouse
         );
-        refreshTable();
+        setTimeout(refreshTable, 1000);
     }
     function getOpenDays(idtruck) {
         const table = document.getElementById("tableBody");
@@ -372,11 +384,8 @@ require 'functions.php';
         request.onreadystatechange = function() {
             if(request.readyState === 4) {
                 if(request.status === 200) {
-                    //console.log(request.responseText);
                     let myJson = JSON.parse(request.responseText);
-                    //console.dir(myJson);
                     for (let i = 0; i < myJson.length; i++) {
-                        //console.log(myJson[i]["openDay"]);
                         const tr = document.createElement("tr");
                         const th = document.createElement("th");
                         th.scope = "row";
@@ -398,7 +407,7 @@ require 'functions.php';
         request.send(
             'truck=' + idtruck
         );
-        refreshTable();
+        setTimeout(refreshTable, 1000);
     }
     
     function updateTruck() {
@@ -407,6 +416,7 @@ require 'functions.php';
         const model = document.getElementById("updateModel");
         const license = document.getElementById("updateLicense");
         const km = document.getElementById("updateKM");
+        const truckName = document.getElementById("updateName");
         
         const request = new XMLHttpRequest();
         request.onreadystatechange = function() {
@@ -424,10 +434,11 @@ require 'functions.php';
             'id=' + id.value +
             '&manufacturers=' + manufacturers.value +
             '&model=' + model.value +
+            '&name=' + truckName.value +
             '&license=' + license.value +
             '&km=' + km.value
         );
-        refreshTable();
+        setTimeout(refreshTable, 1000);
     }
     
     setInterval(refreshTable, 60000);
