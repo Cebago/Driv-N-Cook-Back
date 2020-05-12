@@ -3,11 +3,12 @@ var lat = null;
 var lng = null;
 function init(myLoc) {
     let marker = new google.maps.Marker({
-        position: myLoc
+        position: myLoc,
+        icon : 'img/truck.png'
     });
     let opt = {
         center: myLoc,
-        zoom: 13,
+        zoom: 13 ,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("mapModal"), opt);
