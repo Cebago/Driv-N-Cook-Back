@@ -244,7 +244,7 @@ include 'header.php';
                     </ul>
                     <div class="tab-content card mt-1" id="myTabContent">
                         <div class="tab-pane fade show active" id="openDays" role="tabpanel" aria-labelledby="home-tab">
-                            <table class="table table-striped" id="openTable">
+                            <table class="table" id="openTable">
                                 <thead  class="thead-dark">
                                 <tr>
                                     <th scope="col">Jour de la semaine</th>
@@ -385,19 +385,39 @@ include 'header.php';
             if(request.readyState === 4) {
                 if(request.status === 200) {
                     let myJson = JSON.parse(request.responseText);
+                    const tbody = document.getElementById("tableBody");
                     for (let i = 0; i < myJson.length; i++) {
                         const tr = document.createElement("tr");
-                        const th = document.createElement("th");
-                        th.scope = "row";
-                        th.innerHTML = myJson[i]["openDay"];
-                        const td1 = document.createElement("td");
-                        const td2 = document.createElement("td");
-                        td1.innerHTML = myJson[i]["startHour"];
-                        td2.innerHTML = myJson[i]["endHour"];
-                        tr.appendChild(th);
-                        tr.appendChild(td1);
-                        tr.appendChild(td2);
-                        table.appendChild(tr);
+                        const search = document.getElementById(myJson[i]["openDay"]);
+                        if (search === null) {
+                            const thd = document.createElement("th");
+                            thd.scope = "row";
+                            thd.id = myJson[i]["openDay"];
+                            thd.innerText = myJson[i]["openDay"];
+                            const td1 = document.createElement("td");
+                            td1.innerText = myJson[i]["startHour"];
+                            td1.className = "text-center";
+                            const td2 = document.createElement("td");
+                            td2.innerText = myJson[i]["endHour"];
+                            td2.className = "text-center";
+
+                            tr.appendChild(thd);
+                            tr.appendChild(td1);
+                            tr.appendChild(td2);
+                        } else {
+
+                            search.setAttribute("rowspan", "2");
+                            search.className = "align-middle";
+                            const td1 = document.createElement("td");
+                            td1.innerText = myJson[i]["startHour"];
+                            td1.className = "text-center";
+                            const td2 = document.createElement("td");
+                            td2.innerText = myJson[i]["endHour"];
+                            td2.className = "text-center";
+                            tr.appendChild(td1);
+                            tr.appendChild(td2);
+                        }
+                        tbody.appendChild(tr);
                     }
                 }
             }
