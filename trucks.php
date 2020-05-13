@@ -18,7 +18,7 @@ include 'header.php';
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tabTrucksInfo" role="tab" aria-controls="home" aria-selected="true">Tableau</a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tabmapAllTrucks" onclick="showMap(1, 'test')" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-map-marked-alt"></i> Carte intéractive</a>
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tabmapAllTrucks" onclick="showMap()" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-map-marked-alt"></i> Carte intéractive</a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">

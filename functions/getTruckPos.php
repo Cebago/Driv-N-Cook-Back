@@ -7,12 +7,12 @@ header('content-type:application/json');
 $pdo = connectDB();
 if(isset($_GET["id"])) {
     $idTruck = $_GET["id"];
-    $queryPrepared = $pdo->prepare("SELECT lng, lat FROM LOCATION WHERE truck = :id;");
+    $queryPrepared = $pdo->prepare("SELECT lng, lat, truckName FROM LOCATION, TRUCK WHERE truck = :id AND truck = idTruck;");
     $queryPrepared->execute([
         ":id" => $idTruck
     ]);
 }else{
-    $queryPrepared = $pdo->prepare("SELECT lng, lat, truck, truckName, truckManufacturers, truckModel, licensePlate, km,  DATE_FORMAT(createDate,'%d/%m/%Y') as createDate FROM LOCATION, TRUCK WHERE idTruck = truck");
+    $queryPrepared = $pdo->prepare("SELECT lng, lat, truck, truckName, truckManufacturers, truckModel, licensePlate, km,  DATE_FORMAT(TRUCK.createDate,'%d/%m/%Y')as createDate, firstname FROM LOCATION, TRUCK LEFT JOIN USER ON user = idUser WHERE idTruck = truck");
     $queryPrepared->execute();
 }
 

@@ -1,41 +1,3 @@
-var map;
-var marker;
-
-function init1truck(myLoc, name) {
-    marker = new google.maps.Marker({
-        position: myLoc,
-        icon : 'img/truck.png'
-    });
-
-    var contentString = '<div id="content">'+
-        '<div id="siteNotice">'+
-        '</div>'+
-        '<h3>'+name+'</h3>'+
-        '<div id="bodyContent">'+
-        '</div>';
-
-    var infowindow = new google.maps.InfoWindow({
-        content: contentString
-    });
-
-
-    let opt = {
-        center: myLoc,
-        zoom: 13 ,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById("mapAllTrucks"), opt);
-    marker.setMap(map);
-    marker.addListener('mouseover', function() {
-        infowindow.open(map, marker);
-    });
-
-
-}
-
-
-
-
 function showMap(idTruck) {
 
     let opt = {
@@ -43,8 +5,11 @@ function showMap(idTruck) {
         zoom: 8 ,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-
-    map = new google.maps.Map(document.getElementById("mapAllTrucks"), opt);
+    var map;
+    if(idTruck)
+        map = new google.maps.Map(document.getElementById("map1Truck"), opt);
+    else
+        map = new google.maps.Map(document.getElementById("mapAllTrucks"), opt);
 
     const request = new XMLHttpRequest();
     request.onreadystatechange = function () {
@@ -52,63 +17,105 @@ function showMap(idTruck) {
             if (request.status === 200) {
                 if (request.responseText !== "") {
                     let myJson = JSON.parse(request.responseText);
+                    console.log(myJson);
                     for (var i = 0; i < myJson.length; i++) {
                         let marker = new google.maps.Marker({
                             position: new google.maps.LatLng(myJson[i]["lat"], myJson[i]["lng"]),
                             icon: 'img/truck.png',
                             map: map
                         });
-                        let smallInfoString = '<div id="content" class="dataInfos">' +
-                            '<div id="siteNotice">' +
-                            '</div>' +
-                            '<h6>' + myJson[i]["truckName"] + '</h6>' +
-                            '<div id="bodyContent">' +
-                            '<div> Cliquer pour plus d\'informations </div>' +
-                            '</div>';
+                        if(idTruck){
+                            let geocoder = new google.maps.Geocoder;
+                            console.log("lat: "+ myJson[0]['lat']);
+                            console.log("lng: "+ myJson[0]['lng']);
+                            let latlng = {lat: parseFloat(myJson[0]["lat"]), lng: parseFloat(myJson[0]["lng"])};
+                            geocoder.geocode({'location': latlng}, function(results, status) {
+                                if (status === 'OK') {
+                                    if (results[0]) {
 
-                        let smallInfo = new google.maps.InfoWindow({
-                            content: smallInfoString
-                        });
+                                        var marker = new google.maps.Marker({
+                                            position: latlng,
+                                            map: map
+                                        });
+                                        var smallInfoString = '<div id="content" class="dataInfos">' +
+                                            '<div id="siteNotice">' +
+                                            '</div>' +
+                                            '<h6>' + myJson[0]["truckName"] + '</h6>' +
+                                            '<div>'+results[0].formatted_address+'</div>'+
+                                            '<div id="bodyContent">' +
+                                            '</div>';
+                                        let smallInfo = new google.maps.InfoWindow({
+                                            content: smallInfoString
+                                        });
+                                        smallInfo.open(map, marker);
+                                    } else {
+                                        window.alert('No results found');
+                                    }
+                                } else {
+                                    window.alert('Geocoder failed due to: ' + status);
+                                }
+                            });
 
-                        let largeInfoString = '<div id="content" class="dataInfos">' +
-                            '<div id="siteNotice">' +
-                            '</div>' +
-                            '<h5>' + myJson[i]["truckName"] + '</h5>' +
-                            '<div id="bodyContent">' +
-                            '<div><b>'+  myJson[i]["truckManufacturers"] +' '+ myJson[i]["truckModel"] + ' </b></div>' +
-                            '<div>'+  myJson[i]["km"] +' Kiliomètres parcourus</div>' +
-                            '<div>Créé le '+  myJson[i]["createDate"] +'</div>' +
-                            '<div>Double cliquer pour accéder à la page du camion</div>' +
-                            '</div>';
 
-                        let largeInfo = new google.maps.InfoWindow({
-                            content: largeInfoString
-                        });
+                        }else {
+                            let smallInfoString = '<div id="content" class="dataInfos">' +
+                                '<div id="siteNotice">' +
+                                '</div>' +
+                                '<h6>' + myJson[i]["truckName"] + '</h6>' +
+                                '<div id="bodyContent">' +
+                                '<div> Cliquer pour plus d\'informations </div>' +
+                                '</div>';
 
-                        marker.addListener('mouseover', function () {
-                            smallInfo.open(map, marker);
-                        });
-                        marker.addListener('click', function () {
-                            smallInfo.close(map, marker);
-                            largeInfo.open(map, marker);
-                        });
-                        marker.addListener('mouseout', function () {
-                            smallInfo.close(map, marker);
-                            largeInfo.close(map, marker);
-                        });
-                        marker.addListener('dblclick', function () {
-                            window.open(
-                                'http://drivncook.fr',
-                                '_blank' 
-                            );
-                        });
+                            let smallInfo = new google.maps.InfoWindow({
+                                content: smallInfoString
+                            });
+                            let firstname = myJson[i]["firstname"] || "Personne";
+                            let largeInfoString = '<div id="content" class="dataInfos">' +
+                                '<div id="siteNotice">' +
+                                '</div>' +
+                                '<h5>' + myJson[i]["truckName"] + '</h5>' +
+                                '<div id="bodyContent">' +
+                                '<div><b>' + myJson[i]["truckManufacturers"] + ' ' + myJson[i]["truckModel"] + ' </b></div>' +
+                                '<div>' + myJson[i]["km"] + ' Kiliomètres parcourus</div>' +
+                                '<div>Créé le ' + myJson[i]["createDate"] + '</div>' +
+                                '<div>Conduit par ' + firstname + '</div>' +
+                                '<div><br>Double cliquer pour accéder à la page du camion</div>' +
+                                '</div>';
+
+                            let largeInfo = new google.maps.InfoWindow({
+                                content: largeInfoString
+                            });
+
+                            marker.addListener('mouseover', function () {
+                                smallInfo.open(map, marker);
+                            });
+                            marker.addListener('click', function () {
+                                smallInfo.close(map, marker);
+                                largeInfo.open(map, marker);
+                            });
+                            marker.addListener('mouseout', function () {
+                                smallInfo.close(map, marker);
+                                largeInfo.close(map, marker);
+                            });
+                            marker.addListener('dblclick', function () {
+                                window.open(
+                                    'http://drivncook.fr',
+                                    '_blank'
+                                );
+                            });
+                        }
                     }
                 }
             }
         }
         return 0;
     };
-    request.open('GET', 'functions/getTruckPos.php');
+    if(idTruck) {
+        request.open('GET', 'functions/getTruckPos.php?id=' + idTruck);
+        console.log("avec user"+idTruck)
+    }
+    else
+        request.open('GET', 'functions/getTruckPos.php');
     request.send();
 
 };
