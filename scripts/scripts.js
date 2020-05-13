@@ -1,12 +1,11 @@
 var map;
 var marker;
 
-function init(myLoc, name) {
+function init1truck(myLoc, name) {
     marker = new google.maps.Marker({
         position: myLoc,
         icon : 'img/truck.png'
     });
-    console.log(name);
 
     var contentString = '<div id="content">'+
         '<div id="siteNotice">'+
@@ -25,41 +24,91 @@ function init(myLoc, name) {
         zoom: 13 ,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    map = new google.maps.Map(document.getElementById("mapModal"), opt);
+    map = new google.maps.Map(document.getElementById("mapAllTrucks"), opt);
     marker.setMap(map);
     marker.addListener('mouseover', function() {
         infowindow.open(map, marker);
     });
 
+
 }
 
 
 
 
-function toggleBounce() {
-    if (marker.getAnimation() !== null) {
-        marker.setAnimation(null);
-    } else {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-}
+function showMap(idTruck) {
 
+    let opt = {
+        center: new google.maps.LatLng(48.8376962,2.3896693),
+        zoom: 8 ,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
 
+    map = new google.maps.Map(document.getElementById("mapAllTrucks"), opt);
 
-function showMap(idTruck, name) {
     const request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.readyState === 4) {
             if (request.status === 200) {
                 if (request.responseText !== "") {
                     let myJson = JSON.parse(request.responseText);
-                    init(new google.maps.LatLng(myJson[0]["lat"], myJson[0]["lng"]), name)
+                    for (var i = 0; i < myJson.length; i++) {
+                        let marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(myJson[i]["lat"], myJson[i]["lng"]),
+                            icon: 'img/truck.png',
+                            map: map
+                        });
+                        let smallInfoString = '<div id="content" class="dataInfos">' +
+                            '<div id="siteNotice">' +
+                            '</div>' +
+                            '<h6>' + myJson[i]["truckName"] + '</h6>' +
+                            '<div id="bodyContent">' +
+                            '<div> Cliquer pour plus d\'informations </div>' +
+                            '</div>';
+
+                        let smallInfo = new google.maps.InfoWindow({
+                            content: smallInfoString
+                        });
+
+                        let largeInfoString = '<div id="content" class="dataInfos">' +
+                            '<div id="siteNotice">' +
+                            '</div>' +
+                            '<h5>' + myJson[i]["truckName"] + '</h5>' +
+                            '<div id="bodyContent">' +
+                            '<div><b>'+  myJson[i]["truckManufacturers"] +' '+ myJson[i]["truckModel"] + ' </b></div>' +
+                            '<div>'+  myJson[i]["km"] +' Kiliomètres parcourus</div>' +
+                            '<div>Créé le '+  myJson[i]["createDate"] +'</div>' +
+                            '<div>Double cliquer pour accéder à la page du camion</div>' +
+                            '</div>';
+
+                        let largeInfo = new google.maps.InfoWindow({
+                            content: largeInfoString
+                        });
+
+                        marker.addListener('mouseover', function () {
+                            smallInfo.open(map, marker);
+                        });
+                        marker.addListener('click', function () {
+                            smallInfo.close(map, marker);
+                            largeInfo.open(map, marker);
+                        });
+                        marker.addListener('mouseout', function () {
+                            smallInfo.close(map, marker);
+                            largeInfo.close(map, marker);
+                        });
+                        marker.addListener('dblclick', function () {
+                            window.open(
+                                'http://drivncook.fr',
+                                '_blank' 
+                            );
+                        });
+                    }
                 }
             }
         }
         return 0;
     };
-    request.open('GET', 'functions/getTruckPos.php?id=' + idTruck);
+    request.open('GET', 'functions/getTruckPos.php');
     request.send();
 
 };

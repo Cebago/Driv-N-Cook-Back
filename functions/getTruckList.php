@@ -37,7 +37,7 @@
             <i class='fas fa-map-marked-alt'></i></button>";
             $string .= "<button class='btn btn-dark mr-2 mt-1' type='button' data-toggle='modal' title='Consulter les informations du camion' 
             data-target='#generalInfo' data-whatever='" . $value["idTruck"] . "' onclick='displayTruckId(" . $value["idTruck"] . "); 
-            getInfo(" . $value["idTruck"] . "); getOpenDays(" . $value["idTruck"] . "); showMap(" . $value["idTruck"] .",`".$value["truckName"]."`)'><i class='fas fa-info-circle'></i></button>";
+            getInfo(" . $value["idTruck"] . "); getOpenDays(" . $value["idTruck"] . "); showMap(" . $value["idTruck"] ."`)'><i class='fas fa-info-circle'></i></button>";
         } else {
             $string .= "<button class='btn btn-primary mr-2 mt-1' type='button' data-toggle='modal' title='Assigner le camion à un franchisé'
             data-target='#assignModal' data-whatever='" . $value["idTruck"] . "' onclick='displayTruckId(". $value["idTruck"] . ")'>

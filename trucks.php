@@ -11,27 +11,42 @@ include 'header.php';
     <h5 class="card-header">Gestion de l'ensemble des camions</h5>
     <div class="card-body">
         <button type="button" class="btn btn-primary ml-5 mr-5 mx-auto" data-toggle="modal" data-target="#createTruckModal" ><i class="fas fa-plus"></i>&nbsp;Ajouter un nouveau camion</button>
-        <button class="btn btn-success ml-5 mr-5 mx-auto" type="button" data-toggle="modal" data-target="#locateAllTrucks"><i class="fas fa-map-marked-alt"></i> Voir tous les camions</button>
     </div>
-    <table class="table table-striped mt-2">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Marque</th>
-            <th scope="col">Modèle</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Plaque d'immatriculation</th>
-            <th scope="col">Distance parcourue</th>
-            <th scope="col">Date de création</th>
-            <th scope="col">Conducteur</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody id="tablebody">
-        
-        </tbody>
-    </table>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tabTrucksInfo" role="tab" aria-controls="home" aria-selected="true">Tableau</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tabmapAllTrucks" onclick="showMap(1, 'test')" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-map-marked-alt"></i> Carte intéractive</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="tabTrucksInfo" role="tabpanel" aria-labelledby="home-tab">
+            <table class="table table-striped mt-2">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Marque</th>
+                    <th scope="col">Modèle</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Plaque d'immatriculation</th>
+                    <th scope="col">Distance parcourue</th>
+                    <th scope="col">Date de création</th>
+                    <th scope="col">Conducteur</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody id="tablebody">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade show active" id="tabmapAllTrucks" role="tabpanel" aria-labelledby="home-tab">
+            <div class="mapModal" id="mapAllTrucks"></div>
+        </div>
 </div>
+
 <div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -69,19 +84,6 @@ include 'header.php';
     </div>
 </div>
 
-<div class="modal fade" id="locateAllTrucks" tabindex="-1" role="dialog" aria-labelledby="locateTruck" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateTruckInfo">Carte des camions</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="modal fade" id="createTruckModal" tabindex="-1" role="dialog" aria-labelledby="createTruck" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -254,7 +256,7 @@ include 'header.php';
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-car-crash"></i>&nbsp;Incidents</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#mapModal" role="tab" aria-controls="contact" aria-selected="false" id="map-tab" ><i class="fas fa-map-marked-alt"></i>&nbsp;Localisation</a>
+                            <a class="nav-link" data-toggle="tab" href="#map1Truck" role="tab" aria-controls="contact" aria-selected="false" id="map-tab" ><i class="fas fa-map-marked-alt"></i>&nbsp;Localisation</a>
                         </li>
                     </ul>
                     <div class="tab-content card mt-1" id="myTabContent">
@@ -272,7 +274,7 @@ include 'header.php';
                             </table>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                        <div class="tab-pane fade" id="mapModal" role="tabpanel" aria-labelledby="contact-tab"></div>
+                        <div class="tab-pane fade mapModal" id="map1Truck" role="tabpanel" aria-labelledby="contact-tab"></div>
                     </div>
                 </div>
             </div>
