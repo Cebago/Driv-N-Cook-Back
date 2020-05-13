@@ -11,7 +11,7 @@ function init(myLoc, name) {
     var contentString = '<div id="content">'+
         '<div id="siteNotice">'+
         '</div>'+
-        '<h1 id="firstHeading" class="firstHeading">'+name+'</h1>'+
+        '<h3>'+name+'</h3>'+
         '<div id="bodyContent">'+
         '</div>';
 

@@ -229,7 +229,7 @@ include 'header.php';
     </div>
 </div>
 
-<div class="modal fade" id="generalInfo" tabindex="-1" role="dialog" aria-labelledby="locateTruck" aria-hidden="true">
+<div class="modal fade" id="generalInfo" tabindex="-1" role="dialog" aria-labelledby="locateTruck" aria-hidden="true" >
     <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -243,7 +243,7 @@ include 'header.php';
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="idTruck">Camion n°</span>
                     </div>
-                    <input type="text" id="generalInfo" class="form-control truckID" name="idTruck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping">
+                    <input type="text" id="generalInfo" class="form-control truckID" name="idTruck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly="true">
                 </div>
                 <div class="mt-1">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
