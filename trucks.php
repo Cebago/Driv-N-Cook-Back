@@ -12,25 +12,41 @@ include 'header.php';
     <div class="card-body">
         <button type="button" class="btn btn-primary ml-5 mr-5 mx-auto" data-toggle="modal" data-target="#createTruckModal" ><i class="fas fa-plus"></i>&nbsp;Ajouter un nouveau camion</button>
     </div>
-    <table class="table table-striped mt-2">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Marque</th>
-            <th scope="col">Modèle</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Plaque d'immatriculation</th>
-            <th scope="col">Distance parcourue</th>
-            <th scope="col">Date de création</th>
-            <th scope="col">Conducteur</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody id="tablebody">
-        
-        </tbody>
-    </table>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tabTrucksInfo" role="tab" aria-controls="home" aria-selected="true">Tableau</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tabmapAllTrucks" onclick="showMap()" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-map-marked-alt"></i> Carte intéractive</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="tabTrucksInfo" role="tabpanel" aria-labelledby="home-tab">
+            <table class="table table-striped mt-2">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Marque</th>
+                    <th scope="col">Modèle</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Plaque d'immatriculation</th>
+                    <th scope="col">Distance parcourue</th>
+                    <th scope="col">Date de création</th>
+                    <th scope="col">Conducteur</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody id="tablebody">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade show active" id="tabmapAllTrucks" role="tabpanel" aria-labelledby="home-tab">
+            <div class="mapModal" id="mapAllTrucks"></div>
+        </div>
 </div>
+
 <div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -67,6 +83,7 @@ include 'header.php';
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="createTruckModal" tabindex="-1" role="dialog" aria-labelledby="createTruck" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -214,7 +231,7 @@ include 'header.php';
     </div>
 </div>
 
-<div class="modal fade" id="generalInfo" tabindex="-1" role="dialog" aria-labelledby="locateTruck" aria-hidden="true">
+<div class="modal fade" id="generalInfo" tabindex="-1" role="dialog" aria-labelledby="locateTruck" aria-hidden="true" >
     <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -228,7 +245,7 @@ include 'header.php';
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="idTruck">Camion n°</span>
                     </div>
-                    <input type="text" id="generalInfo" class="form-control truckID" name="idTruck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly>
+                    <input type="text" id="generalInfo" class="form-control truckID" name="idTruck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly="true">
                 </div>
                 <div class="mt-1">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -239,7 +256,7 @@ include 'header.php';
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-car-crash"></i>&nbsp;Incidents</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-map-marked-alt"></i>&nbsp;Localisation</a>
+                            <a class="nav-link" data-toggle="tab" href="#map1Truck" role="tab" aria-controls="contact" aria-selected="false" id="map-tab" ><i class="fas fa-map-marked-alt"></i>&nbsp;Localisation</a>
                         </li>
                     </ul>
                     <div class="tab-content card mt-1" id="myTabContent">
@@ -257,7 +274,7 @@ include 'header.php';
                             </table>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                        <div class="tab-pane fade mapModal" id="map1Truck" role="tabpanel" aria-labelledby="contact-tab"></div>
                     </div>
                 </div>
             </div>
@@ -268,201 +285,13 @@ include 'header.php';
     </div>
 </div>
 
-<script>
-    function refreshTable() {
-        const content = document.getElementById("tablebody");
-
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    //console.log(request.responseText);
-                    content.innerHTML = request.responseText;
-                }
-            }
-        };
-        request.open('GET', './functions/getTruckList.php', true);
-        request.send();
-    }
-    
-    function displayTruckId(idTruck) {
-        const truckID = document.getElementsByClassName("truckID");
-        for (let i = 0; i < truckID.length; i++) {
-            truckID[i].value = idTruck;
-        }
-    }
-    
-    function unassignDriver(idtruck) {
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    //console.log(request.responseText);
-                }
-            }
-        };
-        request.open('POST', 'functions/unassignDriver.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(
-            'truck=' + idtruck
-        );
-        setTimeout(refreshTable, 1000);
-    }
-    
-    function assignTruck() {
-        const truck = document.getElementById("assign").value;
-        const user = document.getElementById("select").value;
-        
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    if (request.responseText !== "") {
-                        alert(request.responseText);
-                    }
-                }
-            }
-        };
-        request.open('POST', 'functions/assignDriver.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(
-            'user=' + user +
-            "&truck=" + truck
-        );
-        setTimeout(refreshTable, 1000);
-    }
-
-    function getInfo(idtruck) {
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    let truckJson = JSON.parse(request.responseText);
-                    const truck = document.getElementsByClassName("truck");
-                    for (let i = 0; i < truck.length; i++) {
-                        const input = document.getElementsByName(truck[i].name);;
-                        input[0].value = truckJson[0][truck[i].name];
-                    }
-                }
-            }
-        };
-        request.open('GET', './functions/getTruckInfo.php?id='+idtruck, true);
-        request.send();
-    }
-    
-    function createTruck() {
-        const manufacturers = document.getElementById("truckManufacturers").value;
-        const model = document.getElementById("truckModel").value;
-        const license = document.getElementById("licensePlate").value;
-        const km = document.getElementById("truckKm").value;
-        const warehouse = document.getElementById("truckWarehouse").value;
-
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    console.log(request.responseText);
-                }
-            }
-        };
-        request.open('POST', 'functions/createTruck.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(
-            'manufacturers=' + manufacturers +
-            '&model=' + model +
-            '&license=' + license +
-            '&km=' + km +
-            '&warehouse=' + warehouse
-        );
-        setTimeout(refreshTable, 1000);
-    }
-    function getOpenDays(idtruck) {
-        const table = document.getElementById("tableBody");
-        table.innerText = "";
-
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    let myJson = JSON.parse(request.responseText);
-                    const tbody = document.getElementById("tableBody");
-                    for (let i = 0; i < myJson.length; i++) {
-                        const tr = document.createElement("tr");
-                        const search = document.getElementById(myJson[i]["openDay"]);
-                        if (search === null) {
-                            const thd = document.createElement("th");
-                            thd.scope = "row";
-                            thd.id = myJson[i]["openDay"];
-                            thd.innerText = myJson[i]["openDay"];
-                            const td1 = document.createElement("td");
-                            td1.innerText = myJson[i]["startHour"];
-                            td1.className = "text-center";
-                            const td2 = document.createElement("td");
-                            td2.innerText = myJson[i]["endHour"];
-                            td2.className = "text-center";
-
-                            tr.appendChild(thd);
-                            tr.appendChild(td1);
-                            tr.appendChild(td2);
-                        } else {
-
-                            search.setAttribute("rowspan", "2");
-                            search.className = "align-middle";
-                            const td1 = document.createElement("td");
-                            td1.innerText = myJson[i]["startHour"];
-                            td1.className = "text-center";
-                            const td2 = document.createElement("td");
-                            td2.innerText = myJson[i]["endHour"];
-                            td2.className = "text-center";
-                            tr.appendChild(td1);
-                            tr.appendChild(td2);
-                        }
-                        tbody.appendChild(tr);
-                    }
-                }
-            }
-        };
-        request.open('POST', 'functions/getOpenDays.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(
-            'truck=' + idtruck
-        );
-        setTimeout(refreshTable, 1000);
-    }
-    
-    function updateTruck() {
-        const id = document.getElementById("update")
-        const manufacturers = document.getElementById("updateManufacturers");
-        const model = document.getElementById("updateModel");
-        const license = document.getElementById("updateLicense");
-        const km = document.getElementById("updateKM");
-        const truckName = document.getElementById("updateName");
-        
-        const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
-                    if (request.responseText !== "") {
-                        alert(request.responseText);
-                    }
-                }
-            }
-        };
-        request.open('POST', './functions/updateTruck.php', true);
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(
-            'id=' + id.value +
-            '&manufacturers=' + manufacturers.value +
-            '&model=' + model.value +
-            '&name=' + truckName.value +
-            '&license=' + license.value +
-            '&km=' + km.value
-        );
-        setTimeout(refreshTable, 1000);
-    }
-    
-    setInterval(refreshTable, 60000);
-    window.onload = refreshTable;
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr_vOUs3BJrToO67yuX8dmTYvr8qCbWB8&callback=initMap">
 </script>
+
+<script src ="scripts/scripts.js"></script>
 <?php include "footer.php"; ?>
 </body>
