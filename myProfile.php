@@ -109,7 +109,7 @@ include "header.php";
 
                 cancelButton.innerHTML = '<i class="fas fa-times"></i>&nbsp;Annuler le formulaire';
                 cancelButton.className = "btn btn-danger float-right mr-3 btn-lg";
-                cancelButton.type = "submit";
+                cancelButton.type = "reset";
                 cancelButton.id = "cancel";
 
                 buttonDiv.appendChild(buttonValidation);
