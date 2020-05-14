@@ -26,9 +26,7 @@ function showMap(idTruck) {
                         });
                         if(idTruck){
                             let geocoder = new google.maps.Geocoder;
-                            console.log("lat: "+ myJson[0]['lat']);
-                            console.log("lng: "+ myJson[0]['lng']);
-                            let latlng = {lat: parseFloat(myJson[0]["lat"]), lng: parseFloat(myJson[0]["lng"])};
+                            let latlng = {lat: parseFloat(myJson[0]["lat"]), lng: parseFloat(myJson[0]["lng"])  };
                             geocoder.geocode({'location': latlng}, function(results, status) {
                                 if (status === 'OK') {
                                     if (results[0]) {
@@ -75,10 +73,11 @@ function showMap(idTruck) {
                                 '</div>' +
                                 '<h5>' + myJson[i]["truckName"] + '</h5>' +
                                 '<div id="bodyContent">' +
-                                '<div><b>' + myJson[i]["truckManufacturers"] + ' ' + myJson[i]["truckModel"] + ' </b></div>' +
-                                '<div>' + myJson[i]["km"] + ' Kiliomètres parcourus</div>' +
-                                '<div>Créé le ' + myJson[i]["createDate"] + '</div>' +
-                                '<div>Conduit par ' + firstname + '</div>' +
+                                '<div><b><i class="fas fa-truck"></i>&nbsp' + myJson[i]["truckManufacturers"] + ' ' + myJson[i]["truckModel"] + ' </b></div>' +
+                                '<div><i class="fas fa-road"></i>&nbsp' + myJson[i]["km"] + ' Kiliomètres parcourus</div>' +
+                                '<div><i class="fas fa-table"></i>&nbsp Créé le ' + myJson[i]["createDate"] + '</div>' +
+                                '<div><i class="fas fa-user-circle"></i>&nbsp Conduit par ' + firstname + '</div>' +
+                                '<div><i class="fas fa-id-badge"></i>&nbsp Immatriculation: '+ myJson[i]["licensePlate"] +'</div>'+
                                 '<div><br>Double cliquer pour accéder à la page du camion</div>' +
                                 '</div>';
 
