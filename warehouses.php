@@ -84,9 +84,9 @@ include "header.php";
             <div class="modal-body">
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="updateName">Nom de l'entrepôt</span>
+                        <span class="input-group-text" id="updateName">ID de l'entrepôt</span>
                     </div>
-                    <input type="text" class="form-control updateWarehouse" id="idWarehouse" name="idWarehouse" placeholder="Nom de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping" readonly>
+                    <input type="text" class="form-control updateWarehouse" id="idWarehouse" name="idWarehouse" placeholder="ID de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping" readonly>
                 </div>
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
