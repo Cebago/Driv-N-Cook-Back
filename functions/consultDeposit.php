@@ -2,6 +2,7 @@
 session_start();
 require "../conf.inc.php";
 require "../functions.php";
+header("Content-Type: application/json");
 
 $user = $_POST["user"];
 
