@@ -9,6 +9,7 @@ if (count($_POST) == 3
     && isset($_POST['confirm'])) {
 
     $error = false;
+    $listOfErrors = [];
     $email = $_SESSION["email"];
     $token = $_SESSION["token"];
 

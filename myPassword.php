@@ -18,7 +18,6 @@ include 'header.php';
                     foreach ($_SESSION["errors"] as $error) {
                         echo "<li>".$error;
                     }
-                    echo $_SESSION['pwd'];
                     echo "</div>";
                 }
                 unset($_SESSION["errors"]);

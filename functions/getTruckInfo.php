@@ -7,7 +7,7 @@ header('content-type:application/json');
 $idTruck = $_GET["id"];
 
 $pdo = connectDB();
-$queryPrepared = $pdo->prepare("SELECT idTruck, truckManufacturers, truckModel, licensePlate, km FROM pa2a2drivncook.TRUCK WHERE idTruck = :id;");
+$queryPrepared = $pdo->prepare("SELECT idTruck, truckManufacturers, truckModel, truckName, licensePlate, km FROM TRUCK WHERE idTruck = :id;");
 $queryPrepared->execute([
     ":id" => $idTruck
 ]);

@@ -101,7 +101,7 @@ include "header.php";
             if (valid === null && cancel === null) {
                 const buttonDiv = document.getElementById('buttons');
                 const buttonValidation = document.createElement('button');
-                const cancelButton = document.createElement('button');
+                const cancelButton = document.createElement('a');
                 buttonValidation.innerHTML = '<i class="fas fa-check"></i>&nbsp;Valider le formulaire';
                 buttonValidation.className = "btn btn-success float-right mr-3 btn-lg";
                 buttonValidation.type = "submit";
@@ -109,7 +109,8 @@ include "header.php";
 
                 cancelButton.innerHTML = '<i class="fas fa-times"></i>&nbsp;Annuler le formulaire';
                 cancelButton.className = "btn btn-danger float-right mr-3 btn-lg";
-                cancelButton.type = "submit";
+                cancelButton.href = "./myProfile.php"
+                cancelButton.type = "button";
                 cancelButton.id = "cancel";
 
                 buttonDiv.appendChild(buttonValidation);
