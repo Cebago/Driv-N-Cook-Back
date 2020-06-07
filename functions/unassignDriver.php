@@ -18,4 +18,10 @@
         $queryPrepared->execute([
             ":truck" => $truck
         ]);
+        $queryPrepared = $pdo->prepare("INSERT INTO TRUCKSTATUS (truck, status, updateDate) VALUES (:truck, :status, CURRENT_TIMESTAMP) 
+                                                            ON DUPLICATE KEY UPDATE updateDate = CURRENT_TIMESTAMP");
+        $queryPrepared->execute([
+            ":truck" => $truck,
+            ":status" => 11
+        ]);
     }
