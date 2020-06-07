@@ -502,7 +502,7 @@ function getTruckMaintenance(truck) {
             }
         }
     };
-    request.open('POST', './functions/getTruckMaintenance');
+    request.open('POST', './functions/getTruckMaintenance.php');
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     request.send("idTruck=" + truck);
 }
