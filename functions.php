@@ -20,7 +20,7 @@ function createToken($email){
 function login($email){
     $token = createToken($email);
     $pdo = connectDB();
-    $queryPrepared = $pdo->prepare("UPDATE USER SET token = :token WHERE emailAddress = :email ");
+    $queryPrepared = $pdo->prepare("UPDATE USERTOKEN, USER SET USERTOKEN.token = :token WHERE user = idUser AND emailAddress = :email AND tokenType = 'Site' ;");
     $queryPrepared->execute([":token"=>$token, ":email"=>$email]);
     $_SESSION["token"] = $token;
     $_SESSION["email"] = $email;
@@ -33,7 +33,10 @@ function isConnected(){
         $token = $_SESSION["token"];
         //Vérification d'un correspondant en base de données
         $pdo = connectDB();
-        $queryPrepared = $pdo->prepare("SELECT idUser FROM USER WHERE emailAddress = :email AND token = :token");
+        $queryPrepared = $pdo->prepare("SELECT idUser FROM USER, USERTOKEN WHERE emailAddress = :email 
+                                     AND USERTOKEN.token = :token 
+                                     AND user = idUser 
+                                     AND tokenType = 'Site'");
         $queryPrepared->execute([
             ":email"=>$email,
             ":token"=>$token
@@ -52,7 +55,10 @@ function isActivated(){
         $email = $_SESSION["email"];
         $token = $_SESSION["token"];
         $pdo = connectDB();
-        $queryPrepared = $pdo->prepare("SELECT isActivated FROM USER WHERE emailAddress = :email AND token = :token");
+        $queryPrepared = $pdo->prepare("SELECT isActivated FROM USER, USERTOKEN WHERE emailAddress = :email 
+                                          AND USERTOKEN.token = :token 
+                                          AND user = idUser 
+                                          AND tokenType = 'Site'");
         $queryPrepared->execute([
             ":email"=>$email,
             ":token"=>$token
@@ -72,7 +78,11 @@ function isAdmin(){
         $email = $_SESSION["email"];
         $token = $_SESSION["token"];
         $pdo = connectDB();
-        $queryPrepared = $pdo->prepare("SELECT roleName FROM USER, SITEROLE WHERE emailAddress = :email AND token = :token AND userRole = idRole");
+        $queryPrepared = $pdo->prepare("SELECT roleName FROM USER, SITEROLE, USERTOKEN WHERE emailAddress = :email 
+                                                 AND USERTOKEN.token = :token 
+                                                 AND user = idUser 
+                                                 AND userRole = idRole
+                                                 AND tokenType = 'Site'");
         $queryPrepared->execute([
             ":email"=>$email,
             ":token"=>$token
@@ -88,6 +98,8 @@ function isAdmin(){
 
 function logout($email){
     $pdo = connectDB();
-    $queryPrepared = $pdo->prepare("UPDATE USER SET token = null WHERE emailAddress = :email");
+    $queryPrepared = $pdo->prepare("UPDATE USER, USERTOKEN SET USERTOKEN.token = null WHERE emailAddress = :email 
+                                                    AND idUser = user 
+                                                    AND tokenType = 'Site'");
     $queryPrepared->execute([":email"=>$email]);
 }
