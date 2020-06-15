@@ -2,12 +2,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <?php if ($_SERVER["REQUEST_URI"] != '/home.php') { ?>
-            <li class="nav-item">
-                <a class="nav-link" href="home.php">Accueil</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="home.php">Accueil</a>
+                </li>
             <?php } ?>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="global" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="global" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     Entreprise
                 </a>
                 <div class="dropdown-menu" aria-labelledby="global">
@@ -18,7 +19,8 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="warehouses" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="warehouses" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     Approvisionnement
                 </a>
                 <div class="dropdown-menu" aria-labelledby="warehouses">
@@ -28,7 +30,8 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="benefits" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="benefits" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     Revenus
                 </a>
                 <div class="dropdown-menu" aria-labelledby="benefits">
@@ -38,7 +41,8 @@
             </li>
         </ul>
         <div class="form-inline my-2 my-lg-0 dropdown">
-            <a class="btn btn-dark my-2 my-sm-0" href="#" id="warehouses" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="btn btn-dark my-2 my-sm-0" href="#" id="warehouses" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
                 <i class="far fa-user-circle"></i>&nbsp;Gérer mon compte
             </a>
             <div class="dropdown-menu dropdown-menu-lg-left" aria-labelledby="warehouses">

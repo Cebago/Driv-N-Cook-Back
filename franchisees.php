@@ -38,7 +38,8 @@ require 'functions.php';
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="identity">Franchisé</span>
                     </div>
-                    <input type="text" id="assign" class="form-control Franchise" name="idTruck" placeholder="idTruck" aria-label="truckId" aria-describedby="addon-wrapping" readonly>
+                    <input type="text" id="assign" class="form-control Franchise" name="idTruck" placeholder="idTruck"
+                           aria-label="truckId" aria-describedby="addon-wrapping" readonly>
                 </div>
                 <div id="calendar">
 
@@ -59,9 +60,9 @@ require 'functions.php';
         }
 
         const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
                     //console.log(request.responseText);
                     let myJson = JSON.parse(request.responseText);
                     for (let i = 0; i < myJson.length; i++) {
@@ -86,7 +87,7 @@ require 'functions.php';
                         priceButton.setAttribute("data-target", "#priceModal");
                         priceButton.setAttribute("data-toggle", "modal");
                         priceButton.setAttribute("onclick", "displayFranchisee('" + myJson[i]["lastname"] + "', '"
-                            + myJson[i]["firstname"] +"'); consultDeposit("+ myJson[i]["idUser"] + ")");
+                            + myJson[i]["firstname"] + "'); consultDeposit(" + myJson[i]["idUser"] + ")");
                         td5.appendChild(priceButton);
                         tr.appendChild(th);
                         tr.appendChild(td1);
@@ -110,9 +111,9 @@ require 'functions.php';
         }
 
         const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
                     //console.log(request.responseText);
                     let myJson = JSON.parse(request.responseText);
                     for (let i = 0; i < myJson.length; i++) {

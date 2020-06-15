@@ -5,7 +5,7 @@ $string = $_GET["string"];
 $string = htmlspecialchars(strtoupper(trim($string)));
 $image = imagecreate(200, 50);
 $background = imagecolorallocate($image, 255, 255, 255);
-if ( preg_match("#[A-Z]{2}-[0-9]{3}-[A-Z]{2}#", $string)) {
+if (preg_match("#[A-Z]{2}-[0-9]{3}-[A-Z]{2}#", $string)) {
     $lenghtString = strlen($string);
     $captcha = $string;
     $listOfFonts = "./fonts/dealerplate california.ttf";

@@ -21,9 +21,9 @@ include 'header.php';
         }
 
         const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
                     const myJson = JSON.parse(request.responseText);
                     for (let i = 0; i < myJson.length; i++) {
                         const div1 = document.createElement('div');
@@ -97,5 +97,5 @@ include 'header.php';
 </script>
 
 
-<?php include 'footer.php' ;?>
+<?php include 'footer.php'; ?>
 </body>
