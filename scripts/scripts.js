@@ -1,12 +1,12 @@
 function showMap(idTruck) {
 
     let opt = {
-        center: new google.maps.LatLng(48.8376962,2.3896693),
-        zoom: 8 ,
+        center: new google.maps.LatLng(48.8376962, 2.3896693),
+        zoom: 8,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map;
-    if(idTruck)
+    if (idTruck)
         map = new google.maps.Map(document.getElementById("map1Truck"), opt);
     else
         map = new google.maps.Map(document.getElementById("mapAllTrucks"), opt);
@@ -24,10 +24,10 @@ function showMap(idTruck) {
                             icon: 'img/truck.png',
                             map: map
                         });
-                        if(idTruck){
+                        if (idTruck) {
                             let geocoder = new google.maps.Geocoder;
-                            let latlng = {lat: parseFloat(myJson[0]["lat"]), lng: parseFloat(myJson[0]["lng"])  };
-                            geocoder.geocode({'location': latlng}, function(results, status) {
+                            let latlng = {lat: parseFloat(myJson[0]["lat"]), lng: parseFloat(myJson[0]["lng"])};
+                            geocoder.geocode({'location': latlng}, function (results, status) {
                                 if (status === 'OK') {
                                     if (results[0]) {
 
@@ -39,7 +39,7 @@ function showMap(idTruck) {
                                             '<div id="siteNotice">' +
                                             '</div>' +
                                             '<h6>' + myJson[0]["truckName"] + '</h6>' +
-                                            '<div>'+results[0].formatted_address+'</div>'+
+                                            '<div>' + results[0].formatted_address + '</div>' +
                                             '<div id="bodyContent">' +
                                             '</div>';
                                         let smallInfo = new google.maps.InfoWindow({
@@ -55,7 +55,7 @@ function showMap(idTruck) {
                             });
 
 
-                        }else {
+                        } else {
                             let smallInfoString = '<div id="content" class="dataInfos">' +
                                 '<div id="siteNotice">' +
                                 '</div>' +
@@ -77,7 +77,7 @@ function showMap(idTruck) {
                                 '<div><i class="fas fa-road"></i>&nbsp' + myJson[i]["km"] + ' Kiliomètres parcourus</div>' +
                                 '<div><i class="fas fa-table"></i>&nbsp Créé le ' + myJson[i]["createDate"] + '</div>' +
                                 '<div><i class="fas fa-user-circle"></i>&nbsp Conduit par ' + firstname + '</div>' +
-                                '<div><i class="fas fa-id-badge"></i>&nbsp Immatriculation: '+ myJson[i]["licensePlate"] +'</div>'+
+                                '<div><i class="fas fa-id-badge"></i>&nbsp Immatriculation: ' + myJson[i]["licensePlate"] + '</div>' +
                                 '<div><br>Double cliquer pour accéder à la page du camion</div>' +
                                 '</div>';
 
@@ -109,11 +109,10 @@ function showMap(idTruck) {
         }
         return 0;
     };
-    if(idTruck) {
+    if (idTruck) {
         request.open('GET', 'functions/getTruckPos.php?id=' + idTruck);
-        console.log("avec user"+idTruck)
-    }
-    else
+        console.log("avec user" + idTruck)
+    } else
         request.open('GET', 'functions/getTruckPos.php');
     request.send();
 
@@ -123,9 +122,9 @@ function refreshTable() {
     const content = document.getElementById("tablebody");
 
     const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if(request.readyState === 4) {
-            if(request.status === 200) {
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
                 //console.log(request.responseText);
                 content.innerHTML = request.responseText;
             }
@@ -144,9 +143,9 @@ function displayTruckId(idTruck) {
 
 function unassignDriver(idtruck) {
     const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if(request.readyState === 4) {
-            if(request.status === 200) {
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
                 //console.log(request.responseText);
             }
         }
@@ -164,9 +163,9 @@ function assignTruck() {
     const user = document.getElementById("select").value;
 
     const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if(request.readyState === 4) {
-            if(request.status === 200) {
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
                 if (request.responseText !== "") {
                     alert(request.responseText);
                 }
@@ -184,19 +183,20 @@ function assignTruck() {
 
 function getInfo(idtruck) {
     const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if(request.readyState === 4) {
-            if(request.status === 200) {
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
                 let truckJson = JSON.parse(request.responseText);
                 const truck = document.getElementsByClassName("truck");
                 for (let i = 0; i < truck.length; i++) {
-                    const input = document.getElementsByName(truck[i].name);;
+                    const input = document.getElementsByName(truck[i].name);
+                    ;
                     input[0].value = truckJson[0][truck[i].name];
                 }
             }
         }
     };
-    request.open('GET', './functions/getTruckInfo.php?id='+idtruck, true);
+    request.open('GET', './functions/getTruckInfo.php?id=' + idtruck, true);
     request.send();
 }
 
@@ -208,9 +208,9 @@ function createTruck() {
     const warehouse = document.getElementById("truckWarehouse").value;
 
     const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if(request.readyState === 4) {
-            if(request.status === 200) {
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
                 console.log(request.responseText);
             }
         }
@@ -226,14 +226,15 @@ function createTruck() {
     );
     setTimeout(refreshTable, 1000);
 }
+
 function getOpenDays(idtruck) {
     const table = document.getElementById("tableBody");
     table.innerText = "";
 
     const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if(request.readyState === 4) {
-            if(request.status === 200) {
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
                 let myJson = JSON.parse(request.responseText);
                 const tbody = document.getElementById("tableBody");
                 for (let i = 0; i < myJson.length; i++) {
@@ -280,9 +281,9 @@ function updateTruck() {
     const truckName = document.getElementById("updateName");
 
     const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if(request.readyState === 4) {
-            if(request.status === 200) {
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
                 if (request.responseText !== "") {
                     alert(request.responseText);
                 }
@@ -356,9 +357,9 @@ function getTruckMaintenance(truck) {
         pagination.removeChild(pagination.firstChild)
     }
     const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if(request.readyState === 4) {
-            if(request.status === 200) {
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
                 let truckJson = JSON.parse(request.responseText);
                 //console.log(truckJson);
                 const statusKeys = Object.keys(truckJson["status"]);
@@ -375,7 +376,7 @@ function getTruckMaintenance(truck) {
                 let number = truckJson["truck"].length;
                 let max = Math.ceil(truckJson["truck"].length / 5);
 
-                for (let i = 1; i < max + 1 ; i++) {
+                for (let i = 1; i < max + 1; i++) {
                     const div = document.createElement("div");
                     div.id = "tabShow" + i;
                     div.setAttribute("name", "tabShow");
@@ -405,7 +406,7 @@ function getTruckMaintenance(truck) {
                         button.type = "button";
                         button.setAttribute("data-toggle", "collapse")
                         button.setAttribute("data-target", "#collapse" + Number(j + 1));
-                        button.setAttribute("aria-expanded","false")
+                        button.setAttribute("aria-expanded", "false")
                         button.setAttribute("aria-controls", "collapse" + Number(j + 1));
                         button.innerText = truckJson["truck"][index[j]]["Nom"];
                         h2.appendChild(button);
