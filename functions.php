@@ -1,6 +1,8 @@
 <?php
 require_once "conf.inc.php";
-
+/**
+ * @return PDO
+ */
 function connectDB()
 {
     try {
@@ -12,6 +14,10 @@ function connectDB()
     return $pdo;
 }
 
+/**
+ * @param $email
+ * @return false|string
+ */
 function createToken($email)
 {
     $token = md5($email . "€monTokenDrivNCook£" . time() . uniqid());
@@ -19,6 +25,9 @@ function createToken($email)
     return $token;
 }
 
+/**
+ * @param $email
+ */
 function login($email)
 {
     $token = createToken($email);
@@ -29,6 +38,9 @@ function login($email)
     $_SESSION["email"] = $email;
 }
 
+/**
+ * @return bool
+ */
 function isConnected()
 {
     if (!empty($_SESSION["email"])
@@ -54,6 +66,9 @@ function isConnected()
     return false;
 }
 
+/**
+ * @return bool
+ */
 function isActivated()
 {
     if (!empty($_SESSION["email"]) && !empty($_SESSION["token"])) {
@@ -78,6 +93,9 @@ function isActivated()
     }
 }
 
+/**
+ * @return bool
+ */
 function isAdmin()
 {
     if (!empty($_SESSION["email"]) && !empty($_SESSION["token"])) {
@@ -102,6 +120,9 @@ function isAdmin()
     }
 }
 
+/**
+ * @param $email
+ */
 function logout($email)
 {
     $pdo = connectDB();
