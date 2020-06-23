@@ -39,6 +39,16 @@
                     <a class="dropdown-item" href="salesHistory.php">Historique</a>
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="benefits" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Newsletter
+                </a>
+                <div class="dropdown-menu" aria-labelledby="benefits">
+                    <a class="dropdown-item" href="newNewsletter.php">Créer une nouvelle newsletter</a>
+                    <a class="dropdown-item" href="allNewsletter.php">Consulter les newsletter</a>
+                </div>
+            </li>
         </ul>
         <div class="form-inline my-2 my-lg-0 dropdown">
             <a class="btn btn-dark my-2 my-sm-0" href="#" id="warehouses" role="button" data-toggle="dropdown"
