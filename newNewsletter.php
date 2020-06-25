@@ -27,6 +27,7 @@ if (isAdmin() && isActivated() && isConnected()) {
                 <li>{{NB_POINTS}} -> Pour afficher le solde de points de fidélité de l'utilisateur</li>
             </ul>
         </div>
+        <button class="btn btn-success" onclick="saveNewsletter()">Sauvegarder</button>
     </div>
     <div class="modal fade" id="uploadImage" tabindex="-1" role="dialog" aria-labelledby="uploadImageLabel"
          aria-hidden="true">

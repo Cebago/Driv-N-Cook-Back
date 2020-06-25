@@ -19,6 +19,7 @@ function addText() {
     link.innerText = "Supprimer la zone de texte";
     link.setAttribute("onclick", "deleteElement(this)");
     let text = document.createElement("textarea");
+    text.name = "textarea"
     text.className = "w-75 mx-auto";
     const email = document.getElementById("allTheMail");
     div.appendChild(text);
@@ -69,4 +70,27 @@ function deleteElement(thisParameter) {
     } else {
         thisParameter.remove();
     }
+}
+
+function saveNewsletter() {
+    const textAreaElement = document.getElementsByName("textarea");
+    for (let i = 0; i < textAreaElement.length; i++) {
+        const p = document.createElement("p");
+        p.innerText = textAreaElement[i].value;
+        const parentNode = textAreaElement[i].parentNode;
+        while (parentNode.firstChild) {
+            parentNode.removeChild(parentNode.firstChild);
+        }
+        parentNode.appendChild(p);
+    }
+    const email = document.getElementById("allTheMail");
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === 4 && request.status === 200) {
+            console.log(request.responseText);
+        }
+    }
+    request.open("POST", "./functions/saveEmail.php", true);
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send("html=" + encodeURIComponent(email.innerHTML));
 }
