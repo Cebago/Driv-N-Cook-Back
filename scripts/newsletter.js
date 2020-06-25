@@ -47,12 +47,17 @@ function uploadToNewsletter(event) {
                 const reader = new FileReader();
                 reader.onload = function () {
                     const email = document.getElementById("allTheMail");
+                    const link = document.createElement("a");
+                    link.href = "#";
+                    link.setAttribute("onclick", "deleteElement(this)");
                     const image = document.createElement("img");
                     image.src = reader.result;
                     image.width = 200;
                     image.height = 200;
                     image.className = "mx-auto ml-2 mr-2 mt-2 mb-2";
-                    email.appendChild(image);
+                    link.className = image.className;
+                    link.appendChild(image);
+                    email.appendChild(link);
                     $('#uploadImage').modal('hide');
                 }
                 reader.readAsDataURL(file);
@@ -73,6 +78,9 @@ function deleteElement(thisParameter) {
 }
 
 function saveNewsletter() {
+    let title = document.getElementById("saveTitle");
+    title = title.value;
+
     const textAreaElement = document.getElementsByName("textarea");
     for (let i = 0; i < textAreaElement.length; i++) {
         const p = document.createElement("p");
@@ -87,10 +95,59 @@ function saveNewsletter() {
     const request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
-            console.log(request.responseText);
+            if (request.responseText !== "") {
+                alert(request.responseText);
+            }
         }
     }
     request.open("POST", "./functions/saveEmail.php", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    request.send("html=" + encodeURIComponent(email.innerHTML));
+    request.send("html=" + encodeURIComponent(email.innerHTML) + "&title=" + title);
+}
+
+function changeSelect(thisParameter) {
+    if (thisParameter[0].innerText === "Choisir une newsletter ...") {
+        thisParameter.remove(thisParameter.firstChild);
+    }
+}
+
+function enterEmail() {
+
+    const div = document.getElementById("enterEmailAddress");
+
+    deleteEnterEmail();
+
+    const input = document.createElement("input");
+    const small = document.createElement("small");
+    input.placeholder = "Saisissez les adresses email";
+    input.name = "allEmails";
+    input.type = "text";
+    input.className = "mt-2 form-control";
+    input.setAttribute("required", "required");
+
+    small.innerText = "Merci de saisir toutes les addresses mails séparées d'un point-virgule";
+    small.className = "form-text text-muted mb-2";
+
+    div.appendChild(input);
+    div.appendChild(small);
+}
+
+function deleteEnterEmail() {
+    const div = document.getElementById("enterEmailAddress");
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+}
+
+function sendToMe(email) {
+    deleteEnterEmail();
+    const div = document.getElementById("enterEmailAddress");
+    const input = document.createElement("input");
+    input.placeholder = "Saisissez les adresses email";
+    input.name = "myEmail";
+    input.type = "text";
+    input.value = email;
+    input.className = "mt-2 form-control";
+    input.setAttribute("readonly", "true");
+    div.appendChild(input);
 }
