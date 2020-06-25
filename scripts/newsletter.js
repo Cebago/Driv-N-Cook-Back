@@ -1,13 +1,29 @@
 function addImage(thisParameter) {
+    let link = document.createElement("a");
     let image = thisParameter.firstChild;
-    image.className += " mx-auto";
+    link.href = "#";
+    link.className = image.className + " mx-auto";
+    link.setAttribute("onclick", "deleteElement(this)");
     const email = document.getElementById("allTheMail");
-    email.appendChild(image);
+    link.appendChild(image);
+    email.appendChild(link);
     $('#uploadImage').modal('hide');
 }
 
 function addText() {
-
+    let div = document.createElement("div");
+    div.className = "mx-auto";
+    div.name = "toDelete";
+    let link = document.createElement("button");
+    link.className = "btn btn-warning mx-auto mt-1 mb-1";
+    link.innerText = "Supprimer la zone de texte";
+    link.setAttribute("onclick", "deleteElement(this)");
+    let text = document.createElement("textarea");
+    text.className = "w-75 mx-auto";
+    const email = document.getElementById("allTheMail");
+    div.appendChild(text);
+    div.appendChild(link);
+    email.appendChild(div);
 }
 
 function uploadToNewsletter(event) {
@@ -44,5 +60,13 @@ function uploadToNewsletter(event) {
             }
         }
         return false;
+    }
+}
+
+function deleteElement(thisParameter) {
+    if (thisParameter.parentNode.name === "toDelete") {
+        thisParameter.parentNode.remove();
+    } else {
+        thisParameter.remove();
     }
 }
