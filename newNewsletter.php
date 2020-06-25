@@ -9,11 +9,9 @@ if (isAdmin() && isActivated() && isConnected()) {
     </head>
     <body>
     <?php include 'navbar.php'; ?>
-    <div id="allTheMail">
-        <div class="col-md-5 mx-auto mt-3 mb-3 card pt-3 pb-3 alert-secondary"></div>
-    </div>
+    <div class="col-md-5 mx-auto mt-3 mb-3 card pt-3 pb-3 alert-secondary" id="allTheMail"></div>
     <div class="col-md-5 mx-auto mt-3 mb-3">
-        <button class="btn btn-primary" onclick="addTextarea()"><i class="fas fa-plus"></i>&nbsp;Ajouter une zone de
+        <button class="btn btn-primary" onclick="addText()"><i class="fas fa-plus"></i>&nbsp;Ajouter une zone de
             texte
         </button>
         <button class="btn btn-secondary" data-toggle="modal" data-target="#uploadImage"><i class="far fa-images"></i>&nbsp;Ajouter
@@ -64,7 +62,7 @@ if (isAdmin() && isActivated() && isConnected()) {
                                     $support = array('gif', 'jpg', 'jpeg', 'png');
                                     $ext = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
                                     if (in_array($ext, $support)) {
-                                        echo '<img class="ml-2 mr-2 mt-2 mb-2" width="200px" height="200px" src="' . $imageName . '" alt="' . $imageName . '" />';
+                                        echo '<a onclick="addImage(this)" href="#"><img class="ml-2 mr-2 mt-2 mb-2" width="200px" height="200px" src="' . $imageName . '" alt="' . $imageName . '" /></a>';
                                     } else {
                                         continue;
                                     }
@@ -72,13 +70,31 @@ if (isAdmin() && isActivated() && isConnected()) {
                                 ?>
                             </div>
                             <div class="tab-pane fade" id="uploadOne" role="tabpanel" aria-labelledby="profile-tab">
+                                <form method="POST" enctype="multipart/form-data"
+                                      onsubmit="return uploadToNewsletter(event)">
+                                    <div class="input-group mb-3 mt-5 ml-2 mr-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="title">Titre de l'image</span>
+                                        </div>
+                                        <input type="text" class="form-control mr-4" name="imageTitle" id="imageTitle"
+                                               placeholder="Titre de l'image" aria-label="Titre de l'image"
+                                               aria-describedby="title" required>
+                                    </div>
+                                    <div class="custom-file mb-2 ml-2 mr-2">
+                                        <input type="file" class="custom-file-input" id="uploadImage" name="uploadImage"
+                                               required>
+                                        <label class="custom-file-label mr-4" for="uploadImage">Choisir une
+                                            image</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-3 ml-2 mr-2">Uploader l'image
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="validButton">Send message</button>
                 </div>
             </div>
         </div>
