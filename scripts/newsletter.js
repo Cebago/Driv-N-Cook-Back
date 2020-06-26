@@ -92,6 +92,13 @@ function saveNewsletter() {
         parentNode.appendChild(p);
     }
     const email = document.getElementById("allTheMail");
+    const image = email.getElementsByTagName("img");
+    for (let i = 0; i < image.length; i++) {
+
+        image[i].src = image[i].src;
+        console.log(image);
+    }
+    console.log(email);
     const request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
@@ -103,6 +110,7 @@ function saveNewsletter() {
     request.open("POST", "./functions/saveEmail.php", true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send("html=" + encodeURIComponent(email.innerHTML) + "&title=" + title);
+    $('#saveNewsletter').modal('hide');
 }
 
 function changeSelect(thisParameter) {
