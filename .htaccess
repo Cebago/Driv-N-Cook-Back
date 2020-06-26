@@ -1,9 +1,9 @@
-RewriteEngine on
+RewriteEngine off
 RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?drivncook.(fr|com)/.*$ [NC]
 RewriteRule \.(jpg|jpeg|png|gif)$ - [NC,F,L]
 
 #remove php file extension
-RewriteEngine on 
+RewriteEngine off
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [NC,L]
