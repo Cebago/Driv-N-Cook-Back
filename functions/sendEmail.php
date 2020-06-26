@@ -46,3 +46,5 @@ foreach ($emails as $email) {
     $html = str_replace("{{NB_POINTS}}", $points, $html);
     mail($destination, $subject, $html, $header);
 }
+
+header("Location: ../allNewsletter.php");
