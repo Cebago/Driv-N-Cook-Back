@@ -10,7 +10,9 @@ include "header.php";
 <div class="menu mt-5 card col-md-11 mx-auto">
     <h5 class="card-header">Liste des camions</h5>
     <div class="card-body">
-        <button type="button" class="btn btn-primary ml-5 mr-5 mx-auto" data-toggle="modal" data-target="#createWarehouse"><i class="fas fa-warehouse"></i>&nbsp;Ajouter un nouvel entrepôt</button>
+        <button type="button" class="btn btn-primary ml-5 mr-5 mx-auto" data-toggle="modal"
+                data-target="#createWarehouse"><i class="fas fa-warehouse"></i>&nbsp;Ajouter un nouvel entrepôt
+        </button>
     </div>
     <table class="table table-striped mt-2">
         <thead class="thead-dark">
@@ -29,7 +31,8 @@ include "header.php";
         </tbody>
     </table>
 </div>
-<div class="modal fade" id="createWarehouse" tabindex="-1" role="dialog" aria-labelledby="locateTruck" aria-hidden="true">
+<div class="modal fade" id="createWarehouse" tabindex="-1" role="dialog" aria-labelledby="locateTruck"
+     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -43,36 +46,42 @@ include "header.php";
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="nameSpan">Nom de l'entrepôt</span>
                     </div>
-                    <input type="text" class="form-control warehouse" id="warehouseName" placeholder="Nom de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="text" class="form-control warehouse" id="warehouseName" placeholder="Nom de l'entrepôt"
+                           aria-label="warehouse" aria-describedby="addon-wrapping">
                 </div>
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="citySpan">Ville de l'entrpôt</span>
                     </div>
-                    <input type="text" class="form-control warehouse" id="warehouseCity" placeholder="Ville de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="text" class="form-control warehouse" id="warehouseCity"
+                           placeholder="Ville de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
                 </div>
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="addressSpan">Adresse de l'entrepôt</span>
                     </div>
-                    <input type="text" class="form-control warehouse" id="warehouseAddress" placeholder="Adresse de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="text" class="form-control warehouse" id="warehouseAddress"
+                           placeholder="Adresse de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
                 </div>
                 <div class="input-group flex-nowrap mt-2">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="postalCodeSpan">Code postal</span>
                     </div>
-                    <input type="number" id="postalCode" class="form-control warehouse" id="warehousePostalCode" placeholder="Code postal" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="number" id="postalCode" class="form-control warehouse" id="warehousePostalCode"
+                           placeholder="Code postal" aria-label="warehouse" aria-describedby="addon-wrapping">
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <button class="btn btn-primary" data-dismiss="modal" onclick="createWarehouse()" type="submit">Ajouter</button>
+                <button class="btn btn-primary" data-dismiss="modal" onclick="createWarehouse()" type="submit">Ajouter
+                </button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="updateWarehouse" tabindex="-1" role="dialog" aria-labelledby="updateWarehouse" aria-hidden="true">
+<div class="modal fade" id="updateWarehouse" tabindex="-1" role="dialog" aria-labelledby="updateWarehouse"
+     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -86,36 +95,46 @@ include "header.php";
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="updateName">ID de l'entrepôt</span>
                     </div>
-                    <input type="text" class="form-control updateWarehouse" id="idWarehouse" name="idWarehouse" placeholder="ID de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping" readonly>
+                    <input type="text" class="form-control updateWarehouse" id="idWarehouse" name="idWarehouse"
+                           placeholder="ID de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping"
+                           readonly>
                 </div>
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="updateName">Nom de l'entrepôt</span>
                     </div>
-                    <input type="text" class="form-control updateWarehouse" id="nameWarehouse" name="warehouseName" placeholder="Nom de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="text" class="form-control updateWarehouse" id="nameWarehouse" name="warehouseName"
+                           placeholder="Nom de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
                 </div>
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="updateCity">Ville de l'entrpôt</span>
                     </div>
-                    <input type="text" class="form-control updateWarehouse" id="cityWarehouse" name="warehouseCity" placeholder="Ville de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="text" class="form-control updateWarehouse" id="cityWarehouse" name="warehouseCity"
+                           placeholder="Ville de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
                 </div>
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="updateAddress">Adresse de l'entrepôt</span>
                     </div>
-                    <input type="text" class="form-control updateWarehouse" id="addressWarehouse" name="warehouseAddress" placeholder="Adresse de l'entrepôt" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="text" class="form-control updateWarehouse" id="addressWarehouse"
+                           name="warehouseAddress" placeholder="Adresse de l'entrepôt" aria-label="warehouse"
+                           aria-describedby="addon-wrapping">
                 </div>
                 <div class="input-group flex-nowrap mt-2">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="updatePostalCode">Code postal</span>
                     </div>
-                    <input type="number" id="warehouseZip" class="form-control updateWarehouse" name="warehousePostalCode" placeholder="Code postal" aria-label="warehouse" aria-describedby="addon-wrapping">
+                    <input type="number" id="warehouseZip" class="form-control updateWarehouse"
+                           name="warehousePostalCode" placeholder="Code postal" aria-label="warehouse"
+                           aria-describedby="addon-wrapping">
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <button class="btn btn-primary" data-dismiss="modal" onclick="updateWarehouse()" type="submit">Modifier</button>
+                <button class="btn btn-primary" data-dismiss="modal" onclick="updateWarehouse()" type="submit">
+                    Modifier
+                </button>
             </div>
         </div>
     </div>
@@ -129,9 +148,9 @@ include "header.php";
         }
 
         const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
                     let myJson = JSON.parse(request.responseText);
                     for (let i = 0; i < myJson.length; i++) {
                         const tr = document.createElement('tr');
@@ -186,9 +205,9 @@ include "header.php";
         address = address.value;
         postalCode = postalCode.value;
         const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
                     if (request.responseText !== "") {
                         alert(request.responseText);
                     }
@@ -212,9 +231,9 @@ include "header.php";
         const address = document.getElementById("addressWarehouse").value;
         const postalCode = document.getElementById("warehouseZip").value;
         const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
                     if (request.responseText !== "") {
                         alert(request.responseText);
                     }
@@ -235,9 +254,9 @@ include "header.php";
 
     function deleteWarehouse(id) {
         const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
                     if (request.responseText !== "") {
                         console.log(request.responseText);
                     }
@@ -251,12 +270,12 @@ include "header.php";
         );
         setTimeout(getListWarehouses, 1000);
     }
-    
+
     function getInfo(idWarehouse) {
         const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readyState === 4) {
-                if(request.status === 200) {
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
                     let myJson = JSON.parse(request.responseText);
                     const warehouse = document.getElementsByClassName("updateWarehouse");
                     for (let i = 0; i < warehouse.length; i++) {
@@ -266,10 +285,10 @@ include "header.php";
                 }
             }
         };
-        request.open('GET', './functions/getWarehouseInfo.php?id='+idWarehouse, true);
+        request.open('GET', './functions/getWarehouseInfo.php?id=' + idWarehouse, true);
         request.send();
     }
-    
+
 
     window.onload = getListWarehouses;
     setInterval(getListWarehouses, 60000);

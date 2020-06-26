@@ -16,17 +16,17 @@ if ((count($_POST) == 4)
     $address = htmlspecialchars(ucwords(trim($_POST['address'])));
     $postalCode = $_POST['postalCode'];
 
-    if ( !((strlen($name) >= 5) && (strlen($name) <= 100)) ) {
+    if (!((strlen($name) >= 5) && (strlen($name) <= 100))) {
         $error = true;
         $listOfErrors .= "Veuillez saisir un nom d'entrepôt compris entre 5 et 100 caractères \r\n";
     }
 
-    if ( !((strlen($city) >= 3) && (strlen($city) <= 100)) ) {
+    if (!((strlen($city) >= 3) && (strlen($city) <= 100))) {
         $error = true;
         $listOfErrors .= "Veuillez saisir un nom de ville compris entre 3 et 100 caractères \r\n";
     }
 
-    if ( !((strlen($address) >= 10) && (strlen($address) <= 100)) ) {
+    if (!((strlen($address) >= 10) && (strlen($address) <= 100))) {
         $error = true;
         $listOfErrors .= "Veuillez saisir une adresse comprise entre 10 et 100 caractères \r\n";
     }
@@ -45,8 +45,8 @@ if ((count($_POST) == 4)
                         warehouseAddress, warehousePostalCode, warehouseType) 
                         VALUES (:name, :city, :address, :postalCode, 'Entrepôt');");
         $queryPrepared->execute([
-           ":name" => $name,
-           ":city" => $city,
+            ":name" => $name,
+            ":city" => $city,
             ":address" => $address,
             ":postalCode" => $postalCode,
         ]);

@@ -1,34 +1,50 @@
 <?php
 require_once "conf.inc.php";
-
-function connectDB(){
-    try{
-        $pdo = new PDO(DBDRIVER.":host=".DBHOST.";dbname=".DBNAME ,DBUSER,DBPWD);
+/**
+ * @return PDO
+ */
+function connectDB()
+{
+    try {
+        $pdo = new PDO(DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME, DBUSER, DBPWD);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }catch(Exception $e){
-        die("Erreur SQL : ".$e->getMessage());
+    } catch (Exception $e) {
+        die("Erreur SQL : " . $e->getMessage());
     }
     return $pdo;
 }
 
-function createToken($email){
-    $token = md5($email."€monTokenDrivNCook£".time().uniqid());
+/**
+ * @param $email
+ * @return false|string
+ */
+function createToken($email)
+{
+    $token = md5($email . "€monTokenDrivNCook£" . time() . uniqid());
     $token = substr($token, 0, rand(15, 20));
     return $token;
 }
 
-function login($email){
+/**
+ * @param $email
+ */
+function login($email)
+{
     $token = createToken($email);
     $pdo = connectDB();
     $queryPrepared = $pdo->prepare("UPDATE USERTOKEN, USER SET USERTOKEN.token = :token WHERE user = idUser AND emailAddress = :email AND tokenType = 'Site' ;");
-    $queryPrepared->execute([":token"=>$token, ":email"=>$email]);
+    $queryPrepared->execute([":token" => $token, ":email" => $email]);
     $_SESSION["token"] = $token;
     $_SESSION["email"] = $email;
 }
 
-function isConnected(){
-    if(!empty($_SESSION["email"])
-        && !empty($_SESSION["token"]) ){
+/**
+ * @return bool
+ */
+function isConnected()
+{
+    if (!empty($_SESSION["email"])
+        && !empty($_SESSION["token"])) {
         $email = $_SESSION["email"];
         $token = $_SESSION["token"];
         //Vérification d'un correspondant en base de données
@@ -38,10 +54,10 @@ function isConnected(){
                                      AND user = idUser 
                                      AND tokenType = 'Site'");
         $queryPrepared->execute([
-            ":email"=>$email,
-            ":token"=>$token
+            ":email" => $email,
+            ":token" => $token
         ]);
-        if (!empty($queryPrepared->fetch()) ){
+        if (!empty($queryPrepared->fetch())) {
             login($email);
             return true;
         }
@@ -50,8 +66,12 @@ function isConnected(){
     return false;
 }
 
-function isActivated(){
-    if(!empty($_SESSION["email"]) && !empty($_SESSION["token"]) ){
+/**
+ * @return bool
+ */
+function isActivated()
+{
+    if (!empty($_SESSION["email"]) && !empty($_SESSION["token"])) {
         $email = $_SESSION["email"];
         $token = $_SESSION["token"];
         $pdo = connectDB();
@@ -60,21 +80,25 @@ function isActivated(){
                                           AND user = idUser 
                                           AND tokenType = 'Site'");
         $queryPrepared->execute([
-            ":email"=>$email,
-            ":token"=>$token
+            ":email" => $email,
+            ":token" => $token
         ]);
         $isActivated = $queryPrepared->fetch();
         $isActivated = $isActivated["isActivated"];
-        if ($isActivated == 1){
+        if ($isActivated == 1) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 }
 
-function isAdmin(){
-    if(!empty($_SESSION["email"]) && !empty($_SESSION["token"]) ){
+/**
+ * @return bool
+ */
+function isAdmin()
+{
+    if (!empty($_SESSION["email"]) && !empty($_SESSION["token"])) {
         $email = $_SESSION["email"];
         $token = $_SESSION["token"];
         $pdo = connectDB();
@@ -84,22 +108,26 @@ function isAdmin(){
                                                  AND userRole = idRole
                                                  AND tokenType = 'Site'");
         $queryPrepared->execute([
-            ":email"=>$email,
-            ":token"=>$token
+            ":email" => $email,
+            ":token" => $token
         ]);
         $isAdmin = $queryPrepared->fetch();
         $isAdmin = $isAdmin["roleName"];
-        if ($isAdmin == "Administrateur"){
+        if ($isAdmin == "Administrateur") {
             return true;
         }
         return false;
     }
 }
 
-function logout($email){
+/**
+ * @param $email
+ */
+function logout($email)
+{
     $pdo = connectDB();
     $queryPrepared = $pdo->prepare("UPDATE USER, USERTOKEN SET USERTOKEN.token = null WHERE emailAddress = :email 
                                                     AND idUser = user 
                                                     AND tokenType = 'Site'");
-    $queryPrepared->execute([":email"=>$email]);
+    $queryPrepared->execute([":email" => $email]);
 }
