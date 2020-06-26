@@ -16,6 +16,7 @@
                     <a class="dropdown-item" href="users.php">Gestion des utilisateurs</a>
                     <a class="dropdown-item" href="trucks.php">Gestion du parc de camions</a>
                     <a class="dropdown-item" href="warehouses.php">Liste des entrepôts</a>
+                    <a class="dropdown-item" href="translation.php">Consulter les traductions</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -27,7 +28,6 @@
                     <a class="dropdown-item" href="warehouseStore.php">Stock actuel de chaque entrepôt</a>
                     <a class="dropdown-item" href="ingredients.php">Liste des ingrédients</a>
                     <a class="dropdown-item" href="ordersHistory.php">Historique d'approvisionnement</a>
-                    <a class="dropdown-item" href="translation.php">Consulter les traductions</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
