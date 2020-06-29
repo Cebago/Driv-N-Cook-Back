@@ -12,7 +12,7 @@ function addImage(thisParameter) {
 
 function addText() {
     let div = document.createElement("div");
-    div.className = "mx-auto";
+    div.className = "mx-auto col-md-12";
     div.name = "toDelete";
     let link = document.createElement("button");
     link.className = "btn btn-warning mx-auto mt-1 mb-1";
