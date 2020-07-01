@@ -47,7 +47,7 @@ include 'header.php';
                 </tbody>
             </table>
         </div>
-        <div class="tab-pane fade show active" id="tabmapAllTrucks" role="tabpanel" aria-labelledby="home-tab">
+        <div class="tab-pane fade show" id="tabmapAllTrucks" role="tabpanel" aria-labelledby="home-tab">
             <div class="mapModal" id="mapAllTrucks"></div>
         </div>
     </div>
