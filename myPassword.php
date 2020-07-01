@@ -2,10 +2,10 @@
 session_start();
 require 'conf.inc.php';
 require 'functions.php';
+
+if (isConnected() && isActivated() && isAdmin()) {
 include 'header.php';
 ?>
-
-</head>
 <body>
 <?php include "navbar.php"; ?>
 <div class="col-md-11 mx-auto mt-5">
@@ -52,5 +52,9 @@ include 'header.php';
     </div>
 </div>
 
-<?php include 'footer.php'; ?>
-</body>
+<?php
+    include 'footer.php';
+} else {
+    header("Location: login.php");
+}
+?>
