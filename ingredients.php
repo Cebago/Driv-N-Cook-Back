@@ -2,9 +2,9 @@
 session_start();
 require 'conf.inc.php';
 require 'functions.php';
+if (isConnected() && isActivated() && isAdmin()) {
 include 'header.php';
 ?>
-</head>
 <body>
 <?php include "navbar.php"; ?>
 <div class="album py-5 bg-light">
@@ -95,7 +95,9 @@ include 'header.php';
     window.onload = getIngredients;
     setInterval(getIngredients, 60000);
 </script>
-
-
-<?php include 'footer.php'; ?>
-</body>
+<?php
+    include 'footer.php';
+} else {
+    header("Location: login.php");
+}
+?>

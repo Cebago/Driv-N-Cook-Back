@@ -2,7 +2,9 @@
 session_start();
 require 'conf.inc.php';
 require 'functions.php';
-include "header.php";
+
+if (isConnected() && isActivated() && isAdmin()) {
+    include "header.php";
 ?>
 </head>
 <body>
@@ -294,5 +296,10 @@ include "header.php";
     setInterval(getListWarehouses, 60000);
 </script>
 
-<?php include "footer.php"; ?>
-</body>
+<?php
+include "footer.php";
+} else {
+    header("Location: login.php");
+}
+?>
+

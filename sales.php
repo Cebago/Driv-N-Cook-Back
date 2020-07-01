@@ -1,10 +1,11 @@
 <?php
 session_start();
-include 'header.php';
 require 'conf.inc.php';
-require 'functions.php'; ?>
-</head>
-<body>
+require 'functions.php';
+
+if (isConnected() && isActivated() && isAdmin()) {
+include 'header.php';
+?>
 <?php include 'navbar.php'; ?>
 <script>
     function jsSales() {
@@ -44,5 +45,9 @@ require 'functions.php'; ?>
     setInterval(jsSales, 300000);
 </script>
 <div id="salesDiv" class="w-75 mx-auto"></div>
-<?php include 'footer.php'; ?>
-</body>
+<?php
+    include 'footer.php';
+} else {
+    header("Location: login.php");
+}
+?>
