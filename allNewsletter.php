@@ -6,8 +6,6 @@ require 'functions.php';
 if (isAdmin() && isActivated() && isConnected()) {
     include 'header.php';
     ?>
-    </head>
-
     <body>
     <?php include 'navbar.php'; ?>
     <div class="col-md-5 mx-auto mt-5">
@@ -54,10 +52,9 @@ if (isAdmin() && isActivated() && isConnected()) {
             </div>
         </form>
     </div>
-    <?php include 'footer.php'; ?>
     <script src="scripts/newsletter.js"></script>
-    </body>
-    <?php
+<?php
+    include 'footer.php';
 } else {
     header("Location: login.php");
 }

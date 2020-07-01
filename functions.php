@@ -87,10 +87,9 @@ function isActivated()
         $isActivated = $isActivated["isActivated"];
         if ($isActivated == 1) {
             return true;
-        } else {
-            return false;
         }
     }
+    return false;
 }
 
 /**
@@ -116,8 +115,8 @@ function isAdmin()
         if ($isAdmin == "Administrateur") {
             return true;
         }
-        return false;
     }
+    return false;
 }
 
 /**

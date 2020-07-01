@@ -1,9 +1,12 @@
 <?php
 session_start();
-include 'header.php';
 require 'conf.inc.php';
-require 'functions.php'; ?>
-</head>
+require 'functions.php';
+
+if (isConnected() && isActivated() && isAdmin()) {
+    include 'header.php';
+?>
+
 
 <body>
 <?php include "navbar.php"; ?>
@@ -62,5 +65,9 @@ require 'functions.php'; ?>
         </tbody>
     </table>
 </div>
-<?php include "footer.php"; ?>
-</body>
+<?php
+include "footer.php";
+} else {
+    header("Location: ");
+}
+?>
