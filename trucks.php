@@ -4,11 +4,11 @@ require 'conf.inc.php';
 require 'functions.php';
 
 if (isConnected() && isActivated() && isAdmin()) {
-include 'header.php';
-?>
+    include 'header.php';
+    ?>
 
-<body>
-<?php include "navbar.php"; ?>
+    <body>
+    <?php include "navbar.php"; ?>
 <div class="menu mt-5 card col-md-11 mx-auto">
     <h5 class="card-header">Gestion de l'ensemble des camions</h5>
     <div class="card-body">
@@ -339,7 +339,7 @@ include 'header.php';
     </script>
 
     <script src="scripts/scripts.js"></script>
-<?php
+    <?php
     include "footer.php";
 } else {
     header("Location: login.php");

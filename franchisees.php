@@ -65,13 +65,16 @@ include 'header.php';
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="identity">Franchisé</span>
                     </div>
-                    <input type="text" id="franchiseeName" class="form-control Franchise" name="franchiseeName" placeholder="franchiseeName" aria-label="franchiseeName" aria-describedby="addon-wrapping" readonly>
+                    <input type="text" id="franchiseeName" class="form-control Franchise" name="franchiseeName"
+                           placeholder="franchiseeName" aria-label="franchiseeName" aria-describedby="addon-wrapping"
+                           readonly>
                 </div>
                 <div class="input-group flex-nowrap mt-1">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="sum">Somme</span>
                     </div>
-                    <input type="number" id="price" class="form-control" name="price" placeholder="Somme versée" aria-label="price" aria-describedby="addon-wrapping">
+                    <input type="number" id="price" class="form-control" name="price" placeholder="Somme versée"
+                           aria-label="price" aria-describedby="addon-wrapping">
                 </div>
             </div>
             <div class="modal-footer">
@@ -126,7 +129,7 @@ include 'header.php';
                         addDepositButton.setAttribute("data-target", "#addModal");
                         addDepositButton.setAttribute("data-toggle", "modal");
                         addDepositButton.setAttribute("onclick", "displayFranchisee('" + myJson[i]["lastname"] + "', '"
-                            + myJson[i]["firstname"] +"')");
+                            + myJson[i]["firstname"] + "')");
                         td5.appendChild(addDepositButton);
                         tr.appendChild(th);
                         tr.appendChild(td1);
@@ -183,12 +186,12 @@ include 'header.php';
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.send("user=" + user);
     }
-    
+
     function addDeposit(user) {
         let money = document.getElementById('price');
         money = Number(money.value);
         const request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
+        request.onreadystatechange = function () {
             if (request.readyState === 4) {
                 if (request.status === 200) {
                     if (request.responseText !== "") {
@@ -216,7 +219,7 @@ include 'header.php';
 </script>
 
 <?php
-    include 'footer.php';
+include 'footer.php';
 } else {
     header("Location: login.php");
 }

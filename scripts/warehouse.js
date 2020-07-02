@@ -10,9 +10,9 @@ function warehouseDisplay() {
 
     let option = select.options[select.selectedIndex].text
     const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if(request.readyState === 4) {
-            if(request.status === 200) {
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
                 let myJson = JSON.parse(request.responseText);
                 console.log(myJson);
                 if (myJson.length === 0) {

@@ -34,14 +34,14 @@ foreach ($emails as $email) {
     $points = $result["points"];
 
     $admin = ($_SERVER["SERVER_ADMIN"]);
-    $domaineAddresse  = substr($admin, strpos($admin,'@')+1, strlen($admin));
-    $header = "From: no-reply@".$domaineAddresse."\n";
-    $header .= "X-Sender: <no-reply@".$domaineAddresse."\n";
+    $domaineAddresse = substr($admin, strpos($admin, '@') + 1, strlen($admin));
+    $header = "From: no-reply@" . $domaineAddresse . "\n";
+    $header .= "X-Sender: <no-reply@" . $domaineAddresse . "\n";
     $header .= "X-Mailer: PHP\n";
-    $header .= "Return-Path: <no-reply@".$domaineAddresse."\n";
+    $header .= "Return-Path: <no-reply@" . $domaineAddresse . "\n";
     $header .= "Content-Type: text/html; charset=iso-8859-1\n";
-    $html = file_get_contents( "../" . $_POST["selectNewsletter"]);
-    $html = str_replace("{{FIRSTNAME}}",$firstName." !" , $html);
+    $html = file_get_contents("../" . $_POST["selectNewsletter"]);
+    $html = str_replace("{{FIRSTNAME}}", $firstName . " !", $html);
     $html = str_replace("{{LASTNAME}}", $lastName, $html);
     $html = str_replace("{{NB_POINTS}}", $points, $html);
     mail($destination, $subject, $html, $header);
