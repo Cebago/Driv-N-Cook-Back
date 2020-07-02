@@ -4,6 +4,8 @@ require '../functions.php';
 
 $subject = $_POST["subject"];
 
+$emails = [];
+
 if (isset($_POST['allEmails'])) {
     $all = explode(";", preg_replace("/\s+/", "", $_POST["allEmails"]));
     $emails = filter_var_array($all, FILTER_VALIDATE_EMAIL);
