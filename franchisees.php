@@ -129,7 +129,7 @@ include 'header.php';
                         addDepositButton.setAttribute("data-target", "#addModal");
                         addDepositButton.setAttribute("data-toggle", "modal");
                         addDepositButton.setAttribute("onclick", "displayFranchisee('" + myJson[i]["lastname"] + "', '"
-                            + myJson[i]["firstname"] + "')");
+                            + myJson[i]["firstname"] + "'); updateButton(" + myJson[i]["idUser"] + ")");
                         td5.appendChild(addDepositButton);
                         tr.appendChild(th);
                         tr.appendChild(td1);
@@ -138,8 +138,6 @@ include 'header.php';
                         tr.appendChild(td4);
                         tr.appendChild(td5);
                         content.appendChild(tr);
-                        const price = document.getElementById("priceAdd");
-                        price.setAttribute("onclick", "addDeposit(" + myJson[i]["idUser"] + ")");
                     }
                 }
             }
@@ -188,14 +186,16 @@ include 'header.php';
     }
 
     function addDeposit(user) {
-        let money = document.getElementById('price');
-        money = Number(money.value);
+        let input = document.getElementById('price');
+        money = Number(input.value);
         const request = new XMLHttpRequest();
         request.onreadystatechange = function () {
             if (request.readyState === 4) {
                 if (request.status === 200) {
                     if (request.responseText !== "") {
                         alert(request.responseText);
+                    } else {
+                        input.value = "";
                     }
                 }
             }
@@ -211,6 +211,12 @@ include 'header.php';
         for (let i = 0; i < franchisee.length; i++) {
             franchisee[i].value = lastname.toUpperCase() + " " + firstname;
         }
+    }
+
+    function updateButton(id) {
+        const button = document.getElementById("priceAdd");
+        console.log(id);
+        button.setAttribute("onclick", "addDeposit(" + id + ")")
     }
 
     window.onload = getFranchisesList;
