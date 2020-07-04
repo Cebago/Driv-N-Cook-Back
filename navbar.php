@@ -46,7 +46,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="benefits">
                     <a class="dropdown-item" href="newNewsletter.php">Créer une nouvelle newsletter</a>
-                    <a class="dropdown-item" href="allNewsletter.php">Consulter les newsletter</a>
+                    <a class="dropdown-item" href="allNewsletter.php">Consulter les newsletters</a>
                 </div>
             </li>
         </ul>
@@ -61,5 +61,25 @@
                 <a class="dropdown-item" href="functions/logout.php"><i class="fas fa-sign-out-alt"></i>&nbsp;Déconnexion</a>
             </div>
         </div>
+    </div>
+    <div class="fixed-top">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-4">
+                <h5 class="text-white h4">Driv'n Cook - Administration</h5>
+                <span class="text-muted"><a href="home.php" class="btn-dark">Accéder à l'accueil</a></span>
+                <span class="text-muted">&nbsp;|&nbsp;</span>
+                <span class="text-muted"><a href="myProfile.php" class="btn-dark">Mon profil</a></span>
+                <span class="text-muted">&nbsp;|&nbsp;</span>
+                <span class="text-muted"><a href="myPassword.php" class="btn-dark">Mot de passe</a></span>
+                <span class="text-muted">&nbsp;|&nbsp;</span>
+                <span class="text-muted"><a href="home.php" class="btn-dark">Se déconnecter</a></span>
+
+            </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
     </div>
 </nav>

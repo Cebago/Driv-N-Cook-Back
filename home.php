@@ -61,6 +61,21 @@ include 'header.php';
                         ?>
                     </a>
                 </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="trucks.php" class="card-link">
+                        Liste des entrepôts
+                    </a>
+                    <a class="badge badge-light badge-pill" href="trucks.php">
+                        <?php
+                        $pdo = connectDB();
+                        $query = "SELECT COUNT(*) AS COUNT FROM WAREHOUSES WHERE warehouseType  = 'Entrepôt';";
+                        $queryPrepared = $pdo->prepare($query);
+                        $result = $queryPrepared->execute();
+                        $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+                        echo $result[0]['COUNT'];
+                        ?>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -77,7 +92,7 @@ include 'header.php';
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="ordersFranchisees.php" class="card-link">
-                        Approvisonnement du franchisé
+                        Liste des ingrédients
                     </a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -92,16 +107,35 @@ include 'header.php';
         <img src="https://www.humanprogresscenter.com/wp-content/uploads/2016/05/fond-gris.jpg" class="card-img-top"
              alt="...">
         <div class="card-body">
-            <h5 class="card-title">Revenus</h5>
+            <h5 class="card-title">Newsletter</h5>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="sales.php" class="card-link">
-                        Vue en temps réel
+                        Créer une nouvelle newsletter
                     </a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="salesHistory.php" class="card-link">
                         Historique des revenus
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card menu">
+        <img src="https://www.humanprogresscenter.com/wp-content/uploads/2016/05/fond-gris.jpg" class="card-img-top"
+             alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Revenus</h5>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="newNewsletter.php" class="card-link">
+                        Créer une nouvelle newsletter
+                    </a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="allNewsletter.php" class="card-link">
+                        Consulter les newsletters
                     </a>
                 </li>
             </ul>
