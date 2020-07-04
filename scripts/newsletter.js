@@ -159,3 +159,34 @@ function sendToMe(email) {
     input.setAttribute("readonly", "true");
     div.appendChild(input);
 }
+
+function chooseImage() {
+    const container = document.getElementById("useOne");
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === 4 && request.status === 200) {
+            if (request.responseText !== "") {
+                let jsonImages = JSON.parse(request.responseText);
+                for (let i = 0; i < jsonImages.length; i++) {
+                    const a = document.createElement("a");
+                    a.href = "#";
+                    a.setAttribute("onclick", "addImage(this)")
+                    const img = document.createElement("img");
+                    img.src = jsonImages[i];
+                    img.className = "ml-2 mr-2 mt-2 mb-2";
+                    img.width = 200;
+                    img.height = 200;
+                    img.alt = jsonImages[i];
+                    a.appendChild(img);
+                    container.appendChild(a);
+                }
+            }
+        }
+    }
+    request.open("GET", "./functions/getImages.php", true);
+    request.send();
+}
