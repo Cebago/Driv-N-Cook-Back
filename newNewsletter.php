@@ -59,9 +59,9 @@ include 'header.php';
                         <div class="tab-pane fade show active" id="useOne" role="tabpanel"
                              aria-labelledby="home-tab">
                         </div>
-                        <form method="POST" enctype="multipart/form-data"
-                              onsubmit="return uploadToNewsletter(event)">
                             <div class="tab-pane fade" id="uploadOne" role="tabpanel" aria-labelledby="profile-tab">
+                                <form method="POST" enctype="multipart/form-data"
+                                      onsubmit="return uploadToNewsletter(event)">
                                 <div class="input-group mb-3 mt-5 ml-2 mr-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="title">Titre de l'image</span>
@@ -70,23 +70,19 @@ include 'header.php';
                                            placeholder="Titre de l'image" aria-label="Titre de l'image"
                                            aria-describedby="title" required>
                                 </div>
-                                <input type="text" class="form-control mr-4" name="imageTitle" id="imageTitle"
-                                       placeholder="Titre de l'image" aria-label="Titre de l'image"
-                                       aria-describedby="title" required>
+                                    <div class="custom-file mb-2 ml-2 mr-2">
+                                        <input type="file" class="custom-file-input" id="uploadImage" name="uploadImage"
+                                               required>
+                                        <label class="custom-file-label mr-4" for="uploadImage">Choisir une
+                                            image</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-3 ml-2 mr-2">Uploader l'image
+                                    </button>
                             </div>
-                            <div class="custom-file mb-2 ml-2 mr-2">
-                                <input type="file" class="custom-file-input" id="uploadImage" name="uploadImage"
-                                       required>
-                                <label class="custom-file-label mr-4" for="uploadImage">Choisir une
-                                    image</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary mb-3 ml-2 mr-2">Uploader l'image
-                            </button>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
