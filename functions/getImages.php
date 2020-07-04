@@ -1,5 +1,5 @@
 <?php
-$allFiles = glob("../../newsletterImages/*");
+$allFiles = glob("../newsletterImages/*");
 $images = [];
 for ($i = 0; $i < count($allFiles); $i++) {
     $imageName = $allFiles[$i];
