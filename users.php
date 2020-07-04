@@ -85,17 +85,17 @@ include 'header.php';
             </div>
             <form method="POST" id="userForm">
                 <div class="modal-body">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="selectRole">Rôle</label>
-                            </div>
-                            <select class="custom-select" name="selectRole" id="selectRole" required>
-                                <option selected value="">Choisir un rôle</option>
-                                <option value="1">Client</option>
-                                <option value="2">Franchisé</option>
-                                <option value="3">Administrateur</option>
-                            </select>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="selectRole">Rôle</label>
                         </div>
+                        <select class="custom-select" name="selectRole" id="selectRole" required>
+                            <option selected value="">Choisir un rôle</option>
+                            <option value="1">Client</option>
+                            <option value="2">Franchisé</option>
+                            <option value="3">Administrateur</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Sauvegarder</button>
