@@ -74,6 +74,7 @@ include 'header.php';
                     input.placeholder = myJsonKeys[i];
                     input.value = myJson[0][myJsonKeys[i]];
                     input.setAttribute("readonly", "readonly");
+                    input.setAttribute("required", "true");
                     pdiv.appendChild(input);
                     profile.appendChild(pdiv);
                 }

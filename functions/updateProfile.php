@@ -3,11 +3,6 @@ session_start();
 require '../conf.inc.php';
 require '../functions.php';
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
-
-
 if (count($_POST) == 12
     && !empty($_POST["idUser"])
     && !empty($_POST["lastname"])
