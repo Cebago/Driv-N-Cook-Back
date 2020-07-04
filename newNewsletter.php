@@ -13,7 +13,7 @@ if (isAdmin() && isActivated() && isConnected()) {
         <button class="btn btn-primary" onclick="addText()"><i class="fas fa-plus"></i>&nbsp;Ajouter une zone de
             texte
         </button>
-        <button class="btn btn-secondary" data-toggle="modal" data-target="#uploadImage"><i class="far fa-images"></i>&nbsp;Ajouter
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#uploadImage" onclick="chooseImage()"><i class="far fa-images"></i>&nbsp;Ajouter
             une image
         </button>
         <div class="mt-5">
@@ -29,6 +29,7 @@ if (isAdmin() && isActivated() && isConnected()) {
         <button class="btn btn-success" data-toggle="modal" data-target="#saveNewsletter"><i class="fas fa-save"></i>&nbsp;Sauvegarder
         </button>
     </div>
+
     <div class="modal fade" id="uploadImage" tabindex="-1" role="dialog" aria-labelledby="uploadImageLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-xl">
@@ -56,19 +57,6 @@ if (isAdmin() && isActivated() && isConnected()) {
                         <div class="tab-content card mt-1" id="myTabContent">
                             <div class="tab-pane fade show active" id="useOne" role="tabpanel"
                                  aria-labelledby="home-tab">
-                                <?php
-                                $allFiles = glob("newsletterImages/*");
-                                for ($i = 0; $i < count($allFiles); $i++) {
-                                    $imageName = $allFiles[$i];
-                                    $support = array('gif', 'jpg', 'jpeg', 'png');
-                                    $ext = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
-                                    if (in_array($ext, $support)) {
-                                        echo '<a onclick="addImage(this)" href="#"><img class="ml-2 mr-2 mt-2 mb-2" width="200px" height="200px" src="' . $imageName . '" alt="' . $imageName . '" /></a>';
-                                    } else {
-                                        continue;
-                                    }
-                                }
-                                ?>
                             </div>
                             <div class="tab-pane fade" id="uploadOne" role="tabpanel" aria-labelledby="profile-tab">
                                 <form method="POST" enctype="multipart/form-data"
