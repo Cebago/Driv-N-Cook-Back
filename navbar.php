@@ -16,6 +16,7 @@
                     <a class="dropdown-item" href="users.php">Gestion des utilisateurs</a>
                     <a class="dropdown-item" href="trucks.php">Gestion du parc de camions</a>
                     <a class="dropdown-item" href="warehouses.php">Liste des entrepôts</a>
+                    <a class="dropdown-item" href="viewMessages.php">Demandes de contact</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
