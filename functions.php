@@ -130,3 +130,15 @@ function logout($email)
                                                     AND tokenType = 'Site'");
     $queryPrepared->execute([":email" => $email]);
 }
+
+/**
+ * @param $email
+ * @return array
+ */
+function getMessages($email){
+    $pdo = connectDB();
+    $queryPrepared = $pdo->prepare("SELECT firstname, lastname, emailAddress, contactSubject, DATE_FORMAT(CONTACT.createDate, '%d/%m/%Y') as createDate, isRead,idContact, contactDescription, receiver FROM USER, CONTACT WHERE CONTACT.user = idUser AND receiver = (SELECT idTruck FROM TRUCK, USER WHERE user = idUser AND emailAddress = :email)");
+    $queryPrepared->execute([":email" => $email]);
+    return $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+
+}
