@@ -59,9 +59,9 @@ include 'header.php';
                         <div class="tab-pane fade show active" id="useOne" role="tabpanel"
                              aria-labelledby="home-tab">
                         </div>
-                            <div class="tab-pane fade" id="uploadOne" role="tabpanel" aria-labelledby="profile-tab">
-                                <form method="POST" enctype="multipart/form-data"
-                                      onsubmit="return uploadToNewsletter(event)">
+                        <div class="tab-pane fade" id="uploadOne" role="tabpanel" aria-labelledby="profile-tab">
+                            <form method="POST" enctype="multipart/form-data"
+                                  onsubmit="return uploadToNewsletter(event)">
                                 <div class="input-group mb-3 mt-5 ml-2 mr-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="title">Titre de l'image</span>
@@ -70,56 +70,56 @@ include 'header.php';
                                            placeholder="Titre de l'image" aria-label="Titre de l'image"
                                            aria-describedby="title" required>
                                 </div>
-                                    <div class="custom-file mb-2 ml-2 mr-2">
-                                        <input type="file" class="custom-file-input" id="uploadImage" name="uploadImage"
-                                               required>
-                                        <label class="custom-file-label mr-4" for="uploadImage">Choisir une
-                                            image</label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary mb-3 ml-2 mr-2">Uploader l'image
-                                    </button>
-                            </div>
+                                <div class="custom-file mb-2 ml-2 mr-2">
+                                    <input type="file" class="custom-file-input" id="uploadImage" name="uploadImage"
+                                           required>
+                                    <label class="custom-file-label mr-4" for="uploadImage">Choisir une
+                                        image</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-3 ml-2 mr-2">Uploader l'image
+                                </button>
+                        </div>
                         </form>
                     </div>
                 </div>
             </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="saveNewsletter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Sauvegarder la newsletter</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="newsletterTitle">Titre de la newsletter</span>
+    <div class="modal fade" id="saveNewsletter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sauvegarder la newsletter</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="newsletterTitle">Titre de la newsletter</span>
+                        </div>
+                        <input type="text" class="form-control" id="saveTitle" placeholder="Titre" aria-label="Titre"
+                               aria-describedby="newsletterTitle">
                     </div>
-                    <input type="text" class="form-control" id="saveTitle" placeholder="Titre" aria-label="Titre"
-                           aria-describedby="newsletterTitle">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" onclick="saveNewsletter()">Valider</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-primary" onclick="saveNewsletter()">Valider</button>
-            </div>
         </div>
     </div>
-</div>
 
-<script src="scripts/newsletter.js"></script>
-<?php include 'footer.php'; ?>
-<?php
-} else {
-    header("Location: login.php");
-}
-?>
+    <script src="scripts/newsletter.js"></script>
+    <?php include 'footer.php'; ?>
+    <?php
+    } else {
+        header("Location: login.php");
+    }
+    ?>

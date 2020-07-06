@@ -62,10 +62,10 @@ include 'header.php';
                     </a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="trucks.php" class="card-link">
+                    <a href="warehouses.php" class="card-link">
                         Liste des entrepôts
                     </a>
-                    <a class="badge badge-light badge-pill" href="trucks.php">
+                    <a class="badge badge-light badge-pill" href="warehouses.php">
                         <?php
                         $pdo = connectDB();
                         $query = "SELECT COUNT(*) AS COUNT FROM WAREHOUSES WHERE warehouseType  = 'Entrepôt';";
@@ -73,6 +73,21 @@ include 'header.php';
                         $result = $queryPrepared->execute();
                         $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
                         echo $result[0]['COUNT'];
+                        ?>
+                    </a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="viewMessages.php" class="card-link">
+                        Demandes de contact
+                    </a>
+                    <a class="badge badge-light badge-pill" href="viewMessages.php">
+                        <?php
+                        $pdo = connectDB();
+                        $query = "SELECT COUNT(idContact) as count FROM CONTACT WHERE isRead = false AND receiver is null";
+                        $queryPrepared = $pdo->prepare($query);
+                        $result = $queryPrepared->execute();
+                        $result = $queryPrepared->fetch(PDO::FETCH_ASSOC);
+                        echo $result['count'];
                         ?>
                     </a>
                 </li>
@@ -91,7 +106,7 @@ include 'header.php';
                     </a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="ordersFranchisees.php" class="card-link">
+                    <a href="ingredients.php" class="card-link">
                         Liste des ingrédients
                     </a>
                 </li>
@@ -107,11 +122,11 @@ include 'header.php';
         <img src="https://www.humanprogresscenter.com/wp-content/uploads/2016/05/fond-gris.jpg" class="card-img-top"
              alt="...">
         <div class="card-body">
-            <h5 class="card-title">Newsletter</h5>
+            <h5 class="card-title">Revenus</h5>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="sales.php" class="card-link">
-                        Créer une nouvelle newsletter
+                        Vue en temps réel
                     </a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -126,7 +141,7 @@ include 'header.php';
         <img src="https://www.humanprogresscenter.com/wp-content/uploads/2016/05/fond-gris.jpg" class="card-img-top"
              alt="...">
         <div class="card-body">
-            <h5 class="card-title">Revenus</h5>
+            <h5 class="card-title">Newsletter & Avantages</h5>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="newNewsletter.php" class="card-link">
@@ -136,6 +151,36 @@ include 'header.php';
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="allNewsletter.php" class="card-link">
                         Consulter les newsletters
+                    </a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="advantages.php" class="card-link">
+                        Consulter la liste des avantages
+                    </a>
+                    <a class="badge badge-light badge-pill" href="advantages.php">
+                        <?php
+                        $pdo = connectDB();
+                        $query = "SELECT COUNT(idAdvantage) as count FROM ADVANTAGE";
+                        $queryPrepared = $pdo->prepare($query);
+                        $result = $queryPrepared->execute();
+                        $result = $queryPrepared->fetch(PDO::FETCH_ASSOC);
+                        echo $result['count'];
+                        ?>
+                    </a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="categories.php" class="card-link">
+                        Consulter la liste des catégories
+                    </a>
+                    <a class="badge badge-light badge-pill" href="categories.php">
+                        <?php
+                        $pdo = connectDB();
+                        $query = "SELECT COUNT(idCategory) as count FROM PRODUCTCATEGORY";
+                        $queryPrepared = $pdo->prepare($query);
+                        $result = $queryPrepared->execute();
+                        $result = $queryPrepared->fetch(PDO::FETCH_ASSOC);
+                        echo $result['count'];
+                        ?>
                     </a>
                 </li>
             </ul>
