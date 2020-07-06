@@ -49,6 +49,7 @@
                     <a class="dropdown-item" href="newNewsletter.php">Créer une nouvelle newsletter</a>
                     <a class="dropdown-item" href="allNewsletter.php">Consulter les newsletters</a>
                     <a class="dropdown-item" href="advantages.php">Consulter la liste des avantages</a>
+                    <a class="dropdown-item" href="categories.php">Consulter la liste des catégories</a>
                 </div>
             </li>
         </ul>
