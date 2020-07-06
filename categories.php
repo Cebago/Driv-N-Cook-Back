@@ -58,7 +58,7 @@ if (isConnected() && isActivated() && isAdmin()) {
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="categoryName">Nom</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Nom de l'avantage" name="categoryName"
+                        <input type="text" class="form-control" placeholder="Nom de la catégorie" name="categoryName"
                                aria-label="advantagePoints" aria-describedby="categoryName" required>
                     </div>
                 </div>
