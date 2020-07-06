@@ -142,3 +142,15 @@ function getMessages($email){
     return $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
 
 }
+
+/**
+ * @param $idCart
+ * @return array
+ */
+function getIngredients($idCart)
+{
+    $pdo = connectDB();
+    $queryPrepared = $pdo->prepare("SELECT idIngredient, ingredientName, ingredientImage, ingredientCategory, quantity FROM INGREDIENTS, CARTINGREDIENT, CART WHERE cart = idCart AND ingredient = idIngredient AND idCart = :cart ");
+    $queryPrepared->execute([":cart" => $idCart]);
+    return $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+}
