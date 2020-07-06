@@ -43,11 +43,12 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="benefits" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Newsletter
+                    Newsletter & Avantages
                 </a>
                 <div class="dropdown-menu" aria-labelledby="benefits">
                     <a class="dropdown-item" href="newNewsletter.php">Créer une nouvelle newsletter</a>
                     <a class="dropdown-item" href="allNewsletter.php">Consulter les newsletters</a>
+                    <a class="dropdown-item" href="advantages.php">Consulter la liste des avantages</a>
                 </div>
             </li>
         </ul>
