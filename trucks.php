@@ -347,4 +347,3 @@ include 'header.php';
 ?>
 
     <script src="scripts/scripts.js"></script>
-    
