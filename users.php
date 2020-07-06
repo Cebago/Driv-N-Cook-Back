@@ -11,7 +11,7 @@ include 'header.php';
 <body>
 <?php include "navbar.php"; ?>
 <div class="menu card mt-2 col-11 mx-auto mt-5">
-    <table class="table table-striped mt-2">
+    <table class="table table-striped mt-2" id="userTab">
         <thead class="thead-dark">
         <tr>
             <th scope="col">ID</th>
@@ -104,10 +104,17 @@ include 'header.php';
         </div>
     </div>
 </div>
-<script src="scripts/user.js"></script>
+
 <?php
 include "footer.php";
+
+?>
+<script src="scripts/user.js"></script>
+
+
+<?php
 } else {
-    header("Location: ");
+    header("Location: login.php");
 }
+
 ?>
