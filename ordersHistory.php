@@ -22,7 +22,8 @@ if (isConnected() && isActivated() && isAdmin()) {
                     <div class="card-header" id="<?php echo 'heading' . $order['idOrder'] ?>">
                         <h2 class="mb-0">
                             <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                                    data-target="<?php echo '#collapse' . $order['idOrder'] ?>" aria-expanded="true" aria-controls="<?php echo 'collapse' . $order['idOrder'] ?>">
+                                    data-target="<?php echo '#collapse' . $order['idOrder'] ?>" aria-expanded="true"
+                                    aria-controls="<?php echo 'collapse' . $order['idOrder'] ?>">
                                 <?php
                                 echo "Commande du " . $order["orderDate"] . " à " . $order["orderHour"];
                                 ?>
@@ -30,7 +31,8 @@ if (isConnected() && isActivated() && isAdmin()) {
                         </h2>
                     </div>
 
-                    <div id="<?php echo 'collapse' . $order['idOrder'] ?>" class="collapse" aria-labelledby="<?php echo 'heading' . $order['idOrder'] ?>" data-parent="#accordionExample">
+                    <div id="<?php echo 'collapse' . $order['idOrder'] ?>" class="collapse"
+                         aria-labelledby="<?php echo 'heading' . $order['idOrder'] ?>" data-parent="#accordionExample">
                         <div class="card-body">
                             <p>
                                 <strong>Total:</strong>
