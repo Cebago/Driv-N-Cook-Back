@@ -3,12 +3,15 @@ session_start();
 require 'conf.inc.php';
 require 'functions.php';
 
-if (isConnected() && isActivated() && isAdmin()) {
-    include 'header.php';
-    ?>
+if (!isAdmin() || !isConnected()) {
+    header("Location: login.php");
+}
 
-    <body>
-    <?php include "navbar.php"; ?>
+include 'header.php';
+?>
+<body>
+<?php include 'navbar.php' ?>
+
 <div class="menu mt-5 card col-md-11 mx-auto">
     <h5 class="card-header">Gestion de l'ensemble des camions</h5>
     <div class="card-body">
@@ -338,10 +341,10 @@ if (isConnected() && isActivated() && isAdmin()) {
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr_vOUs3BJrToO67yuX8dmTYvr8qCbWB8&callback=initMap">
     </script>
 
-    <script src="scripts/scripts.js"></script>
+
     <?php
     include "footer.php";
-} else {
-    header("Location: login.php");
-}
 ?>
+
+    <script src="scripts/scripts.js"></script>
+    
