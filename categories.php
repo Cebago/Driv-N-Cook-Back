@@ -32,7 +32,8 @@ if (isConnected() && isActivated() && isAdmin()) {
             <tr>
                 <th><?php echo $category["idCategory"] ?></th>
                 <td><?php echo $category["categoryName"] ?></td>
-                <td><a href="./functions/deleteCategory.php?id=<?php echo $category["idCategory"] ?>" class="btn btn-warning" >Supprimer cette catégorie</a></td>
+                <td><a href="./functions/deleteCategory.php?id=<?php echo $category["idCategory"] ?>"
+                       class="btn btn-warning">Supprimer cette catégorie</a></td>
             </tr>
             <?php
         }
@@ -41,7 +42,8 @@ if (isConnected() && isActivated() && isAdmin()) {
     </table>
 </div>
 
-<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel"
+     aria-hidden="true">
     <form method="POST" action="./functions/addCategory.php">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -56,7 +58,8 @@ if (isConnected() && isActivated() && isAdmin()) {
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="categoryName">Nom</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Nom de l'avantage" name="categoryName" aria-label="advantagePoints" aria-describedby="categoryName" required>
+                        <input type="text" class="form-control" placeholder="Nom de l'avantage" name="categoryName"
+                               aria-label="advantagePoints" aria-describedby="categoryName" required>
                     </div>
                 </div>
                 <div class="modal-footer">
