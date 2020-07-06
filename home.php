@@ -62,10 +62,10 @@ include 'header.php';
                     </a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="trucks.php" class="card-link">
+                    <a href="warehouses.php" class="card-link">
                         Liste des entrepôts
                     </a>
-                    <a class="badge badge-light badge-pill" href="trucks.php">
+                    <a class="badge badge-light badge-pill" href="warehouses.php">
                         <?php
                         $pdo = connectDB();
                         $query = "SELECT COUNT(*) AS COUNT FROM WAREHOUSES WHERE warehouseType  = 'Entrepôt';";
@@ -106,7 +106,7 @@ include 'header.php';
                     </a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="ordersFranchisees.php" class="card-link">
+                    <a href="ingredients.php" class="card-link">
                         Liste des ingrédients
                     </a>
                 </li>
@@ -126,7 +126,7 @@ include 'header.php';
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a href="sales.php" class="card-link">
-                        Créer une nouvelle newsletter
+                        Vue en temps réel
                     </a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
