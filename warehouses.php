@@ -4,7 +4,7 @@ require 'conf.inc.php';
 require 'functions.php';
 
 if (isConnected() && isActivated() && isAdmin()) {
-    include "header.php";
+include "header.php";
 ?>
 </head>
 <body>

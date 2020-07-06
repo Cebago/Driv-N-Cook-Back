@@ -42,12 +42,43 @@ include 'header.php';
                     <input type="text" id="assign" class="form-control Franchise" name="idTruck" placeholder="idTruck"
                            aria-label="truckId" aria-describedby="addon-wrapping" readonly>
                 </div>
-                <div id="calendar">
-
-                </div>
+                <div id="franchisee"></div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="priceModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Assigner un conducteur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="identity">Franchisé</span>
+                    </div>
+                    <input type="text" id="franchiseeName" class="form-control Franchise" name="franchiseeName"
+                           placeholder="franchiseeName" aria-label="franchiseeName" aria-describedby="addon-wrapping"
+                           readonly>
+                </div>
+                <div class="input-group flex-nowrap mt-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="sum">Somme</span>
+                    </div>
+                    <input type="number" id="price" class="form-control" name="price" placeholder="Somme versée"
+                           aria-label="price" aria-describedby="addon-wrapping">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="priceAdd" data-dismiss="modal">Valider le versement</button>
             </div>
         </div>
     </div>
@@ -81,15 +112,25 @@ include 'header.php';
                         td4.innerHTML = myJson[i]["price"] + " €";
                         let td5 = document.createElement("td");
                         let priceButton = document.createElement("button");
-                        priceButton.className = "btn btn-primary";
+                        priceButton.className = "btn btn-primary ml-3 mr-3 mt-3 mb-3";
                         priceButton.innerHTML = "Consulter le solde";
-                        priceButton.setAttribute("title", "Mettre à jour le solde");
+                        priceButton.setAttribute("title", "Consulter le solde");
                         priceButton.setAttribute("type", "button");
                         priceButton.setAttribute("data-target", "#priceModal");
                         priceButton.setAttribute("data-toggle", "modal");
                         priceButton.setAttribute("onclick", "displayFranchisee('" + myJson[i]["lastname"] + "', '"
                             + myJson[i]["firstname"] + "'); consultDeposit(" + myJson[i]["idUser"] + ")");
                         td5.appendChild(priceButton);
+                        let addDepositButton = document.createElement("button");
+                        addDepositButton.className = "btn btn-secondary ml-3 mr-3 mt-3 mb-3";
+                        addDepositButton.innerHTML = "Ajouter un versement";
+                        addDepositButton.setAttribute("title", "Ajouter un versement");
+                        addDepositButton.setAttribute("type", "button");
+                        addDepositButton.setAttribute("data-target", "#addModal");
+                        addDepositButton.setAttribute("data-toggle", "modal");
+                        addDepositButton.setAttribute("onclick", "displayFranchisee('" + myJson[i]["lastname"] + "', '"
+                            + myJson[i]["firstname"] + "'); updateButton(" + myJson[i]["idUser"] + ")");
+                        td5.appendChild(addDepositButton);
                         tr.appendChild(th);
                         tr.appendChild(td1);
                         tr.appendChild(td2);
@@ -106,7 +147,7 @@ include 'header.php';
     }
 
     function consultDeposit(user) {
-        const calendar = document.getElementById("calendar");
+        const calendar = document.getElementById("franchisee");
         while (calendar.firstChild) {
             calendar.removeChild(calendar.firstChild);
         }
@@ -144,12 +185,38 @@ include 'header.php';
         request.send("user=" + user);
     }
 
+    function addDeposit(user) {
+        let input = document.getElementById('price');
+        money = Number(input.value);
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    if (request.responseText !== "") {
+                        alert(request.responseText);
+                    } else {
+                        input.value = "";
+                    }
+                }
+            }
+        };
+        request.open('POST', './functions/addDeposit.php', true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.send("money=" + money + "&user=" + user);
+        setTimeout(getFranchisesList, 3000);
+    }
+
     function displayFranchisee(lastname, firstname) {
         const franchisee = document.getElementsByClassName("Franchise");
-        console.dir(franchisee);
         for (let i = 0; i < franchisee.length; i++) {
             franchisee[i].value = lastname.toUpperCase() + " " + firstname;
         }
+    }
+
+    function updateButton(id) {
+        const button = document.getElementById("priceAdd");
+        console.log(id);
+        button.setAttribute("onclick", "addDeposit(" + id + ")")
     }
 
     window.onload = getFranchisesList;
@@ -158,7 +225,7 @@ include 'header.php';
 </script>
 
 <?php
-    include 'footer.php';
+include 'footer.php';
 } else {
     header("Location: login.php");
 }

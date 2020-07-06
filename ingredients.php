@@ -96,7 +96,7 @@ include 'header.php';
     setInterval(getIngredients, 60000);
 </script>
 <?php
-    include 'footer.php';
+include 'footer.php';
 } else {
     header("Location: login.php");
 }

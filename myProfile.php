@@ -8,7 +8,7 @@ include 'header.php';
 ?>
 <body>
 <?php include "navbar.php"; ?>
-<div class="col-md-11 mx-auto mt-3">
+<div class="col-md-11 mx-auto mt-5">
     <h5 class="" id="seeProfile">Consulation du profil</h5>
 </div>
 <form class="col-md-11 mx-auto mt-3" action="./functions/updateProfile.php" method="POST">
@@ -74,6 +74,7 @@ include 'header.php';
                     input.placeholder = myJsonKeys[i];
                     input.value = myJson[0][myJsonKeys[i]];
                     input.setAttribute("readonly", "readonly");
+                    input.setAttribute("required", "true");
                     pdiv.appendChild(input);
                     profile.appendChild(pdiv);
                 }
@@ -124,7 +125,7 @@ include 'header.php';
 
 </script>
 <?php
-    include "footer.php";
+include "footer.php";
 } else {
     header("Location: login.php");
 }
