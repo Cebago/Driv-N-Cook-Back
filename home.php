@@ -80,7 +80,7 @@ include 'header.php';
                     <a href="viewMessages.php" class="card-link">
                         Demandes de contact
                     </a>
-                    <a class="badge badge-light badge-pill" href="trucks.php">
+                    <a class="badge badge-light badge-pill" href="viewMessages.php">
                         <?php
                         $pdo = connectDB();
                         $query = "SELECT COUNT(idContact) as count FROM CONTACT WHERE isRead = false AND receiver is null";
@@ -157,7 +157,7 @@ include 'header.php';
                     <a href="advantages.php" class="card-link">
                         Consulter la liste des avantages
                     </a>
-                    <a class="badge badge-light badge-pill" href="trucks.php">
+                    <a class="badge badge-light badge-pill" href="advantages.php">
                         <?php
                         $pdo = connectDB();
                         $query = "SELECT COUNT(idAdvantage) as count FROM ADVANTAGE";
@@ -172,7 +172,7 @@ include 'header.php';
                     <a href="categories.php" class="card-link">
                         Consulter la liste des catégories
                     </a>
-                    <a class="badge badge-light badge-pill" href="trucks.php">
+                    <a class="badge badge-light badge-pill" href="categories.php">
                         <?php
                         $pdo = connectDB();
                         $query = "SELECT COUNT(idCategory) as count FROM PRODUCTCATEGORY";
