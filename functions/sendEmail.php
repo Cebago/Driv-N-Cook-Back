@@ -26,11 +26,14 @@ foreach ($emails as $email) {
     $destination = $email;
 
     $pdo = connectDB();
-    $queryPrepared = $pdo->prepare("SELECT firstname, lastname, points FROM USER, FIDELITY WHERE emailAddress = :email AND fidelityCard = idFidelity");
+    $queryPrepared = $pdo->prepare("SELECT firstname, lastname, points, acceptEmails FROM USER, FIDELITY WHERE emailAddress = :email AND fidelityCard = idFidelity");
     $queryPrepared->execute([
         ":email" => $email
     ]);
     $result = $queryPrepared->fetch(PDO::FETCH_ASSOC);
+    if ($result["acceptEmails"] == 0) {
+        continue;
+    }
     $firstName = $result["firstname"];
     $lastName = $result["lastname"];
     $points = $result["points"];
