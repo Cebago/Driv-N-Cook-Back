@@ -240,32 +240,6 @@ if (isConnected() && isActivated() && isAdmin()) {
         </div>
     </div>
 
-    <div class="modal fade" id="locateTruck" tabindex="-1" role="dialog" aria-labelledby="locateTruck"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="updateTruckInfo">Localiser le camion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group flex-nowrap">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="idTruck">Camion n°</span>
-                        </div>
-                        <input type="text" id="map" class="form-control truckID" name="idTruck" placeholder="idTruck"
-                               aria-label="truckId" aria-describedby="addon-wrapping" readonly>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="modal fade" id="generalInfo" tabindex="-1" role="dialog" aria-labelledby="locateTruck"
          aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
