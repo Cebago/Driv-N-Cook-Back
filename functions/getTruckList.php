@@ -32,9 +32,6 @@ foreach ($result as $value) {
     if (isset($value["user"])) {
         $string .= "<button class='btn btn-secondary mr-2 mt-1' type='button' title='Ne plus assigner le camion' onclick='
             unassignDriver(" . $value["idTruck"] . ")'><i class='fas fa-user-slash'></i></button>";
-        $string .= "<button class='btn btn-success mr-2 mt-1' type='button' data-toggle='modal' title='Localiser le camion'
-            data-target='#locateTruck' data-whatever='" . $value["idTruck"] . "' onclick='displayTruckId(" . $value["idTruck"] . ")'>
-            <i class='fas fa-map-marked-alt'></i></button>";
         $string .= "<button class='btn btn-dark mr-2 mt-1' type='button' data-toggle='modal' title='Consulter les informations du camion' 
             data-target='#generalInfo' data-whatever='" . $value["idTruck"] . "' onclick='displayTruckId(" . $value["idTruck"] . "); 
             getInfo(" . $value["idTruck"] . "); getOpenDays(" . $value["idTruck"] . "); showMap(" . $value["idTruck"] . ");getTruckMaintenance(" . $value["idTruck"] . ");'><i class='fas fa-info-circle'></i></button>";
