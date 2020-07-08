@@ -323,8 +323,3 @@ include 'header.php';
     include 'footer.php';
     ?>
     <script src="scripts/scripts.js"></script>
-    <script>
-        window.onload = getFranchisesList;
-        setInterval(getFranchisesList, 60000);
-
-    </script>
