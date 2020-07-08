@@ -70,6 +70,12 @@ if (count($_POST) == 6) {
             ":name" => $name
         ]);
         $idTruck = $pdo->lastInsertId();
+
+        $queryPrepared = $pdo->prepare("INSERT INTO LOCATION (truck) WHERE (:id)");
+        $queryPrepared->execute([
+            ":id" => $idTruck
+        ]);
+
         $queryPrepared = $pdo->prepare("INSERT INTO WAREHOUSES (warehouseName, warehouseType)
                                                     VALUES ('Stock du camion', 'Camion')");
         $queryPrepared->execute();
