@@ -134,6 +134,13 @@ include 'header.php';
                     </div>
                     <div class="input-group flex-nowrap mt-1">
                         <div class="input-group-prepend">
+                            <span class="input-group-text" id="name">Catégorie</span>
+                        </div>
+                        <input type="text" id="truckCategory" class="form-control" name="createTruckCategory"
+                               placeholder="Catégorie du camion" aria-label="truckId" aria-describedby="addon-wrapping">
+                    </div>
+                    <div class="input-group flex-nowrap mt-1">
+                        <div class="input-group-prepend">
                             <span class="input-group-text" id="plate">Plaque d'immatriculation</span>
                         </div>
                         <input type="text" id="licensePlate" class="form-control" name="createLicensePlate"
