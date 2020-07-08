@@ -204,6 +204,7 @@ function createTruck() {
     const manufacturers = document.getElementById("truckManufacturers").value;
     const model = document.getElementById("truckModel").value;
     const license = document.getElementById("licensePlate").value;
+    const truckName = document.getElementById("truckName").value;
     const km = document.getElementById("truckKm").value;
     const warehouse = document.getElementById("truckWarehouse").value;
 
@@ -219,6 +220,7 @@ function createTruck() {
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     request.send(
         'manufacturers=' + manufacturers +
+        "&name=" + truckName +
         '&model=' + model +
         '&license=' + license +
         '&km=' + km +

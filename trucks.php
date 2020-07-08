@@ -3,12 +3,15 @@ session_start();
 require 'conf.inc.php';
 require 'functions.php';
 
-if (isConnected() && isActivated() && isAdmin()) {
-    include 'header.php';
-    ?>
+if (!isAdmin() || !isConnected()) {
+    header("Location: login.php");
+}
 
-    <body>
-    <?php include "navbar.php"; ?>
+include 'header.php';
+?>
+<body>
+<?php include 'navbar.php' ?>
+
 <div class="menu mt-5 card col-md-11 mx-auto">
     <h5 class="card-header">Gestion de l'ensemble des camions</h5>
     <div class="card-body">
@@ -76,11 +79,12 @@ if (isConnected() && isActivated() && isAdmin()) {
                         <option selected>Choisir un franchisé</option>
                         <?php
                         $pdo = connectDB();
-                        $queryPrepared = $pdo->prepare("SELECT idUser, firstname FROM USER, SITEROLE WHERE userRole = idRole AND roleName = 'Franchisé';");
+                        $queryPrepared = $pdo->prepare("SELECT idUser, firstname, lastname FROM USER, SITEROLE WHERE userRole = idRole AND roleName = 'Franchisé';");
                         $queryPrepared->execute();
                         $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $value) {
-                            echo "<option value='" . $value["idUser"] . "'>" . $value["firstname"] . "</option>";
+                            $name = strtoupper($value["lastname"]) . " " . $value["firstname"];
+                            echo "<option value='" . $value["idUser"] . "'>" . $name . "</option>";
                         }
                         ?>
                     </select>
@@ -136,6 +140,8 @@ if (isConnected() && isActivated() && isAdmin()) {
                                placeholder="Plaque d'immatriculation du camion" aria-label="truckId"
                                aria-describedby="addon-wrapping">
                     </div>
+                    <small id="plateHelp" class="form-text text-muted">Merci de respecter les deux formats suivants:
+                        AA-111-AA ou 111 AAA 11</small>
                     <div class="input-group flex-nowrap mt-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="km">Nombre de kilomètres</span>
@@ -312,10 +318,13 @@ if (isConnected() && isActivated() && isAdmin()) {
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr_vOUs3BJrToO67yuX8dmTYvr8qCbWB8&callback=initMap">
     </script>
 
-    <script src="scripts/scripts.js"></script>
+
     <?php
-    include "footer.php";
-} else {
-    header("Location: login.php");
-}
-?>
+    include 'footer.php';
+    ?>
+    <script src="scripts/scripts.js"></script>
+    <script>
+        window.onload = getFranchisesList;
+        setInterval(getFranchisesList, 60000);
+
+    </script>

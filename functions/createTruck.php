@@ -5,11 +5,12 @@ require "../functions.php";
 
 $warehouse = $_POST["warehouse"];
 $manufacturers = $_POST["manufacturers"];
+$name = $_POST["name"];
 $model = $_POST["model"];
 $license = $_POST["license"];
 $km = $_POST["km"];
 
-if (count($_POST) == 5) {
+if (count($_POST) == 6) {
 
     $manufacturers = htmlspecialchars(ucwords(trim($manufacturers)));
     $model = htmlspecialchars(ucwords(trim($model)));
@@ -59,13 +60,14 @@ if (count($_POST) == 5) {
         echo $listOfErrors;
     } else {
         $pdo = connectDB();
-        $queryPrepared = $pdo->prepare("INSERT INTO TRUCK (truckManufacturers, truckModel, licensePlate, km)
-                                                    VALUES (:manufacturers, :model, :license, :km);");
+        $queryPrepared = $pdo->prepare("INSERT INTO TRUCK (truckManufacturers, truckModel, licensePlate, km, truckName)
+                                                    VALUES (:manufacturers, :model, :license, :km, :name)");
         $queryPrepared->execute([
             ":manufacturers" => $manufacturers,
             ":model" => $model,
             ":license" => $license,
-            ":km" => $km
+            ":km" => $km,
+            ":name" => $name
         ]);
         $idTruck = $pdo->lastInsertId();
         $queryPrepared = $pdo->prepare("INSERT INTO WAREHOUSES (warehouseName, warehouseType)

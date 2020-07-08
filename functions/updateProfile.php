@@ -29,6 +29,17 @@ if (count($_POST) == 12
     $city = htmlspecialchars(ucwords(trim($_POST["city"])));
     $license = $_POST["licenseNumber"];
 
+    $pdo = connectDB();
+    $queryPrepared = $pdo->prepare("UPDATE USER SET firstname = :firstname, lastname = :lastname, phoneNumber = :phoneNumber, address = :address, city = :city, postalCode = :postalCode, licenseNumber = :license WHERE idUser = :id");
+    $queryPrepared->execute([
+        ":firstname" => $firstName,
+        ":lastname" => $lastName,
+        ":phoneNumber" => $phone,
+        ":address" => $address,
+        ":city" => $city,
+        ":postalCode" => $zip,
+        ":license" => $license
+    ]);
 
 } else {
     die ("Tentative de Hack .... !!!!");
