@@ -207,6 +207,7 @@ function createTruck() {
     const truckName = document.getElementById("truckName").value;
     const km = document.getElementById("truckKm").value;
     const warehouse = document.getElementById("truckWarehouse").value;
+    const category = document.getElementById("truckCategory").value;
 
     const request = new XMLHttpRequest();
     request.onreadystatechange = function () {
@@ -224,7 +225,8 @@ function createTruck() {
         '&model=' + model +
         '&license=' + license +
         '&km=' + km +
-        '&warehouse=' + warehouse
+        '&warehouse=' + warehouse +
+        '&wategory=' + category
     );
     setTimeout(refreshTable, 1000);
 }
