@@ -3,18 +3,22 @@ session_start();
 require "../conf.inc.php";
 require "../functions.php";
 
-$warehouse = $_POST["warehouse"];
-$manufacturers = $_POST["manufacturers"];
-$name = $_POST["name"];
-$model = $_POST["model"];
-$license = $_POST["license"];
-$km = $_POST["km"];
 
-if (count($_POST) == 6) {
+
+if (count($_POST) == 7) {
+
+    $warehouse = $_POST["warehouse"];
+    $manufacturers = $_POST["manufacturers"];
+    $name = $_POST["name"];
+    $model = $_POST["model"];
+    $license = $_POST["license"];
+    $km = $_POST["km"];
+    $category = $_POST["category"];
 
     $manufacturers = htmlspecialchars(ucwords(trim($manufacturers)));
     $model = htmlspecialchars(ucwords(trim($model)));
     $license = htmlspecialchars(strtoupper(trim($license)));
+    $category = htmlspecialchars(strtoupper(trim($category)));
 
 
     $listOfErrors = "";
@@ -33,6 +37,11 @@ if (count($_POST) == 6) {
     if ((strlen($model) < 4) && (strlen($model) > 101)) {
         $error = true;
         $listOfErrors .= "Veuillez saisir un modèle de camion compris entre 5 et 100 caractères \r\n";
+    }
+
+    if ((strlen($category) < 4) && (strlen($category) > 101)) {
+        $error = true;
+        $listOfErrors .= "Veuillez saisir une catégorie de camion compris entre 5 et 100 caractères \r\n";
     }
 
     if ((!preg_match("#[A-Z]{2}-[0-9]{3}-[A-Z]{2}#", $license)) && (!preg_match("#[0-9]{3} [A-Z]{3} [0-9]{2}#", $license))) {
@@ -60,18 +69,20 @@ if (count($_POST) == 6) {
         echo $listOfErrors;
     } else {
         $pdo = connectDB();
-        $queryPrepared = $pdo->prepare("INSERT INTO TRUCK (truckManufacturers, truckModel, licensePlate, km, truckName)
-                                                    VALUES (:manufacturers, :model, :license, :km, :name)");
+        $queryPrepared = $pdo->prepare("INSERT INTO TRUCK (truckManufacturers, truckModel, licensePlate, km, truckName, categorie)
+                                                    VALUES (:manufacturers, :model, :license, :km, :name, :category)");
         $queryPrepared->execute([
             ":manufacturers" => $manufacturers,
             ":model" => $model,
             ":license" => $license,
             ":km" => $km,
-            ":name" => $name
+            ":name" => $name,
+            ":category" => $category
         ]);
+
         $idTruck = $pdo->lastInsertId();
 
-        $queryPrepared = $pdo->prepare("INSERT INTO LOCATION (truck) WHERE (:id)");
+        $queryPrepared = $pdo->prepare("INSERT INTO LOCATION (truck) VALUES (:id)");
         $queryPrepared->execute([
             ":id" => $idTruck
         ]);
