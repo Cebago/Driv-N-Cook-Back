@@ -9,7 +9,7 @@ if (!isAdmin() || !isConnected()) {
 
 include 'header.php';
 ?>
-    <body>
+<body>
 <div class="col-md-11 mx-auto mt-5">
     <button class="btn btn-primary" data-toggle="modal" data-target="#advantageModal">Ajouter un avantage</button>
 </div>
@@ -107,8 +107,8 @@ include 'footer.php';
 ?>
 
 <script>
-    $(document).ready( function () {
+    $(document).ready(function () {
         $('#advantagesTab').DataTable();
-    } );
+    });
 
 </script>

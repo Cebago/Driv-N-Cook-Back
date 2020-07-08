@@ -11,7 +11,7 @@ include 'header.php';
 ?>
 <body>
 <?php include 'navbar.php' ?>
-<div class="menu mt-5 card col-md-11 mx-auto" >
+<div class="menu mt-5 card col-md-11 mx-auto">
     <h5 class="card-header">Gestion de l'ensemble des franchisés</h5>
     <table class="table table-striped mt-2" id="tableUser">
         <thead class="thead-dark">
@@ -86,8 +86,6 @@ include 'header.php';
         </div>
     </div>
 </div>
-
-
 
 
 <?php

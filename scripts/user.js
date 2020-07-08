@@ -3,6 +3,6 @@ function changeForm(user) {
     form.setAttribute("action", "functions/changeUserRole.php?id=" + user);
 }
 
-$(document).ready( function () {
+$(document).ready(function () {
     $('#userTab').DataTable();
-} );
+});

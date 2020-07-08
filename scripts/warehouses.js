@@ -47,9 +47,9 @@ function getListWarehouses() {
 
                 }
 
-                $(document).ready( function () {
+                $(document).ready(function () {
                     $('#tabWarehouses').DataTable();
-                } );
+                });
             }
         }
     };
