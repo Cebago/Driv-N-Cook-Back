@@ -130,8 +130,8 @@ include 'header.php';
                     </a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="salesHistory.php" class="card-link">
-                        Historique des revenus
+                    <a href="exportToPdf.php" class="card-link">
+                        Synthèse PDF
                     </a>
                 </li>
             </ul>
