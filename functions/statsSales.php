@@ -3,7 +3,8 @@ require 'conf.inc.php';
 require 'functions.php';
 
 
-function getTrucksStats(){
+function getTrucksStats()
+{
     $pdo = connectDB();
     $queryPrepared = $pdo->prepare("SELECT truckName, lastname, firstname,
 		(SELECT SUM(price) FROM TRANSACTION WHERE transactionType = 'buyWarehouse' AND user = idUser ) as buyWarehouse,
