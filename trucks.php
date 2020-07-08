@@ -79,11 +79,12 @@ include 'header.php';
                         <option selected>Choisir un franchisé</option>
                         <?php
                         $pdo = connectDB();
-                        $queryPrepared = $pdo->prepare("SELECT idUser, firstname FROM USER, SITEROLE WHERE userRole = idRole AND roleName = 'Franchisé';");
+                        $queryPrepared = $pdo->prepare("SELECT idUser, firstname, lastname FROM USER, SITEROLE WHERE userRole = idRole AND roleName = 'Franchisé';");
                         $queryPrepared->execute();
                         $result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $value) {
-                            echo "<option value='" . $value["idUser"] . "'>" . $value["firstname"] . "</option>";
+                            $name = strtoupper($value["lastname"]) . " " . $value["firstname"];
+                            echo "<option value='" . $value["idUser"] . "'>" . $name . "</option>";
                         }
                         ?>
                     </select>
