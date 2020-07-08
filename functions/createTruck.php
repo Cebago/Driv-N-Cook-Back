@@ -87,8 +87,6 @@ if (count($_POST) == 6) {
             ":truck" => $idTruck,
             ":warehouse" => $idWarehouse
         ]);
-        echo "truck " . $idTruck;
-        echo "entre " . $idWarehouse;
     }
 } else {
     echo "Merci de ne pas modifier le formulaire !!";
