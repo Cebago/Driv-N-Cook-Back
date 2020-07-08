@@ -139,6 +139,8 @@ include 'header.php';
                                placeholder="Plaque d'immatriculation du camion" aria-label="truckId"
                                aria-describedby="addon-wrapping">
                     </div>
+                    <small id="plateHelp" class="form-text text-muted">Merci de respecter les deux formats suivants:
+                        AA-111-AA ou 111 AAA 11</small>
                     <div class="input-group flex-nowrap mt-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="km">Nombre de kilomètres</span>
@@ -319,7 +321,7 @@ include 'header.php';
     <?php
     include 'footer.php';
     ?>
-    <script src="scripts/franchises.js"></script>
+    <script src="scripts/scripts.js"></script>
     <script>
         window.onload = getFranchisesList;
         setInterval(getFranchisesList, 60000);
