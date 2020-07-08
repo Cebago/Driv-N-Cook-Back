@@ -4,19 +4,24 @@ session_start();
 require "../conf.inc.php";
 require "../functions.php";
 
+$sales = [];
+
 $pdo = connectDB();
-$queryPrepared = $pdo->prepare("SELECT truckmanufacturers, SUM(orderPrice) as sum FROM ORDERS, TRUCK WHERE ORDERS.truck = TRUCK.idTruck
-    AND orderDate BETWEEN :dateBegin AND :dateEnd GROUP BY idTruck;");
-$queryPrepared->execute(
-    [
+$queryPrepared = $pdo->prepare("SELECT concat(UPPER(lastname), ' ', firstname) as franchise, idTruck FROM USER, TRUCK WHERE idUser = user");
+$queryPrepared->execute();
+$users = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+foreach ($users as $user) {
+    $queryPrepared = $pdo->prepare("SELECT orderPrice FROM ORDERS WHERE orderType = 'Commande client' AND truck = :truck AND orderDate BETWEEN :dateBegin AND :dateEnd");
+    $queryPrepared->execute([
+        ":truck" => $user["idTruck"],
         ":dateBegin" => getdate(time())["year"] . "-01-01",
         ":dateEnd" => getdate(time())["year"] . "-12-31"
-    ]
-);
-$result = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
-$dataPoints = array();
-foreach ($result as $truck) {
-    $dataPoints[] = array("label" => $truck["truckmanufacturers"], "y" => $truck["sum"]);
+    ]);
+    $sum = 0;
+    $prices = $queryPrepared->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($prices as $price) {
+        $sum = $price["orderPrice"] + $sum;
+    }
+    $sales[] = array("label" => $user["franchise"], "y" => $sum);
 }
-$dataPoints = json_encode($dataPoints, JSON_NUMERIC_CHECK);
-echo $dataPoints;
+echo json_encode($sales, JSON_NUMERIC_CHECK);
