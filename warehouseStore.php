@@ -37,6 +37,6 @@ include "header.php";
 </div>
 
 
-<script src="scripts/warehouse.js"></script>
+<script src="scripts/warehouseStore.js"></script>
 <?php include "footer.php"; ?>
 </body>

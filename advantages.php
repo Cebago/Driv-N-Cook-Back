@@ -1,19 +1,20 @@
 <?php
 session_start();
-require "conf.inc.php";
-require "functions.php";
+require 'conf.inc.php';
+require 'functions.php';
 
-if (isConnected() && isActivated() && isAdmin()) {
-    include "header.php";
-    include "navbar.php";
-    ?>
+if (!isAdmin() || !isConnected()) {
+    header("Location: login.php");
+}
 
+include 'header.php';
+?>
     <body>
 <div class="col-md-11 mx-auto mt-5">
     <button class="btn btn-primary" data-toggle="modal" data-target="#advantageModal">Ajouter un avantage</button>
 </div>
 <div class="col-md-11 mx-auto mt-5 card">
-    <table class="table table-striped">
+    <table class="table table-striped" id="advantagesTab">
         <thead class="thead-dark">
         <tr>
             <th>ID</th>
@@ -101,9 +102,13 @@ if (isConnected() && isActivated() && isAdmin()) {
     </form>
 </div>
 
-    <?php
-    include "footer.php";
-} else {
-    header("Location: login.php");
-}
+<?php
+include 'footer.php';
 ?>
+
+<script>
+    $(document).ready( function () {
+        $('#advantagesTab').DataTable();
+    } );
+
+</script>
