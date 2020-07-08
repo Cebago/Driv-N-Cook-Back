@@ -37,7 +37,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="benefits">
                     <a class="dropdown-item" href="sales.php">Vue en temps réel</a>
-                    <a class="dropdown-item" href="exportToPdf.php">Historique</a>
+                    <a class="dropdown-item" href="exportToPdf.php">Synthèse PDF</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
