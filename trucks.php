@@ -12,6 +12,23 @@ include 'header.php';
 <body>
 <?php include 'navbar.php' ?>
 
+<?php
+$error = [];
+$error[] = "erreur";
+$_SESSION["errors"] = $error;
+if (isset($_SESSION["errors"])) {
+    echo "<div class='card alert alert-danger ml-2 mr-2 mt-5 mb-3'>";
+    echo "<ul>";
+    foreach ($_SESSION["errors"] as $error) {
+        echo "<li>" . $error . "</li>";
+    }
+    echo "</ul>";
+    echo "</div>";
+    unset($_SESSION["errors"]);
+}
+?>
+
+
 <div class="menu mt-5 card col-md-11 mx-auto">
     <h5 class="card-header">Gestion de l'ensemble des camions</h5>
     <div class="card-body">
