@@ -13,9 +13,6 @@ include 'header.php';
 <?php include 'navbar.php' ?>
 
 <?php
-$error = [];
-$error[] = "erreur";
-$_SESSION["errors"] = $error;
 if (isset($_SESSION["errors"])) {
     echo "<div class='card alert alert-danger ml-2 mr-2 mt-5 mb-3'>";
     echo "<ul>";
