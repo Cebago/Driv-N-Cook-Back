@@ -8,6 +8,7 @@ if (!isAdmin() || !isConnected()) {
 }
 
 include 'header.php';
+include "navbar.php";
 ?>
 <body>
 <div class="col-md-11 mx-auto mt-5">
