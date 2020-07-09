@@ -96,7 +96,7 @@ if (count($_POST) == 7) {
                                                     VALUES (:truck, :warehouse)");
         $queryPrepared->execute([
             ":truck" => $idTruck,
-            ":warehouse" => $warehouse
+            ":warehouse" => $idWarehouse
         ]);
         $queryPrepared = $pdo->prepare("INSERT INTO TRUCKWAREHOUSE (truck, warehouse)
                                                     VALUES (:truck, :warehouse)");
