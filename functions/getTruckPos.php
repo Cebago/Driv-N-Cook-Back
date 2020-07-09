@@ -12,7 +12,7 @@ if (isset($_GET["id"])) {
         ":id" => $idTruck
     ]);
 } else {
-    $queryPrepared = $pdo->prepare("SELECT lng, lat, truck, truckName, truckManufacturers, truckModel, licensePlate, km,  DATE_FORMAT(TRUCK.createDate,'%d/%m/%Y')as createDate, firstname FROM LOCATION, TRUCK LEFT JOIN USER ON user = idUser WHERE idTruck = truck");
+    $queryPrepared = $pdo->prepare("SELECT lng, lat, truck, truckName, truckManufacturers, truckModel, licensePlate, km,  DATE_FORMAT(TRUCK.createDate,'%d/%m/%Y')as createDate, firstname, idTruck FROM LOCATION, TRUCK LEFT JOIN USER ON user = idUser WHERE idTruck = truck");
     $queryPrepared->execute();
 }
 

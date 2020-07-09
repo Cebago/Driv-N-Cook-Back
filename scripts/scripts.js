@@ -20,7 +20,7 @@ function showMap(idTruck) {
                     console.log(myJson);
                     for (var i = 0; i < myJson.length; i++) {
                         let marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(myJson[i]["lat"], myJson[i]["lng"]),
+                            position: new google.maps.LatLng(myJson[i]["lng"], myJson[i]["lat"]),
                             icon: 'img/truck.png',
                             map: map
                         });
@@ -80,6 +80,7 @@ function showMap(idTruck) {
                                 '<div><i class="fas fa-id-badge"></i>&nbsp Immatriculation: ' + myJson[i]["licensePlate"] + '</div>' +
                                 '<div><br>Double cliquer pour accéder à la page du camion</div>' +
                                 '</div>';
+                            let link = "https://drivncook.fr/truckMenu.php?idTruck=" + myJson[i]["idTruck"];
 
                             let largeInfo = new google.maps.InfoWindow({
                                 content: largeInfoString
@@ -98,7 +99,7 @@ function showMap(idTruck) {
                             });
                             marker.addListener('dblclick', function () {
                                 window.open(
-                                    'http://drivncook.fr',
+                                    link,
                                     '_blank'
                                 );
                             });
