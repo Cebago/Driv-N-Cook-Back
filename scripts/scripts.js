@@ -20,7 +20,7 @@ function showMap(idTruck) {
                     console.log(myJson);
                     for (var i = 0; i < myJson.length; i++) {
                         let marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(myJson[i]["lat"], myJson[i]["lng"]),
+                            position: new google.maps.LatLng(myJson[i]["lng"], myJson[i]["lat"]),
                             icon: 'img/truck.png',
                             map: map
                         });
