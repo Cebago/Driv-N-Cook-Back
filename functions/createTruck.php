@@ -6,7 +6,6 @@ require "../functions.php";
 
 
 if (count($_POST) == 7) {
-
     $warehouse = $_POST["warehouse"];
     $manufacturers = $_POST["manufacturers"];
     $name = $_POST["name"];
@@ -14,7 +13,6 @@ if (count($_POST) == 7) {
     $license = $_POST["license"];
     $km = $_POST["km"];
     $category = $_POST["category"];
-
     $manufacturers = htmlspecialchars(ucwords(trim($manufacturers)));
     $model = htmlspecialchars(ucwords(trim($model)));
     $license = htmlspecialchars(strtoupper(trim($license)));
