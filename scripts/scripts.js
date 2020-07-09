@@ -80,6 +80,7 @@ function showMap(idTruck) {
                                 '<div><i class="fas fa-id-badge"></i>&nbsp Immatriculation: ' + myJson[i]["licensePlate"] + '</div>' +
                                 '<div><br>Double cliquer pour accéder à la page du camion</div>' +
                                 '</div>';
+                            let link = "https://drivncook.fr/truckMenu.php?idTruck=" + myJson[i]["idTruck"];
 
                             let largeInfo = new google.maps.InfoWindow({
                                 content: largeInfoString
@@ -98,7 +99,7 @@ function showMap(idTruck) {
                             });
                             marker.addListener('dblclick', function () {
                                 window.open(
-                                    'http://drivncook.fr',
+                                    link,
                                     '_blank'
                                 );
                             });
