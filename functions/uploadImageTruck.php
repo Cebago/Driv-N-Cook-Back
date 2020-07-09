@@ -3,8 +3,6 @@ session_start();
 require "../conf.inc.php";
 require "../functions.php";
 
-var_dump($_FILES);
-
 $title = $_POST["idTruck"];
 $target_dir = "img/truckImg/";
 $uploadOk = 1;
@@ -38,7 +36,7 @@ if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpe
 }
 if ($uploadOk == 0) {
     $listOfErrors[] = "Desolé votre fichier n'est pas envoyé";
-    $_SESSION["errors"];
+    $_SESSION["errors"] = $listOfErrors;
 } else {
     if (move_uploaded_file($_FILES["truckImage"]["tmp_name"], $target_dir . $title . "." . $imageFileType)) {
         $img = $target_dir . $title . "." . $imageFileType;
@@ -51,6 +49,6 @@ if ($uploadOk == 0) {
     } else {
         $listOfErrors[] = "Une erreur a été rencontrée lors du téléchargement";
     }
-    $_SESSION["errors"];
+    $_SESSION["errors"] = $listOfErrors;
 }
 header("Location: ../trucks.php");
