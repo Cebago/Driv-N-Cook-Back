@@ -31,7 +31,7 @@ foreach ($emails as $email) {
         ":email" => $email
     ]);
     $result = $queryPrepared->fetch(PDO::FETCH_ASSOC);
-    if ($result["acceptEmails"] == 0) {
+    if ( $result == null || $result["acceptEmails"] == 0) {
         continue;
     }
     $firstName = $result["firstname"];
