@@ -38,6 +38,7 @@ include 'header.php';
                         div1.className = "col-md-4";
                         div2.className = "card mb-4 shadow-sm";
                         img.src = "img/" + myJson[i]["ingredientImage"];
+                        img.height = "260";
                         div2.appendChild(img);
                         div3.className = "card-body";
                         title.className = "ml-2"
