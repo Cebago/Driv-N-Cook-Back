@@ -513,5 +513,9 @@ function getTruckMaintenance(truck) {
     request.send("idTruck=" + truck);
 }
 
+function update(id) {
+    const input = document.getElementById("idTruckUpload");
+    input.value = id;
+}
 setInterval(refreshTable, 60000);
 window.onload = refreshTable;

@@ -43,6 +43,7 @@ foreach ($result as $value) {
     $string .= "<button class='btn btn-info mr-2 mt-1' type='button' data-toggle='modal' title='Modifier les informations du camion' 
         data-target='#updateTruck' data-whatever='" . $value["idTruck"] . "' onclick='displayTruckId(" . $value["idTruck"] . "); 
         getInfo(" . $value["idTruck"] . ")'><i class='fas fa-pen'></i></button>";
+    $string .= "<button class='btn btn-secondary mr-2 mt-1' type='button' data-toggle='modal' title='Uploader une image du camion' data-target='#truckUpload' onclick='update(" . $value["idTruck"] . ")'><i class='fas fa-file-upload'></i></button>";
     $string .= "</td>";
     $string .= "</tr>";
 }
