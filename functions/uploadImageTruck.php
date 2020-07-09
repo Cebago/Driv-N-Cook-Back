@@ -49,6 +49,8 @@ if ($uploadOk == 0) {
     } else {
         $listOfErrors[] = "Une erreur a été rencontrée lors du téléchargement";
     }
-    $_SESSION["errors"] = $listOfErrors;
+    if (!empty($listOfErrors)) {
+        $_SESSION["errors"] = $listOfErrors;
+    }
 }
 header("Location: ../trucks.php");
