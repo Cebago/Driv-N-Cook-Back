@@ -227,7 +227,7 @@ function createTruck() {
         '&license=' + license +
         '&km=' + km +
         '&warehouse=' + warehouse +
-        '&wategory=' + category
+        '&category=' + category
     );
     setTimeout(refreshTable, 1000);
 }
