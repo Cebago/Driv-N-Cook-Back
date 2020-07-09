@@ -102,6 +102,11 @@ if (count($_POST) == 7) {
             ":truck" => $idTruck,
             ":warehouse" => $idWarehouse
         ]);
+
+        $queryPrepared = $pdo->prepare("INSERT INTO TRUCKSTATUS (truck, status) VALUES (:truck, 14)");
+        $queryPrepared->execute([
+            ":truck" => $idTruck
+        ]);
     }
 } else {
     echo "Merci de ne pas modifier le formulaire !!";
