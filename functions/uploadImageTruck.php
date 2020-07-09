@@ -38,7 +38,7 @@ if ($uploadOk == 0) {
     $listOfErrors[] = "Desolé votre fichier n'est pas envoyé";
     $_SESSION["errors"] = $listOfErrors;
 } else {
-    if (move_uploaded_file($_FILES["truckImage"]["tmp_name"], $target_dir . $title . "." . $imageFileType)) {
+    if (move_uploaded_file($_FILES["truckImage"]["tmp_name"], "../" . $target_dir . $title . "." . $imageFileType)) {
         $img = $target_dir . $title . "." . $imageFileType;
         $pdo = connectDB();
         $queryPrepared = $pdo->prepare("UPDATE TRUCK SET truckPicture = :image WHERE idTruck = :id");
